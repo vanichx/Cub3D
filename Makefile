@@ -6,7 +6,7 @@
 #    By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 16:54:39 by ipetruni          #+#    #+#              #
-#    Updated: 2024/01/15 16:59:51 by ipetruni         ###   ########.fr        #
+#    Updated: 2024/01/15 17:35:59 by ipetruni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,17 +18,21 @@ NAME = cub3D
 
 OBJ_DIR = obj/
 SRC_DIR = src/
+GNL_DIR = gnl/
 MLX_DIR = mlx/
 
-SRC	=	main 
+SRC	=	main \
+		utils
 
 SRCS =  $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC)))
+SRCS += $(addprefix $(GNL_DIR), get_next_line.c get_next_line_utils.c)	
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
+OBJS += $(addprefix $(OBJ_DIR), get_next_line.o get_next_line_utils.o)
 
 # COMMANDS
 
 CC = gcc 
-CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR)
+CFLAGS = -Wall -Wextra -Werror -Imlx -I$(MLX_DIR) -I$(GNL_DIR)
 LFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 RM = rm -rf
 
@@ -41,8 +45,15 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c 
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -I./includes -c $< -o $@
-	
 
+$(OBJ_DIR)get_next_line.o: $(GNL_DIR)get_next_line.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)get_next_line_utils.o: $(GNL_DIR)get_next_line_utils.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	
 clean:
 		@$(RM) $(OBJS)
 		@$(RM) $(OBJ_DIR)
