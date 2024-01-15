@@ -5,85 +5,61 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/15 10:08:57 by ipetruni          #+#    #+#              #
-#    Updated: 2024/01/15 10:38:52 by ipetruni         ###   ########.fr        #
+#    Created: 2024/01/15 16:54:39 by ipetruni          #+#    #+#              #
+#    Updated: 2024/01/15 16:59:51 by ipetruni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Variables
-CC					=	gcc
-CFLAGS				=	-Wall -Wextra -Iinclude -Isrc -O3 -g -fsanitize=address -fno-omit-frame-pointer
+# SETUP OF THE PROGRAM
 
-RM					=	rm -rf
-CUB3D				=   cub3D
-NAME				=	$(cub3D)
+NAME = cub3D
 
-# readline, leaks, valgrind
-VALGRIND			= valgrind --track-fds=yes --trace-children=yes#--log-file="valog" #--leak-check=full  -s --show-leak-kinds=all #--track-origins=yes
-LEAKS				= leaks --atExit --
+# FILES AND PATH TO THEM
 
-# Libraries
-LIBFT				=	libft.a
-LIBFT_DIR			=	lib/libft
-LIBFT_FILE			=	$(LIBFT_DIR)/$(LIBFT)
-CFLAGS				+=	-I $(LIBFT_DIR)/include
+OBJ_DIR = obj/
+SRC_DIR = src/
+MLX_DIR = mlx/
 
-MAKE_LIB			=	make --no-print-directory -C
+SRC	=	main 
 
-# Source and Object Files
-VPATH				=	src:include:src/execution:src/lexer:src/parenthesis:src/parsing:src/expander:src/tree:src/utils:include
-CUB3D_INC			=	CUB3D.h
-CUB3D_SRC			=	$(shell find src -name '*.c')
+SRCS =  $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC)))
+OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
 
-# Object Files
-OBJ_DIR				=	obj
-CUB3D_OBJ			=	$(addprefix $(OBJ_DIR)/, $(CUB3D_SRC:.c=.o))
+# COMMANDS
 
-# Rules
-all:				$(NAME)
+CC = gcc 
+CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR)
+LFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+RM = rm -rf
 
-$(OBJ_DIR)/%.o:		%.c $(CUB3D_INC)
-					@mkdir -p $(dir $@)
-					@$(CC) $(CFLAGS) $(RL_CFLAGS) -c $< -o $@
+all: $(NAME)
 
-$(LIBFT_FILE):
-					$(MAKE_LIB) $(LIBFT_DIR)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS)
+	@echo "$(GREEN)$(NAME) was successfully created!$(DEFAULT)"
+	
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c 
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -I./includes -c $< -o $@
+	
 
-$(NAME):			$(LIBFT_FILE) $(CUB3D_OBJ)
-					@$(CC) $(CFLAGS) $(LIBFT_FILE) $(CUB3D_OBJ) $(RL_LIBS) -o $@
-					@echo "$(GREEN)$(NAME) was successfully created!$(DEFAULT)"
+clean:
+		@$(RM) $(OBJS)
+		@$(RM) $(OBJ_DIR)
+		@echo "$(YELLOW)$(NAME) objects files deleted!$(DEFAULT)"
+	
+fclean: clean
+		@$(RM) $(NAME)
+		@echo "$(RED)$(NAME) program and objects deleted!$(DEFAULT)"
 
-lib_clean:
-					$(MAKE_LIB) $(LIBFT_DIR) clean
+re:		fclean all
 
-lib_fclean:
-					$(MAKE_LIB) $(LIBFT_DIR) fclean
+.PHONY: all clean fclean re
 
-clean:				lib_clean
-					$(RM) $(OBJ_DIR)
-					@echo "$(YELLOW)$(NAME) object files deleted!$(DEFAULT)"
+# COLORS DEFENITIONS
 
-fclean:				clean lib_fclean
-					$(RM) $(NAME)
-					@echo "$(RED)$(NAME) program deleted!$(DEFAULT)"
-					
-re:					fclean all
-
-# Valgrind testing
-valgrind: $(NAME)
-	$(VALGRIND) ./$(NAME)
-
-# Leaks at exit testing
-leaks: $(NAME)
-	$(LEAKS) ./$(NAME)
-
-.SILENT:
-
-.PHONY:				all lib_clean lib_fclean clean fclean re
-
-# COLORS DEFINITION
-RED				= \033[1;31m
-DEFAULT			= \033[0m
-GREEN			= \033[1;32m
-BOLD			= \033[1m
-YELLOW			= \033[1;33m
+RED = \033[1;31m
+DEFAULT = \033[0m
+GREEN = \033[1;32m
+BOLD = \033[1m
+YELLOW = \033[1;33m
