@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/16 13:31:08 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/16 14:18:25 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ typedef	struct s_mlx
 	int		line_length;
 	int		endian;
 }		t_mlx;
+
+typedef struct s_map
+{
+	
+}
 
 
 #endif
