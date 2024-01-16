@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/16 16:11:26 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/16 18:34:02 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "cub3d.h"
 #include "../mlx/mlx.h"
-
 #include <X11/Xlib.h>
 
 bool	init_window(t_mlx *screen)
@@ -60,10 +59,10 @@ int main(int argc, char *argv[])
 	ft_bzero(&cube, sizeof(t_cube));
 	if (check_args(argc, argv))
 		return (EXIT_FAILURE);
-	if (parse_map(argv[1], &cube.map))
+	if (parse_and_init(argv[1], &cube))
 		return (EXIT_FAILURE);
-	if (init_window(&cube.screen))
-		return (EXIT_FAILURE);
-	// parsing
-	mlx_loop(&cube.screen.mlx);
+	// if (init_window(&cube.screen))
+	// 	return (EXIT_FAILURE);
+	
+	// mlx_loop(&cube.screen.mlx);
 }
