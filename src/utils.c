@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 12:57:43 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/15 17:45:56 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:30:21 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ int	exit_game(t_game *game)
 	mlx_destroy_image(game->mlx, game->img->poe);
 	mlx_destroy_image(game->mlx, game->img->s);
 	mlx_destroy_window(game->mlx, game->window);
-	if (game)
-		free_game(game);
+	// if (game)
+	// 	free_game(game);
 	// if (game->point)
 	// 	free_point(game->point);
 	exit(0);
