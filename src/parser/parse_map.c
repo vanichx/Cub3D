@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/16 18:55:49 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:14:55 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,15 @@ int handle_map_file(int fd, char **map, t_cube *cube)
 		}
 		else if (!ft_strncmp(line, "F ", 2) || ft_strncmp(line, "C ", 2))
 		{
-			cube->map.floor_col[0] = ft_atoi(line + 2);
-			cube->map.floor_col[1] = ft_atoi(line + 2);
-			cube->map.floor_col[2] = ft_atoi(line + 2);
+			if(!ft_strncmp(line, "F ", 2)) {
+				cube->map.floor_col[0] = ft_atoi(line + 2);
+				cube->map.floor_col[1] = ft_atoi(line + 2);
+				cube->map.floor_col[2] = ft_atoi(line + 2);///////////
+			} else {
+				cube->map.ceiling_col[0] = ft_atoi(line + 2);
+				cube->map.ceiling_col[1] = ft_atoi(line + 2);
+				cube->map.ceiling_col[2] = ft_atoi(line + 2);
+			}
 		}
 		free(line);
 		printf("im here\n");
@@ -86,6 +92,9 @@ int handle_map_file(int fd, char **map, t_cube *cube)
 	printf("num_textures: %d\n", cube->map.num_textures);
 	for (int i = 0; i < cube->map.num_textures; i++)
 		printf("texture[%d]: %s\n", i, cube->map.texture[i]);
+	printf("floor_col[0]: %d\n", cube->map.floor_col[0]);
+	printf("floor_col[1]: %d\n", cube->map.floor_col[1]);
+	printf("floor_col[2]: %d\n", cube->map.floor_col[2]);
 	return (1);
 }
 
