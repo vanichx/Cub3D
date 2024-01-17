@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/16 18:34:02 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:46:26 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	// if (init_window(&cube.screen))
 	// 	return (EXIT_FAILURE);
+	cleanup(&cube);
 	
 	// mlx_loop(&cube.screen.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 11:48:08 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:38:55 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,25 +87,31 @@ typedef struct s_cube
 	int			fov;
 }			t_cube;
 
-
+/* free.c */
+void	ft_strdel(char **s);
+void	free_textures(t_cube *cube);
+void	free_2darray(char **array);
+void	cleanup(t_cube *cube);
 
 /* main.c */
 bool	init_window(t_mlx *screen);
 bool	check_args(int argc, char *argv[]);
 
+/* parse_colors.c */
+int		parse_color_code(char *line, int *color);
 
 /* parse_map.c */
 void	init_all(t_cube *cube);
 int		read_file(char *map_path, int *fd);
 int		handle_map_file(int fd, char **map, t_cube *cube);
-void	handle_textures_info(int fd, t_cube *cube);
-void	parse_color_code(char *line, int *color);
 bool	parse_and_init(char *map_path, t_cube *cube);
+
+/* parse_textures_info.c */
+void	handle_textures_info(int fd, t_cube *cube);
 
 /* parse_utils.c */
 int		ft_isspace(int c);
 char	*trim_whitespace(const char *str);
-void	process_input(char *input, char *str, int *i, int *j);
 
 /* gnl.c */
 int		ft_linelen(char *s);
@@ -113,7 +119,6 @@ char	*ft_extract_line(char *buffer);
 char	*ft_read(int fd, char *buffer);
 char	*ft_remove_line(char *buffer);
 char	*get_next_line(int fd);
-
 
 /* utils.c */
 void	*ft_realloc(void *ptr, size_t size);
