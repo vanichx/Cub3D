@@ -88,19 +88,19 @@ ASAN +=	-fsanitize=pointer-subtract -fsanitize=pointer-compare
 #	----------------------------------------	RULES
 
 all:
-		@$(MAKE) -sC $(LIBFT_DIR)
-		@$(MAKE) -sC $(MLX_DIR)
-		@$(MAKE) $(NAME)
-
+		@$(MAKE) -sC $(LIBFT_DIR) > /dev/null
+		@$(MAKE) -sC $(MLX_DIR) > /dev/null
+		@$(MAKE) $(NAME) > /dev/null
+		@echo "MLX COMPILED ✅"
+		@echo "CUB3D COMPILED ✅"
 clean:
-		@rm -rf $(DEP_ROOT) $(OBJ_ROOT)
-		@printf "$(RED)All cub3d objects removed\n$(DEF_COLOR)"
+		@rm -rf $(DEP_ROOT) $(OBJ_ROOT) > /dev/null
+		@echo "All cub3d objects removed"
 
 fclean:
-		@rm -rf $(DEP_ROOT) $(OBJ_ROOT)
-		@rm -f $(NAME)
-		@printf "$(RED)All cub3d files removed\n$(DEF_COLOR)"
-
+		@rm -rf $(DEP_ROOT) $(OBJ_ROOT) > /dev/null
+		@rm -f $(NAME) > /dev/null
+		@echo "All cub3d files removed"
 fcleanall:
 		@$(MAKE) fclean -sC $(LIBFT_DIR)
 		@printf "$(RED)All libft files removed\n$(DEF_COLOR)"

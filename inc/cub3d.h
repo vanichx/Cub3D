@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/16 18:31:49 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:48:08 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,23 @@ typedef struct s_cube
 
 
 
-
+/* main.c */
+bool	init_window(t_mlx *screen);
+bool	check_args(int argc, char *argv[]);
 
 
 /* parse_map.c */
 void	init_all(t_cube *cube);
 int		read_file(char *map_path, int *fd);
-int		validate_map_line(char *line);
 int		handle_map_file(int fd, char **map, t_cube *cube);
-int 	update_map_and_player_info(char *line, t_cube *cube, char **map);
-bool	line_has_wall(char *line);
-int		find_player_position(char *line, t_cube *cube);
-bool	find_valid_character(char c);
-bool	is_player_direction(char ch);
+void	handle_textures_info(int fd, t_cube *cube);
+void	parse_color_code(char *line, int *color);
 bool	parse_and_init(char *map_path, t_cube *cube);
 
+/* parse_utils.c */
+int		ft_isspace(int c);
+char	*trim_whitespace(const char *str);
+void	process_input(char *input, char *str, int *i, int *j);
 
 /* gnl.c */
 int		ft_linelen(char *s);

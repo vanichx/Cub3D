@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/16 19:14:55 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:46:32 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,79 +41,73 @@ int	read_file(char *map_path, int *fd)
 	return (1);
 }
 
-int find_player_position(char *line, t_cube *cube)
-{
-	int		i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
-		{
-			cube->player.pos.x = i;
-			cube->player.pos.y = cube->map.map_y;
-			cube->player.init_view = line[i];
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
 
 int handle_map_file(int fd, char **map, t_cube *cube)
 {
-	char	*line;
+	handle_textures_info(fd, cube);
+	
 
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) || !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
-		{
-			cube->map.texture[cube->map.num_textures] = ft_strdup(line + 3);
-			cube->map.num_textures++;
-		}
-		else if (!ft_strncmp(line, "F ", 2) || ft_strncmp(line, "C ", 2))
-		{
-			if(!ft_strncmp(line, "F ", 2)) {
-				cube->map.floor_col[0] = ft_atoi(line + 2);
-				cube->map.floor_col[1] = ft_atoi(line + 2);
-				cube->map.floor_col[2] = ft_atoi(line + 2);///////////
-			} else {
-				cube->map.ceiling_col[0] = ft_atoi(line + 2);
-				cube->map.ceiling_col[1] = ft_atoi(line + 2);
-				cube->map.ceiling_col[2] = ft_atoi(line + 2);
-			}
-		}
-		free(line);
-		printf("im here\n");
-		line = get_next_line(fd);
-	}
-	printf("num_textures: %d\n", cube->map.num_textures);
-	for (int i = 0; i < cube->map.num_textures; i++)
-		printf("texture[%d]: %s\n", i, cube->map.texture[i]);
-	printf("floor_col[0]: %d\n", cube->map.floor_col[0]);
-	printf("floor_col[1]: %d\n", cube->map.floor_col[1]);
-	printf("floor_col[2]: %d\n", cube->map.floor_col[2]);
+	
+	
+	
 	return (1);
 }
 
 
 
-bool	find_valid_character(char c)
+void handle_textures_info(int fd, t_cube *cube)
 {
-	return (c == ' ' || c == '0' || c == '1' || c == 'N' || c == 'S'
-		|| c == 'W' || c == 'E');
+	char	*line;
+	char	*trimmed_line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		trimmed_line = trim_whitespace(line);
+		if (!ft_strncmp(trimmed_line, "NO ", 3) || !ft_strncmp(trimmed_line, "SO ", 3) || !ft_strncmp(trimmed_line, "EA ", 3) || !ft_strncmp(trimmed_line, "WE ", 3))
+		{
+			cube->map.texture[cube->map.num_textures] = ft_strdup(trimmed_line + 3);
+			cube->map.num_textures++;
+		}
+		else if (!ft_strncmp(trimmed_line, "F ", 2))
+			parse_color_code(trimmed_line, cube->map.floor_col);
+		else if (!ft_strncmp(trimmed_line, "C ", 2))
+			parse_color_code(trimmed_line, cube->map.ceiling_col);
+		free(trimmed_line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	printf("num_textures: %d\n", cube->map.num_textures);
+	printf("textures: %s, %s, %s, %s\n", cube->map.texture[0], cube->map.texture[1], cube->map.texture[2], cube->map.texture[3]);
+	printf("floor: %d, %d, %d\n", cube->map.floor_col[0], cube->map.floor_col[1], cube->map.floor_col[2]);
+	printf("ceiling: %d, %d, %d\n", cube->map.ceiling_col[0], cube->map.ceiling_col[1], cube->map.ceiling_col[2]);
 }
 
-bool is_player_direction(char ch)
+void parse_color_code(char *line, int *color)
 {
-	return (ch == 'N' || ch == 'S' || ch == 'W' || ch == 'E');
+	int i;
+	int j; 
+	int num;
+
+	i = 0;
+	j = 0;
+	num = 0;
+	line += 2;
+	while (j < 3)
+	{
+		if (line[i] == ',' || line[i+1] == '\0')
+		{
+			color[j] = num;
+			num = 0;
+			j++;
+		}
+		else
+		{
+			num = num * 10 + (line[i] - '0');
+		}
+		i++;
+	}
 }
-
-
-
-
 
 
 /// MAIN PARSING FUNCTION
