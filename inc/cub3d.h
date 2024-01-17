@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 14:38:55 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:10:15 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,14 @@ bool	check_args(int argc, char *argv[]);
 /* parse_colors.c */
 int		parse_color_code(char *line, int *color);
 
-/* parse_map.c */
+/* parse_file.c */
 void	init_all(t_cube *cube);
 int		read_file(char *map_path, int *fd);
-int		handle_map_file(int fd, char **map, t_cube *cube);
+int		handle_map_file(int fd, char *map_path, char **map, t_cube *cube);
 bool	parse_and_init(char *map_path, t_cube *cube);
+
+/* parse_map.c */
+void	handle_map(int fd, char **map, t_cube *cube);
 
 /* parse_textures_info.c */
 void	handle_textures_info(int fd, t_cube *cube);
@@ -122,6 +125,6 @@ char	*get_next_line(int fd);
 
 /* utils.c */
 void	*ft_realloc(void *ptr, size_t size);
-
+char	*ft_strncpy(char *dest, const char *src, size_t n);
 
 #endif

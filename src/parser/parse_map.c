@@ -5,67 +5,83 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 14:44:26 by ipetruni         ###   ########.fr       */
+/*   Created: 2024/01/17 15:43:14 by ipetruni          #+#    #+#             */
+/*   Updated: 2024/01/17 16:14:42 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_all(t_cube *cube)
+void	calculate_map_size(int fd, t_cube *cube)
 {
-	cube->fov = 60;
-	cube->map.map_x = 0;
-	cube->map.map_y = 0;
-	cube->map.num_line = 0;
-	cube->map.num_textures = 0;
-	cube->map.data_type = 0;
-	cube->map.map_parsing = false;
-	cube->player.pos.x = 0;
-	cube->player.pos.y = 0;
-	cube->player.player_speed = 10;
-	cube->player.player_rot_speed = 4;
-	cube->player.move = 0;
-	cube->player.rotate = 0;
-}
+	int		i;
+	char	*line;
+	int		is_map_started;
 
-int	read_file(char *map_path, int *fd)
-{
-	*fd = open(map_path, O_RDONLY);
-	if (*fd < 0)
+	i = 0;
+	is_map_started = 0;
+	line = get_next_line(fd);
+	while (line)
 	{
-		printf("Error\nCould not open file %s\n", map_path);
-		return (0);
+		if (line[0] == ' ' || line[0] == '1')
+		{
+			is_map_started = 1;
+			if (cube->map.map_width < ft_strlen(line))
+				cube->map.map_width = ft_strlen(line);
+			i++;
+		}
+		else if (is_map_started)
+			break;
+		free(line);
+		line = get_next_line(fd);
 	}
-	return (1);
+	cube->map.map_height = i;
 }
 
-int	handle_map_file(int fd, char **map, t_cube *cube)
+void	handle_map(int fd, char **map, t_cube *cube)
 {
-	handle_textures_info(fd, cube);
-	//convert the map to a 2d array
-	return (1);
-}
+	char *line;
+	int i = 0;
 
-bool	parse_and_init(char *map_path, t_cube *cube)
-{
-	int		fd;
-	char	**map;
 
-	//Initialize all the variables
-	init_all(cube);
-	//Read the map file
-	if (!read_file(map_path, &fd))
-		return (false);
-	//Allocate memory for the map
-	map = ft_calloc(sizeof(char **), 1);
-	if (!map)
-		return (false);
-	cube->map.map = map;
-	//Parse the map file
-	if (!handle_map_file(fd, map, cube))
-		return (false);
-	//Print the map	
-	close(fd);
-	return (EXIT_SUCCESS);
+	// Calculate the map size
+	calculate_map_size(fd, cube);
+	
+	printf("map_width: %d\n", cube->map.map_width);
+	printf("map_height: %d\n", cube->map.map_height);
+	// Allocate memory for the 2D array
+	*map = malloc(cube->map.map_height * sizeof(char *));
+	if (*map == NULL)
+	{
+		// Handle error
+		return;
+	}
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		// Allocate memory for each line in the 2D array
+		map[i] = malloc(cube->map.map_width * sizeof(char));
+		if (map[i] == NULL)
+		{
+			// Handle error
+			return;
+		}
+
+		// Copy the line into the 2D array
+		ft_strncpy(map[i], line, cube->map.map_width);
+
+		// Replace spaces with zeros
+		for (int j = 0; j < cube->map.map_width; j++)
+		{
+			if (map[i][j] == ' ')
+			{
+				map[i][j] = '0';
+			}
+		}
+
+		free(line);
+		line = get_next_line(fd);
+		i++;
+	}
 }
