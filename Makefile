@@ -73,7 +73,7 @@ GCC =		gcc
 # Flags for the gcc compilation
 FLAGS =		-g -MMD -MP -I/opt/X11/include
 FLAGS +=	-O3
-# FLAGS =		-Wall -Werror -Wextra -MMD -MP
+FLAGS +=	-Wall -Werror -Wextra -MMD -MP
 
 MINILIBXCC := -I mlx -L $(DIR_MLX) -lmlx -lX11
 
@@ -118,7 +118,7 @@ reall:
 
 $(NAME) :: $(OBJS)
 		@printf "$(DEL_LINE)\r Compiling $@"
-		@$(GCC) -v $(FLAGS) $^ $(LIBFT) $(MLX) $(MINILIBXCC) $(OPENGL) -o $@
+		@$(GCC) -v $(FLAGS) $(ASAN) $^ $(LIBFT) $(MLX) $(MINILIBXCC) $(OPENGL) -o $@
 
 #$(NAME) :: $(OBJS)
 #		@printf "$(DEL_LINE)\r Compiling $@"

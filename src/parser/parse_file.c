@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 16:12:50 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:45:26 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ int	read_file(char *map_path, int *fd)
 int	handle_map_file(int fd, char *map_path, char **map, t_cube *cube)
 {
 	if (!read_file(map_path, &fd))
-		return (false);
+		return (0);
 	handle_textures_info(fd, cube);
 	close(fd);
 
 	if (!read_file(map_path, &fd))
-		return (false);
+		return (0);
 	handle_map(fd, map, cube);
+	// for(int i = 0; i < cube->map.map_height; i++)
+	// 	printf("%s\n", map[i]);
 	close(fd);
 	return (1);
 }
@@ -59,6 +61,7 @@ bool	parse_and_init(char *map_path, t_cube *cube)
 	int		fd;
 	char	**map;
 
+	fd = -1;
 	//Initialize all the variables
 	init_all(cube);
 

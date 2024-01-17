@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 16:10:15 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:17:49 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int		handle_map_file(int fd, char *map_path, char **map, t_cube *cube);
 bool	parse_and_init(char *map_path, t_cube *cube);
 
 /* parse_map.c */
-void	handle_map(int fd, char **map, t_cube *cube);
+char	**handle_map(int fd, char **map, t_cube *cube);
 
 /* parse_textures_info.c */
 void	handle_textures_info(int fd, t_cube *cube);

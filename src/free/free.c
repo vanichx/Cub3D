@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 14:46:04 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:30:23 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	free_2darray(char **array)
 void	cleanup(t_cube *cube)
 {
 	free_textures(cube);
-	free_2darray(cube->map.map);
+	// free_2darray(cube->map.map);
 }
