@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 09:32:07 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 11:39:06 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int		is_player(char *line);
 
 /* parse_player.c */
 int		parse_player(t_cube *cube);
-int 	check_walls(char **map, int map_height, int map_width);
+int 	check_walls(t_cube *cube);
 
 /* gnl.c */
 char	*get_next_line(int fd);

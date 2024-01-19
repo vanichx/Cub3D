@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 08:48:10 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 12:04:14 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	print_map_info(t_cube *cube)
 	printf("\t\tThe cube info is:\n");
 	printf("\n\n\tThe map structure is:\n");
 	for (int j = 0; cube->map.map[j] != 0; j++)
-			printf("map_line :%s", cube->map.map[j]);
+			printf("map_line :%s\n", cube->map.map[j]);
 	printf("\n\n\tThe map texture are is:\n");
 	for (int j = 0; j < cube->map.num_textures; j++)
 			printf("%s\n", cube->map.texture[j]);

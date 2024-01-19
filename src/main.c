@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 10:21:26 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:40:43 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ bool	parse(char *map_path, t_cube *cube)
 	if (parse_file(map_path, &cube->map.map_file) 
 		|| parse_map(cube->map.map_file, cube)
 		|| parse_player(cube)
-		|| check_walls(cube->map.map, cube->map.map_height, cube->map.map_width))
-		{
-			print_map_info(cube);
-			return (EXIT_FAILURE);
-		}
+		|| check_walls(cube))
+	{
+		print_map_info(cube);
+		printf("Map is invalid\n");
+		return (EXIT_FAILURE);
+	}
+	print_map_info(cube);
+	printf("Map is valid\n");
 	return (EXIT_SUCCESS);
 }
 
