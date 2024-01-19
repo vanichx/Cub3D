@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 16:17:49 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/19 02:22:09 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
+#define MAX_LINES 10000
 
 #define NORTH 0
 #define SOUTH 1
@@ -57,6 +58,7 @@ typedef struct s_map
 	char	*texture[4];
 	int		floor_col[3];
 	int		ceiling_col[3];
+	char	**map_info;
 	char	**map;
 	int 	map_width;
 	int		map_height;
@@ -102,19 +104,22 @@ int		parse_color_code(char *line, int *color);
 
 /* parse_file.c */
 void	init_all(t_cube *cube);
-int		read_file(char *map_path, int *fd);
-int		handle_map_file(int fd, char *map_path, char **map, t_cube *cube);
+int		validate_map(char **map, t_cube *cube);
 bool	parse_and_init(char *map_path, t_cube *cube);
+int		read_file(char *map_path, int *fd);
 
 /* parse_map.c */
 char	**handle_map(int fd, char **map, t_cube *cube);
 
 /* parse_textures_info.c */
-void	handle_textures_info(int fd, t_cube *cube);
+int		parse_textures(char **map, t_cube *cube);
+int		copy_map_lines(char *line, char **buffer, t_cube *cube);
 
 /* parse_utils.c */
 int		ft_isspace(int c);
 char	*trim_whitespace(const char *str);
+int		is_valid_line(char *line);
+bool	is_valid_char(char c);
 
 /* gnl.c */
 int		ft_linelen(char *s);
@@ -126,5 +131,8 @@ char	*get_next_line(int fd);
 /* utils.c */
 void	*ft_realloc(void *ptr, size_t size);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
+
+/* Debugging */
+void print_cube_info(t_cube *cube);
 
 #endif

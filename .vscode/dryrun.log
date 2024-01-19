@@ -15,12 +15,10 @@ printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_memset.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_memset.c -o ft_memset.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_strlen.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_strlen.c -o ft_strlen.o
- 
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_calloc.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_calloc.c -o ft_calloc.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_putchar_fd.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_putchar_fd.c -o ft_putchar_fd.o
- 
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_strmapi.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_strmapi.c -o ft_strmapi.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_isalnum.c"
@@ -43,7 +41,6 @@ printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_strrchr.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_strrchr.c -o ft_strrchr.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_isdigit.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_isdigit.c -o ft_isdigit.o
- 
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_split.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_split.c -o ft_split.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_strrspn.c"
@@ -52,7 +49,6 @@ printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_isprint.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_isprint.c -o ft_isprint.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_strchr.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_strchr.c -o ft_strchr.o
- 
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_strspn.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_strspn.c -o ft_strspn.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_itoa.c"
@@ -67,7 +63,6 @@ printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_striteri.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_striteri.c -o ft_striteri.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_substr.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_substr.c -o ft_substr.o
- 
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_memcmp.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_memcmp.c -o ft_memcmp.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_strjoin.c"
@@ -98,49 +93,64 @@ printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_lstclear_bonus.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_lstclear_bonus.c -o ft_lstclear_bonus.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_lstiter_bonus.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_lstiter_bonus.c -o ft_lstiter_bonus.o
- 
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_lstmap_bonus.c"
 gcc -g -Werror -Wextra -Wall -c -c ft_lstmap_bonus.c -o ft_lstmap_bonus.o
 printf "\033[2K\r\033[0;39m[LIBFT] compiling: ft_atoi.o"
 ar -rcs libft.a ft_atoi.o ft_memmove.o ft_strlcpy.o ft_bzero.o ft_memset.o ft_strlen.o ft_calloc.o ft_putchar_fd.o ft_strmapi.o ft_isalnum.o ft_putendl_fd.o ft_strncmp.o ft_isalpha.o ft_putnbr_fd.o ft_strnstr.o ft_isascii.o ft_putstr_fd.o ft_strrchr.o ft_isdigit.o ft_split.o ft_strrspn.o ft_isprint.o ft_strchr.o ft_strspn.o ft_itoa.o ft_strdup.o ft_strtrim.o ft_memchr.o ft_striteri.o ft_substr.o ft_memcmp.o ft_strjoin.o ft_tolower.o ft_memcpy.o ft_strlcat.o ft_toupper.o ft_isspace.o ft_lstnew_bonus.o ft_lstadd_front_bonus.o ft_lstsize_bonus.o ft_lstlast_bonus.o ft_lstadd_back_bonus.o ft_lstdelone_bonus.o ft_lstclear_bonus.o ft_lstiter_bonus.o ft_lstmap_bonus.o
 printf "\033[2K\rLIBFT COMPILED ✅\033[0;39m\n"
- 
 make --no-print-directory -sC lib/mlx
- 
 /Applications/Xcode.app/Contents/Developer/usr/bin/make libmlx.a
- 
 cc -O2 -w -DSTRINGPUTX11   -c -o mlx_shaders.o mlx_shaders.c
- 
 cc -O2 -w -DSTRINGPUTX11   -c -o mlx_new_window.o mlx_new_window.m
 cc -O2 -w -DSTRINGPUTX11   -c -o mlx_init_loop.o mlx_init_loop.m
 cc -O2 -w -DSTRINGPUTX11   -c -o mlx_new_image.o mlx_new_image.m
 cc -O2 -w -DSTRINGPUTX11   -c -o mlx_xpm.o mlx_xpm.c
- 
 cc -O2 -w -DSTRINGPUTX11   -c -o mlx_int_str_to_wordtab.o mlx_int_str_to_wordtab.c
 cc -O2 -w -DSTRINGPUTX11   -c -o mlx_png.o mlx_png.c
 cc -O2 -w -DSTRINGPUTX11   -c -o mlx_mouse.o mlx_mouse.m
 ar -r libmlx.a mlx_shaders.o mlx_new_window.o mlx_init_loop.o mlx_new_image.o mlx_xpm.o mlx_int_str_to_wordtab.o mlx_png.o mlx_mouse.o
 ranlib libmlx.a
 printf "\033[0;92m\rMLX COMPILED ✅\033[0;39m\n"
- 
 make --no-print-directory cub3D
  
+mkdir -p .obj//free/ .dep//free/
+printf "\033[0;39m[CUB3D] compiling: src//free/free.c \n"
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//free/free.c -o .obj//free/free.o
+mv  .obj//free/free.d .dep//free/
 mkdir -p .obj// .dep//
 printf "\033[0;39m[CUB3D] compiling: src//main.c \n"
-gcc -g -MMD -MP -I/opt/X11/include -O3 -I inc/ -I lib/libft -I lib/mlx -c src//main.c -o .obj//main.o
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//main.c -o .obj//main.o
 mv  .obj//main.d .dep//
- 
 mkdir -p .obj//parser/ .dep//parser/
 printf "\033[0;39m[CUB3D] compiling: src//parser/gnl.c \n"
-gcc -g -MMD -MP -I/opt/X11/include -O3 -I inc/ -I lib/libft -I lib/mlx -c src//parser/gnl.c -o .obj//parser/gnl.o
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//parser/gnl.c -o .obj//parser/gnl.o
 mv  .obj//parser/gnl.d .dep//parser/
 mkdir -p .obj//parser/ .dep//parser/
+printf "\033[0;39m[CUB3D] compiling: src//parser/parse_colors.c \n"
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//parser/parse_colors.c -o .obj//parser/parse_colors.o
+mv  .obj//parser/parse_colors.d .dep//parser/
+mkdir -p .obj//parser/ .dep//parser/
+printf "\033[0;39m[CUB3D] compiling: src//parser/parse_file.c \n"
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//parser/parse_file.c -o .obj//parser/parse_file.o
+mv  .obj//parser/parse_file.d .dep//parser/
+mkdir -p .obj//parser/ .dep//parser/
 printf "\033[0;39m[CUB3D] compiling: src//parser/parse_map.c \n"
-gcc -g -MMD -MP -I/opt/X11/include -O3 -I inc/ -I lib/libft -I lib/mlx -c src//parser/parse_map.c -o .obj//parser/parse_map.o
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//parser/parse_map.c -o .obj//parser/parse_map.o
 mv  .obj//parser/parse_map.d .dep//parser/
+mkdir -p .obj//parser/ .dep//parser/
+printf "\033[0;39m[CUB3D] compiling: src//parser/parse_textures_info.c \n"
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//parser/parse_textures_info.c -o .obj//parser/parse_textures_info.o
+mv  .obj//parser/parse_textures_info.d .dep//parser/
+mkdir -p .obj//parser/ .dep//parser/
+printf "\033[0;39m[CUB3D] compiling: src//parser/parse_utils.c \n"
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//parser/parse_utils.c -o .obj//parser/parse_utils.o
+mv  .obj//parser/parse_utils.d .dep//parser/
+mkdir -p .obj//utils/ .dep//utils/
+printf "\033[0;39m[CUB3D] compiling: src//utils/utils.c \n"
+gcc -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -I inc/ -I lib/libft -I lib/mlx -c src//utils/utils.c -o .obj//utils/utils.o
+mv  .obj//utils/utils.d .dep//utils/
 printf "\r Compiling cub3D"
-gcc -v -g -MMD -MP -I/opt/X11/include -O3 .obj//main.o .obj//parser/gnl.o .obj//parser/parse_map.o lib/libft/libft.a lib/mlx/libmlx.a -I mlx -L lib/mlx -lmlx -lX11 -framework OpenGL -framework AppKit -L/opt/X11/lib -lX11 -o cub3D
- 
+gcc -v -g -MMD -MP -I/opt/X11/include -O3 -Wall -Werror -Wextra -MMD -MP -fsanitize=address -fsanitize-recover=address -fno-omit-frame-pointer -fno-common -fsanitize=pointer-subtract -fsanitize=pointer-compare .obj//free/free.o .obj//main.o .obj//parser/gnl.o .obj//parser/parse_colors.o .obj//parser/parse_file.o .obj//parser/parse_map.o .obj//parser/parse_textures_info.o .obj//parser/parse_utils.o .obj//utils/utils.o lib/libft/libft.a lib/mlx/libmlx.a -I mlx -L lib/mlx -lmlx -lX11 -framework OpenGL -framework AppKit -L/opt/X11/lib -lX11 -o cub3D
 printf "\033[0;92m\rCUB3D COMPILED ✅\033[0;39m\n"
 make: Leaving directory `/Users/eseferi/Cub3D'
  

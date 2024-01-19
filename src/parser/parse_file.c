@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 16:45:26 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/19 02:19:27 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ void	init_all(t_cube *cube)
 	cube->player.rotate = 0;
 }
 
+int	validate_map(char **map, t_cube *cube)
+{
+	if (parse_textures(map, cube))
+		return (EXIT_FAILURE);
+	// // for(int i = 0; i < cube->map.map_height; i++)
+	// // 	printf("%s\n", map[i]);
+	// close(fd);
+	return (EXIT_SUCCESS);
+}
+
 int	read_file(char *map_path, int *fd)
 {
 	*fd = open(map_path, O_RDONLY);
@@ -40,39 +50,43 @@ int	read_file(char *map_path, int *fd)
 	return (1);
 }
 
-int	handle_map_file(int fd, char *map_path, char **map, t_cube *cube)
-{
-	if (!read_file(map_path, &fd))
-		return (0);
-	handle_textures_info(fd, cube);
-	close(fd);
 
+int	count_lines_copy(char *map_path, char ***map_info)
+{
+	int		fd;
+	char	*line;
+	int		count;
+	char	**buffer;
+
+	count = 0;
+	buffer = malloc(MAX_LINES * sizeof(char *));
 	if (!read_file(map_path, &fd))
-		return (0);
-	handle_map(fd, map, cube);
-	// for(int i = 0; i < cube->map.map_height; i++)
-	// 	printf("%s\n", map[i]);
+		return (fprintf(stderr, "❌ Read error: Failed to read the file\n"));
+	line = get_next_line(fd);
+	while (line)
+	{
+		buffer[count] = ft_strdup(line);
+		count++;
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
-	return (1);
+	*map_info = malloc(count * sizeof(char *));
+	if (!*map_info)
+		return (fprintf(stderr, "❌ Malloc error: Failed to Allocate the map buffer\n"));
+	for (int i = 0; i < count; i++)
+		(*map_info)[i] = buffer[i];
+	free(buffer);
+	return (0);
 }
 
 bool	parse_and_init(char *map_path, t_cube *cube)
-{
-	int		fd;
-	char	**map;
-
-	fd = -1;
-	//Initialize all the variables
-	init_all(cube);
-
-	//Allocate memory for the map
-	map = ft_calloc(sizeof(char **), 1);
-	if (!map)
-		return (false);
-	cube->map.map = map;
-	//Parse the map file
-	if (!handle_map_file(fd, map_path, map, cube))
-		return (false);
-
+{	
+	init_all(cube);		//Initialize all the variables
+	if (count_lines_copy(map_path, &cube->map.map_info))	 // Count the number of lines in the file
+		return (EXIT_FAILURE);
+	if (validate_map(cube->map.map_info, cube))		//Parse the map file
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
+
