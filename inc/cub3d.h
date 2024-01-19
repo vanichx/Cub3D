@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 02:22:09 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 06:57:58 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_map
 	char	*texture[4];
 	int		floor_col[3];
 	int		ceiling_col[3];
-	char	**map_info;
+	char	**map_file;
 	char	**map;
 	int 	map_width;
 	int		map_height;
@@ -89,50 +89,61 @@ typedef struct s_cube
 	int			fov;
 }			t_cube;
 
+/* main.c */
+bool	check_args(int argc, char *argv[]);
+
+
+/*****************************************	PARSER	******************************************/
+/* parse.c */
+bool	parse(char *map_path, t_cube *cube);
+
+/* parse_file.c */
+int		parse_file(char *map_path, char ***map_file);
+
+/* parse_map.c */
+int		parse_map(char **map_file, t_cube *cube);
+
+/* parse_info.c */
+void	parse_textures(char *trimmed_line, t_cube *cube);
+void	parse_floor_color(char *trimmed_line, t_cube *cube, char *line);
+void	parse_ceiling_color(char *trimmed_line, t_cube *cube, char *line);
+int		parse_map_lines(char *line, char **buffer, t_cube *cube);
+void	print_map_info(t_cube *cube);
+
+/* parse_colors.c */
+int		parse_color_code(char *line, int *color);
+
+/* parse_utils.c */
+bool	is_valid_char(char c);
+int		is_valid_line(char *line);
+int		read_file(char *map_path, int *fd);
+
+/* gnl.c */
+char	*get_next_line(int fd);
+
+/* init.c */
+void	init_cube(t_cube *cube);
+bool	init_window(t_mlx *screen);
+/*****************************************	PARSER	******************************************/
+
+
+
+/*****************************************	utils	******************************************/
+/* utils.c */
+void	*ft_realloc(void *ptr, size_t size);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+int		ft_isspace(int c);
+char	*trim_whitespace(const char *str);
+/*****************************************	utils	******************************************/
+
+
+
+/*****************************************	free	******************************************/
 /* free.c */
 void	ft_strdel(char **s);
 void	free_textures(t_cube *cube);
 void	free_2darray(char **array);
 void	cleanup(t_cube *cube);
-
-/* main.c */
-bool	init_window(t_mlx *screen);
-bool	check_args(int argc, char *argv[]);
-
-/* parse_colors.c */
-int		parse_color_code(char *line, int *color);
-
-/* parse_file.c */
-void	init_all(t_cube *cube);
-int		validate_map(char **map, t_cube *cube);
-bool	parse_and_init(char *map_path, t_cube *cube);
-int		read_file(char *map_path, int *fd);
-
-/* parse_map.c */
-char	**handle_map(int fd, char **map, t_cube *cube);
-
-/* parse_textures_info.c */
-int		parse_textures(char **map, t_cube *cube);
-int		copy_map_lines(char *line, char **buffer, t_cube *cube);
-
-/* parse_utils.c */
-int		ft_isspace(int c);
-char	*trim_whitespace(const char *str);
-int		is_valid_line(char *line);
-bool	is_valid_char(char c);
-
-/* gnl.c */
-int		ft_linelen(char *s);
-char	*ft_extract_line(char *buffer);
-char	*ft_read(int fd, char *buffer);
-char	*ft_remove_line(char *buffer);
-char	*get_next_line(int fd);
-
-/* utils.c */
-void	*ft_realloc(void *ptr, size_t size);
-char	*ft_strncpy(char *dest, const char *src, size_t n);
-
-/* Debugging */
-void print_cube_info(t_cube *cube);
+/*****************************************	free	******************************************/
 
 #endif

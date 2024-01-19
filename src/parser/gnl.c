@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:51:43 by ailopez-          #+#    #+#             */
-/*   Updated: 2024/01/16 14:56:53 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 06:50:42 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define BUFFER_SIZE 1024
 
-int	ft_linelen(char *s)
+static int	ft_linelen(char *s)
 {
 	size_t	i;
 
@@ -26,7 +26,7 @@ int	ft_linelen(char *s)
 	return (i + 1);
 }
 
-char	*ft_extract_line(char *buffer)
+static char	*ft_extract_line(char *buffer)
 {
 	char	*line;
 	int		size;
@@ -41,7 +41,7 @@ char	*ft_extract_line(char *buffer)
 	return (line);
 }
 
-char	*ft_read(int fd, char *buffer)
+static char	*ft_read(int fd, char *buffer)
 {
 	char	*new_buffer;
 	char	*reading;
@@ -66,7 +66,7 @@ char	*ft_read(int fd, char *buffer)
 	return (buffer);
 }
 
-char	*ft_remove_line(char *buffer)
+static char	*ft_remove_line(char *buffer)
 {
 	int		start;
 	char	*newbuffer;

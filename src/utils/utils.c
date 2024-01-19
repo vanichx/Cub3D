@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:28:20 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 15:52:55 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/19 07:08:22 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,37 @@ char	*ft_strncpy(char *dest, const char *src, size_t n)
 		i++;
 	}
 	return (dest);
+}
+
+int	ft_isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
+}
+
+char	*trim_whitespace(const char *str)
+{
+	char	*result;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	result = malloc(strlen(str) + 1);
+	while (ft_isspace((unsigned char)str[i]))
+		i++;
+	while (str[i] != '\0')
+	{
+		if (ft_isspace((unsigned char)str[i]))
+		{
+			while (ft_isspace((unsigned char)str[i]))
+				i++;
+			if (str[i] != '\0')
+				result[j++] = ' ';
+		}
+		else
+			result[j++] = str[i++];
+	}
+	result[j] = '\0';
+	return (result);
 }
