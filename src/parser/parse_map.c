@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/19 07:06:25 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 08:31:03 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ int	parse_map(char **map_file, t_cube *cube)
 	}
 	cube->map.map[cube->map.map_height] = NULL;
 	free_2darray(buffer);
-	print_map_info(cube);
 	return (EXIT_SUCCESS);
 }

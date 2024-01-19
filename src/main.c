@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 07:10:37 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 08:58:54 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ bool	check_args(int argc, char *argv[])
 bool	parse(char *map_path, t_cube *cube)
 {
 	init_cube(cube);
-	if (parse_file(map_path, &cube->map.map_file))
+	if (parse_file(map_path, &cube->map.map_file) 
+		|| parse_map(cube->map.map_file, cube)
+		|| parse_player(cube))
 		return (EXIT_FAILURE);
-	if (parse_map(cube->map.map_file, cube))
-		return (EXIT_FAILURE);
+	print_map_info(cube);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 07:03:37 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 08:48:10 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,14 @@ void	print_map_info(t_cube *cube)
 	printf("\n\nThe ceiling colors are:\n");
 	for (int j = 0; j < 3; j++)
 			printf("%d ", cube->map.ceiling_col[j]);
+	printf("\n\nPlayer's data are:\n");
+	printf("player's x position: %f\n", cube->player.matrix_pos.x);
+	printf("player's y position: %f\n", cube->player.matrix_pos.y);
+	printf("player's initial view: %c\n", cube->player.init_view);
+	printf("player's move: %d\n", cube->player.move);
+	printf("player's rotate: %d\n", cube->player.rotate);
+	printf("player's speed: %f\n", cube->player.player_speed);
+	printf("player's rotation speed: %f\n", cube->player.player_rot_speed);
 	printf("\n\nmap_height: %d\n", cube->map.map_height);
 	printf("\nmap_width: %d\n", cube->map.map_width);
 }

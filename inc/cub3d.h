@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 07:11:15 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 09:03:36 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 #define SOUTH 1
 #define EAST 2
 #define WEST 3
+
+#define PLAYER_SPEED 10
+#define PLAYER_ROT_SPEED 4
 
 typedef struct s_point
 {
@@ -64,8 +67,6 @@ typedef struct s_map
 	int		map_height;
 	int 	num_line;
 	int		num_textures;
-	int		data_type;
-	bool	map_parsing;
 	int		map_x;
 	int		map_y;
 }				t_map;
@@ -115,6 +116,11 @@ int		parse_color_code(char *line, int *color);
 bool	is_valid_char(char c);
 int		is_valid_line(char *line);
 int		read_file(char *map_path, int *fd);
+bool	line_has_walls(char *line);
+int		is_player(char *line);
+
+/* parse_player.c */
+int		parse_player(t_cube *cube);
 
 /* gnl.c */
 char	*get_next_line(int fd);

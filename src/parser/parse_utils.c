@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:51:08 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 07:07:29 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 08:40:53 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,30 @@ int	read_file(char *map_path, int *fd)
 		return (0);
 	}
 	return (1);
+}
+
+bool	line_has_walls(char *line)
+{
+	while (*line)
+	{
+		if (*line == '1')
+			return (true);
+		line++;
+	}
+	return (false);
+}
+
+int		is_player(char *line)
+{
+	int	pos;
+
+	pos = 0;
+	while (line[pos])
+	{
+		if (line[pos] == 'N' || line[pos] == 'S'
+			|| line[pos] == 'E' || line[pos] == 'W')
+			return (pos);
+		pos++;
+	}
+	return (0);
 }
