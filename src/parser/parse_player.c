@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/19 10:08:43 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 10:21:17 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	transform_spaces(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == ' ')
+			if (map[i][j] == ' ' || map[i][j] == 'N' || map[i][j] == 'S'
+			|| map[i][j] == 'E' || map[i][j] == 'W')
 				map[i][j] = '0';
 			j++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 10:09:44 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 10:21:26 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ bool	parse(char *map_path, t_cube *cube)
 		|| parse_map(cube->map.map_file, cube)
 		|| parse_player(cube)
 		|| check_walls(cube->map.map, cube->map.map_height, cube->map.map_width))
-		return (EXIT_FAILURE);
+		{
+			print_map_info(cube);
+			return (EXIT_FAILURE);
+		}
 	return (EXIT_SUCCESS);
 }
 
@@ -42,7 +45,6 @@ int main(int argc, char *argv[])
 	t_cube cube;
 	
 	ft_bzero(&cube, sizeof(t_cube));
-	printf("carrege mother \r return\n");
 	if (check_args(argc, argv))
 		return (EXIT_FAILURE);
 	if (parse(argv[1], &cube))
