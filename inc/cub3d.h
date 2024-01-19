@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 06:57:58 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 07:11:15 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,10 @@ typedef struct s_cube
 
 /* main.c */
 bool	check_args(int argc, char *argv[]);
+bool	parse(char *map_path, t_cube *cube);
 
 
 /*****************************************	PARSER	******************************************/
-/* parse.c */
-bool	parse(char *map_path, t_cube *cube);
-
 /* parse_file.c */
 int		parse_file(char *map_path, char ***map_file);
 
