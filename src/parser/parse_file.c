@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 04:57:06 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 05:52:16 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ int	validate_map(char **map, t_cube *cube)
 {
 	if (parse_textures(map, cube))
 		return (EXIT_FAILURE);
-	// // for(int i = 0; i < cube->map.map_height; i++)
-	// // 	printf("%s\n", map[i]);
-	// close(fd);
 	return (EXIT_SUCCESS);
 }
 

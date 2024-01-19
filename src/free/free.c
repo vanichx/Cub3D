@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/18 19:55:28 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 05:51:25 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	free_2darray(char **array)
 void	cleanup(t_cube *cube)
 {
 	free_textures(cube);
-	// free_2darray(cube->map.map);
+	free_2darray(cube->map.map);
+	free_2darray(cube->map.map_info);
 }
