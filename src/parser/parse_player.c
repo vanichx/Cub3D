@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/19 13:04:03 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:05:57 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,34 @@ int	parse_player(t_cube *cube)
 	return (0);
 }
 
-#include <stdlib.h>
+bool is_map_enclosed(char **map, int width, int height)
+{
+    // Check if the outermost edges have '1', indicating an open map
+    for (int i = 0; i < height; i++)
+    {
+        if (map[i][0] != '1' || map[i][width - 1] != '1')
+            return false;
+    }
+
+    for (int j = 0; j < width; j++)
+    {
+        if (map[0][j] != '1' || map[height - 1][j] != '1')
+            return false;
+    }
+
+    // Check if the inner area is enclosed by '1'
+    for (int i = 1; i < height - 1; i++)
+    {
+        for (int j = 1; j < width - 1; j++)
+        {
+            if (map[i][j] != '1')
+                return false;
+        }
+    }
+
+    // Map is enclosed by walls
+    return true;
+}
 
 void square_map(t_map *map)
 {
@@ -55,9 +82,9 @@ void square_map(t_map *map)
             line = malloc(sizeof(char) * (map->map_width + 1));
             while (map->map[i][j] != '\0')
             {
-				if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'E' || map->map[i][j] == 'W')
-					line[j] = map->map[i][j];
-				else if (map->map[i][j] != '1') // Compare with character '1'
+                if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'E' || map->map[i][j] == 'W')
+                    line[j] = map->map[i][j];
+                else if (map->map[i][j] != '1') // Compare with character '1'
                     line[j] = '0'; // Replace characters other than '1' with '0'
                 else
                     line[j] = '1';
@@ -83,84 +110,24 @@ void square_map(t_map *map)
     }
 }
 
-// Function implementations
-int check_corner_grids(t_map *map, int i, int j) {
-    if ((i == 0 && j == 0))
-		return ((map->map[i][j + 1] == '1' || map->map[i + 1][j] == '1' || map->map[i + 1][j + 1] == '1'));
-	else if ((i == 0 && j == map->map_width - 1))
-		return (map->map[i][j - 1] == '1' || map->map[i + 1][j] == '1' || map->map[i + 1][j - 1] == '1');
-	else if ((i == map->map_height - 1 && j == 0))
-		return (map->map[i][j + 1] == '1' || map->map[i - 1][j] == '1' || map->map[i - 1][j + 1] == '1');
-	else 
-		return (map->map[i][j - 1] == '1' || map->map[i - 1][j] == '1' || map->map[i - 1][j - 1] == '1');
-}
-
-int check_top_side_grids(t_map *map, int i, int j) {
-    return ((map->map[i + 1][j - 1] == '1' || map->map[i][j - 1] == '1') 
-		&& (map->map[i + 1][j] == '1' || map->map[i + 1][j + 1] == '1' 
-		|| map->map[i][j + 1] == '1'));
-}
-
-int check_bottom_side_grids(t_map *map, int i, int j) {
-	return ((map->map[i - 1][j - 1] == '1' || map->map[i][j - 1] == '1') 
-		&& (map->map[i - 1][j] == '1' || map->map[i - 1][j + 1] == '1' 
-		|| map->map[i][j + 1] == '1'));
-}
-
-int check_left_side_grids(t_map *map, int i, int j) {
-	return ((map->map[i - 1][j + 1] == '1' || map->map[i - 1][j] == '1') 
-		&& (map->map[i][j + 1] == '1' || map->map[i + 1][j + 1] == '1' 
-		|| map->map[i + 1][j] == '1'));
-}
-
-int check_right_side_grids(t_map *map, int i, int j) {
-	return ((map->map[i - 1][j - 1] == '1' || map->map[i - 1][j] == '1') 
-		&& (map->map[i][j - 1] == '1' || map->map[i + 1][j - 1] == '1' 
-		|| map->map[i + 1][j] == '1'));
-}
-
-int check_middle_grids(t_map *map, int i, int j) {
-	return ((map->map[i - 1][j - 1] == '1' || map->map[i - 1][j] == '1' 
-		|| map->map[i][j - 1] == '1' || map->map[i + 1][j - 1] == '1') 
-		&& (map->map[i - 1][j + 1] == '1' || map->map[i - 1][j] == '1' 
-		|| map->map[i][j + 1] == '1' || map->map[i + 1][j + 1] == '1'));
-}
-
-int check_grids(t_map *map, int i, int j)
-{
-	if ((i == 0 && j == 0) || (i == 0 && j == map->map_width - 1) || (i == map->map_height - 1 && j == 0) || (i == map->map_height - 1 && j == map->map_width - 1))
-		return (check_corner_grids(map, i, j));
-	else if (i == 0 && j > 0 && j < map->map_width - 1)
-		return (check_top_side_grids(map, i, j));
-	else if (i == map->map_height - 1 && j > 0 && j < map->map_width - 1)
-		return (check_bottom_side_grids(map, i, j));
-	else if (j == 0 && i > 0 && i < map->map_height - 1)
-		return (check_left_side_grids(map, i, j));
-	else if (j == map->map_width - 1 && i > 0 && i < map->map_height - 1)
-		return (check_right_side_grids(map, i, j));
-	else if (i > 0 && i < map->map_height - 1 && j > 0 && j < map->map_width - 1)
-		return (check_middle_grids(map, i, j));
-	return (0);
-}
-
 int check_walls(t_cube *cube)
 {
-	int i;
-	int j;
+    int i;
+    int j;
 
-	i = 0;
-	j = 0;
-	square_map(&cube->map);
-	while (i < cube->map.map_height)
-	{
-		while (j < cube->map.map_width)
-		{
-			if (cube->map.map[i][j] == '1')
-				if (!check_grids(&cube->map, i, j))
-					return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
+    i = 0;
+    j = 0;
+    square_map(&cube->map);
+
+    // Check if the modified map is enclosed by walls
+    if (is_map_enclosed(cube->map.map, cube->map.map_width, cube->map.map_height))
+    {
+        // Map is enclosed by walls, handle accordingly
+        return 1;
+    }
+    else
+    {
+        // Map is not enclosed by walls, handle accordingly
+        return 0;
+    }
 }
