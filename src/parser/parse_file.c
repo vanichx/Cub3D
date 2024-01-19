@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 02:19:27 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 04:57:06 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ int	count_lines_copy(char *map_path, char ***map_info)
 	char	*line;
 	int		count;
 	char	**buffer;
+	int		i;
 
+	i = 0;
 	count = 0;
-	buffer = malloc(MAX_LINES * sizeof(char *));
+	buffer = ft_calloc(MAX_LINES, sizeof(char *));
 	if (!read_file(map_path, &fd))
 		return (fprintf(stderr, "❌ Read error: Failed to read the file\n"));
 	line = get_next_line(fd);
@@ -71,13 +73,18 @@ int	count_lines_copy(char *map_path, char ***map_info)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	*map_info = malloc(count * sizeof(char *));
+	*map_info = malloc((count + 1) * sizeof(char *));
 	if (!*map_info)
 		return (fprintf(stderr, "❌ Malloc error: Failed to Allocate the map buffer\n"));
-	for (int i = 0; i < count; i++)
-		(*map_info)[i] = buffer[i];
-	free(buffer);
-	return (0);
+	while (i < count)
+	{
+		(*map_info)[i] = ft_strdup(buffer[i]);
+		if ((*map_info)[i++] == NULL)
+			return (free_2darray(buffer) ,fprintf(stderr, "❌ Malloc error: Failed to Allocate the map buffer\n"));
+	}
+	(*map_info)[count] = NULL;
+	free_2darray(buffer);
+	return (EXIT_SUCCESS);
 }
 
 bool	parse_and_init(char *map_path, t_cube *cube)

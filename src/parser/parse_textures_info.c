@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 03:09:03 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 05:01:39 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	parse_textures(char **map_info, t_cube *cube)
 	int i;
 
 	i = 0;
-	buffer = malloc(sizeof(char *) * MAX_LINES);
+	buffer = ft_calloc(MAX_LINES, sizeof(char *));
 	if (!buffer)
 		return (fprintf(stderr, "❌ Malloc error: %s\n", strerror(errno)));
 	while (map_info[i])
@@ -86,21 +86,18 @@ int	parse_textures(char **map_info, t_cube *cube)
 		free(trimmed_line);
 		i++;
 	}
-	cube->map.map = malloc(sizeof(char *) * cube->map.map_height);
+	cube->map.map = malloc(sizeof(char *) * (cube->map.map_height + 1));
 	for (int j = 0; j < cube->map.map_height; j++) {
-		cube->map.map[j] = strdup(buffer[j]);
+		cube->map.map[j] = ft_strdup(buffer[j]);
 		if (cube->map.map[j] == NULL) {
 			fprintf(stderr, "Failed to duplicate string.\n");
-			return EXIT_FAILURE;
+			return (free_2darray(buffer), EXIT_FAILURE);
 		}
 	}
-	for (int j = 0; j < cube->map.map_height; j++) {
-		free(buffer[j]);
-		buffer[j] = NULL;
-	}
-	free(buffer);
-	//print_cube_info(cube);
-	return (0);
+	cube->map.map[cube->map.map_height] = NULL;
+	free_2darray(buffer);
+	print_cube_info(cube);
+	return (EXIT_SUCCESS);
 }
 
 int copy_map_lines(char *line, char **buffer, t_cube *cube)
@@ -122,14 +119,19 @@ int copy_map_lines(char *line, char **buffer, t_cube *cube)
 
 void print_cube_info(t_cube *cube)
 {
+	printf("\t\tThe cube info is:\n");
+	printf("\n\n\tThe map structure is:\n");
 	for (int j = 0; cube->map.map[j] != 0; j++)
 			printf("map_line :%s", cube->map.map[j]);
+	printf("\n\n\tThe map texture are is:\n");
 	for (int j = 0; j < cube->map.num_textures; j++)
-			printf("%s\n", cube->map.texture[j]);
+			printf("%s", cube->map.texture[j]);
+	printf("\n\nThe floor colors are:\n");
 	for (int j = 0; j < 3; j++)
-			printf("%d\n", cube->map.floor_col[j]);
+			printf("%d ", cube->map.floor_col[j]);
+	printf("\n\nThe ceiling colors are:\n");
 	for (int j = 0; j < 3; j++)
-			printf("%d\n", cube->map.ceiling_col[j]);
-	printf("map_height: %d\n", cube->map.map_height);
-	printf("map_width: %d\n", cube->map.map_width);
+			printf("%d ", cube->map.ceiling_col[j]);
+	printf("\n\nmap_height: %d\n", cube->map.map_height);
+	printf("\nmap_width: %d\n", cube->map.map_width);
 }
