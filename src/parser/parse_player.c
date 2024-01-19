@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/19 08:57:10 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 10:08:43 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,29 @@ int	parse_player(t_cube *cube)
 	return (0);
 }
 
-// int check_walls(char **map)
-// {
-// 	if (!line)
-// 	while (*map)
-// 	{
-// 		if (!line_has_walls(*map))
-// 			return (fprintf(stderr, "❌ Cube error: Map is not closed\n"), 1);
-// 		map++;
-// 	}
-// }
+void	transform_spaces(char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == ' ')
+				map[i][j] = '0';
+			j++;
+		}
+		i++;
+	}
+}
+
+int check_walls(char **map, int map_height, int map_width)
+{
+	(void)map_height;
+	(void)map_width;
+	transform_spaces(map);
+    return 1;
+}

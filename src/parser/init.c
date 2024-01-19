@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/19 07:00:52 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/19 09:32:55 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	init_cube(t_cube *cube)
 	cube->map.map_y = 0;
 	cube->map.num_line = 0;
 	cube->map.num_textures = 0;
-	cube->map.data_type = 0;
-	cube->map.map_parsing = false;
 	cube->player.pos.x = 0;
 	cube->player.pos.y = 0;
 	cube->player.player_speed = 10;
