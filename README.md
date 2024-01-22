@@ -21,7 +21,7 @@ Mandatory and bonus features for comprehensive learning.
 
 ## Usefull resources 
 
-Kind of Raycasting Bible: Raycasting Tutorial https://lodev.org/cgtutor/raycasting.html
-How Wolfenstein 3D Raycasting Works - Pseudo 3D: Video Tutorial https://www.youtube.com/watch?v=8XnQq28TRZY
-Raycasting HTML5 with JavaScript (Part 1) - Cloning Wolfenstein 3D: Video Tutorial https://youtu.be/8tYKQi_cRV0
-Raycast Theory: Video Tutorial https://www.youtube.com/watch?v=NbSee-XM7WA
+Kind of Raycasting Bible: Raycasting Tutorial https://lodev.org/cgtutor/raycasting.html\n
+How Wolfenstein 3D Raycasting Works - Pseudo 3D: Video Tutorial https://www.youtube.com/watch?v=8XnQq28TRZY \n
+Raycasting HTML5 with JavaScript (Part 1) - Cloning Wolfenstein 3D: Video Tutorial https://youtu.be/8tYKQi_cRV0 \n
+Raycast Theory: Video Tutorial https://www.youtube.com/watch?v=NbSee-XM7WA\n
