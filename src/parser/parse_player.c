@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/22 14:53:52 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 15:18:50 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,19 @@ int  f_fill(t_cube *cube, int p_y, int p_x)
   return (0);
 }
 
-void replace_spaces(char **map)
+void replace_spaces(char **map, int map_h)
 {
 	int i;
 	int j;
 	
 	i = 0;
 	j = 0;
-	while (map[i][j])
+	while (i < map_h)
 	{
 		j = 0;
 		while (map[i][j])
 		{
+			printf("map[%d][%d] = %c\n", i, j, map[i][j]);
 			if (map[i][j] == ' ')
 				map[i][j] = '0';
 			j++;
@@ -89,10 +90,9 @@ void replace_spaces(char **map)
 
 int check_walls(t_cube *cube)
 {
-	replace_spaces(cube->map.map);
+	replace_spaces(cube->map.map, cube->map.map_height);
 	print_map_info(cube);
 	if (f_fill(cube, (int)cube->player.matrix_pos.y, (int)cube->player.matrix_pos.x))
 		return (print_map_info(cube), fprintf(stderr, "❌ Cube error: Map is not enclosed\n"), 1);
-	print_map_info(cube);
 	return (0);
 }

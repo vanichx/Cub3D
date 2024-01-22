@@ -6,23 +6,24 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 13:11:38 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 15:14:52 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 #include "../mlx/mlx.h"
 
 bool	check_args(int argc, char *argv[])
 {
 	if (argc != 2)
-		return (fprintf(stderr, "❌ Cube error: Wrong number of arguments\n"));
+		return (fprintf(stderr, WRONG_NUM_OF_ARGS));
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
-		return (fprintf(stderr, "❌ Cube error: Wrong file extension\n"));
+		return (fprintf(stderr, WRONG_FILE_EXT));
 	if (ft_strncmp(argv[1], "maps/", 5))
-		return (fprintf(stderr, "❌ Cube error: Wrong file location\n"));
+		return (fprintf(stderr, WRONG_FILE_LOC));
 	if (ft_strlen(argv[1]) < 10)
-		return (fprintf(stderr, "❌ Cube error: Wrong file naming\n"));
+		return (fprintf(stderr, WRONG_FILE_NAMING));
 	return (EXIT_SUCCESS);
 }
 
