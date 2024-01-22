@@ -1,139 +1,90 @@
-#	----------------------------------------	NAMES
+# Variables
+CC					=	gcc
+CFLAGS				=	-Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include #-fsanitize=address -fno-omit-frame-pointer
 
-# Name value
-NAME =		cub3D
+RM					=	rm -rf
+CUB3D				=   cub3D
+NAME				=	$(CUB3D)
 
-# Makefile file
-MKF =		Makefile
-MAKE = 		make --no-print-directory
+# Libraries
+LIBFT				=	libft.a
+LIBFT_DIR			=	lib/libft
+LIBFT_FILE			=	$(LIBFT_DIR)/$(LIBFT)
+CFLAGS				+=	-I $(LIBFT_DIR)/include
 
-#	----------------------------------------	COLORS
+MLX_DIR				=	lib/mlx
+MLX_FILE			=	$(MLX_DIR)/libmlx.a
+CFLAGS				+=	-I $(MLX_DIR)
+LDFLAGS				+=	-L $(MLX_DIR) -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKit -lX11
 
-DEF_COLOR = \033[0;39m
-GRAY = \033[0;90m
-RED = \033[0;91m
-GREEN = \033[0;92m
-YELLOW = \033[0;93m
-BLUE = \033[0;94m
-MAGENTA = \033[0;95m
-CYAN = \033[0;96m
-WHITE = \033[0;97m
+MAKE_LIB			=	make --no-print-directory -C
 
-#	----------------------------------------	FILES
+# Source and Object Files
+VPATH			=	src:include:src/free:src/parser:src/utils:include
+CUB3D_INC		=	CUB3D.h
+CUB3D_SRC		=	$(shell find src -name '*.c')
 
-# All files into src/
+# Object Files
+OBJ_DIR				=	obj
+CUB3D_OBJ		=	$(addprefix $(OBJ_DIR)/, $(CUB3D_SRC:.c=.o))
 
-FILES := $(patsubst src/%,%,$(shell find src/ -type f -name "*.c"))
+# Rules
+all:				$(NAME)
 
-# Root folders
-SRC_ROOT := src/
-DEP_ROOT := .dep/
-OBJ_ROOT := .obj/
-LIB_ROOT := lib/
+$(OBJ_DIR)/%.o:		%.c
+					@mkdir -p $(dir $@)
+					@$(CC) $(CFLAGS) -c $< -o $@
 
-# Objects and dependencies defines
-SRC 	:=	$(addprefix $(SRC_ROOT), $(FILES))
-OBJS 	:=	$(addprefix $(OBJ_ROOT), $(FILES:.c=.o))
-DEPS 	:=	$(addprefix $(DEP_ROOT), $(FILES:.c=.d))
-INCS 	:=	$(addprefix -I, $(INC_DIRS))
+$(LIBFT_FILE):
+					$(MAKE_LIB) $(LIBFT_DIR)
 
+$(MLX_FILE):
+					$(MAKE_LIB) $(MLX_DIR)
 
-#	----------------------------------------	HEADERS DIR
+$(NAME):			$(LIBFT_FILE) $(MLX_FILE) $(CUB3D_OBJ)
+					@$(CC) $(CFLAGS) $(LDFLAGS) $(LIBFT_FILE) $(MLX_FILE) $(CUB3D_OBJ) -o $@
+					@echo "$(GREEN)$(NAME) was successfully created!$(DEFAULT)"
 
-# Header of LIBFT
-DIR_LIBFT =	lib/libft
+lib_clean:
+					$(MAKE_LIB) $(LIBFT_DIR) clean
+					$(MAKE_LIB) $(MLX_DIR) clean
 
-# Headers of mlx
-DIR_MLX =	lib/mlx
+lib_fclean:
+					$(MAKE_LIB) $(LIBFT_DIR) fclean
+					$(MAKE_LIB) $(MLX_DIR) clean
 
-# Headers of project
-DIR_HEDS =	inc/
+clean:				lib_clean
+					$(RM) $(OBJ_DIR)
+					@echo "$(YELLOW)$(NAME) object files deleted!$(DEFAULT)"
 
+fclean:				clean lib_fclean
+					$(RM) $(NAME)
+					@echo "$(RED)$(NAME) program deleted!$(DEFAULT)"
+					
+re:					fclean all
 
-#	----------------------------------------	LIBRARIES
+# COLORS DEFINITION
+RED				= \033[1;31m
+DEFAULT			= \033[0m
+GREEN			= \033[1;32m
+BOLD			= \033[1m
+YELLOW			= \033[1;33m
 
-# LIBFT libraries
-LIBFT =		lib/libft/libft.a
+# Valgrind testing
+valgrind: $(NAME)
+	$(VALGRIND) ./$(NAME)
 
-# Makefile LIBFT
-LIBFT_DIR =	lib/libft
+# Leaks at exit testing
+leaks: $(NAME)
+	$(LEAKS) ./$(NAME)
 
-# Mlx libraries
-MLX =		lib/mlx/libmlx.a
+.SILENT:
 
-# Makefile mlx
-MLX_DIR =	lib/mlx
+.PHONY:				all lib_clean lib_fclean clean fclean re
 
-
-#	----------------------------------------	COMPILATION
-
-# Variable to compile .c files
-GCC =		gcc
-
-# Flags for the gcc compilation
-FLAGS =		-g -MMD -MP -I/opt/X11/include
-FLAGS +=	-O3
-FLAGS +=	-Wall -Werror -Wextra -MMD -MP
-
-MINILIBXCC := -I mlx -L $(DIR_MLX) -lmlx -lX11
-
-OPENGL :=	-framework OpenGL -framework AppKit -L/opt/X11/lib -lX11
-
-# Address sanitizing flags
-ASAN :=	#-fsanitize=address -fsanitize-recover=address
-ASAN +=	#-fno-omit-frame-pointer -fno-common
-ASAN +=	#-fsanitize=pointer-subtract -fsanitize=pointer-compare
-
-
-#	----------------------------------------	RULES
-
-all:
-		@$(MAKE) -sC $(LIBFT_DIR)
-		@$(MAKE) -sC $(MLX_DIR)
-		@$(MAKE) $(NAME)
-
-clean:
-		@rm -rf $(DEP_ROOT) $(OBJ_ROOT)
-		@printf "$(RED)All cub3d objects removed\n$(DEF_COLOR)"
-
-fclean:
-		@rm -rf $(DEP_ROOT) $(OBJ_ROOT)
-		@rm -f $(NAME)
-		@printf "$(RED)All cub3d files removed\n$(DEF_COLOR)"
-
-fcleanall:
-		@$(MAKE) fclean -sC $(LIBFT_DIR)
-		@printf "$(RED)All libft files removed\n$(DEF_COLOR)"
-		@$(MAKE) clean -sC $(MLX_DIR)
-		@printf "$(RED)All mlx files removed\n$(DEF_COLOR)"
-		@$(MAKE) fclean
-
-re:
-		@$(MAKE) fclean
-		@$(MAKE) all
-
-reall:
-		@$(MAKE) fcleanall
-		@$(MAKE) all
-
-$(NAME) :: $(OBJS)
-		@printf "$(DEL_LINE)\r Compiling $@"
-		@$(GCC) -v $(FLAGS) $(ASAN) $^ $(LIBFT) $(MLX) $(MINILIBXCC) $(OPENGL) -o $@
-
-#$(NAME) :: $(OBJS)
-#		@printf "$(DEL_LINE)\r Compiling $@"
-#		@$(GCC) -v $(FLAGS) $(ASAN) $^ $(LIBFT) $(MLX) $(MINILIBXCC) $(OPENGL) -o $@
-
-$(NAME) ::
-		@printf "$(DEL_LINE)$(GREEN)\rCUB3D COMPILED ✅$(DEF_COLOR)\n"
-
-$(OBJ_ROOT)%.o : $(SRC_ROOT)%.c $(MKF) $(LIBFT) $(MKF)
-		@mkdir -p $(dir $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
-		@printf "$(DEF_COLOR)[CUB3D] compiling: $< \n"
-		@$(GCC) $(FLAGS) -I $(DIR_HEDS) -I $(LIBFT_DIR) -I $(DIR_MLX) -c $< -o $@
-		@mv $(patsubst %.o, %.d, $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
-
-
--include $(DEPS)
-
-.PHONY:	all bonus update clean fclean re
+# COLORS DEFINITION
+RED				= \033[1;31m
+DEFAULT			= \033[0m
+GREEN			= \033[1;32m
+BOLD			= \033[1m
+YELLOW			= \033[1;33m
