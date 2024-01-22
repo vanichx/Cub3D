@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 16:28:14 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:09:09 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_point		pos;
-	t_point		matrix_pos;
+	t_point		m_pos;
 	int			move;
 	int			rotate;
 	float		player_speed;
@@ -95,23 +95,34 @@ typedef struct s_cube
 bool	check_args(int argc, char *argv[]);
 void	parse(char *map_path, t_cube *cube);
 
+/* ../src/parser */
 
-/*****************************************	PARSER	******************************************/
+/* gnl.c */
+char	*get_next_line(int fd);
+
+/* init.c */
+void	init_cube(t_cube *cube);
+bool	init_window(t_mlx *screen);
+
+/* parse_colors.c */
+int		parse_color_code(char *line, int *color);
+
 /* parse_file.c */
-void		parse_file(char *map_path, char ***map_file, t_cube *cube);
-
-/* parse_map.c */
-void	parse_map(char **map_file, t_cube *cube);
+void	parse_file(char *map_path, char ***map_file, t_cube *cube);
 
 /* parse_info.c */
 void	parse_textures(char *trimmed_line, t_cube *cube);
 void	parse_floor_color(char *trimmed_line, t_cube *cube, char *line);
 void	parse_ceiling_color(char *trimmed_line, t_cube *cube, char *line);
 void	parse_map_lines(char *line, char **buffer, t_cube *cube);
-void	print_map_info(t_cube *cube);
+void	print_map_info(t_cube *cube); //DEBUG
 
-/* parse_colors.c */
-int		parse_color_code(char *line, int *color);
+/* parse_map.c */
+void	parse_map(char **map_file, t_cube *cube);
+
+/* parse_player.c */
+void	parse_player(t_cube *cube);
+void	check_walls(t_cube *cube);
 
 /* parse_utils.c */
 bool	is_valid_char(char c);
@@ -120,17 +131,8 @@ int		read_file(char *map_path, int *fd);
 bool	line_has_walls(char *line);
 int		is_player(char *line);
 
-/* parse_player.c */
-void	parse_player(t_cube *cube);
-void	check_walls(t_cube *cube);
+/* ../src/parser */
 
-/* gnl.c */
-char	*get_next_line(int fd);
-
-/* init.c */
-void	init_cube(t_cube *cube);
-bool	init_window(t_mlx *screen);
-/*****************************************	PARSER	******************************************/
 
 
 

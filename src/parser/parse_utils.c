@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:51:08 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 16:16:00 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:12:54 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool	line_has_walls(char *line)
 	return (false);
 }
 
-int		is_player(char *line)
+int	is_player(char *line)
 {
 	int	pos;
 

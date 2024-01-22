@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 16:15:43 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:15:08 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,28 +75,28 @@ void	parse_map_lines(char *line, char **buffer, t_cube *cube)
 
 void	print_map_info(t_cube *cube)
 {
+	int	j;
+
+	j = -1;
 	printf("\t\tThe cube info is:\n");
 	printf("\n\n\tThe map structure is:\n");
-	for (int j = 0; cube->map.map[j] != 0; j++) {
+	while (cube->map.map[++j] != 0)
 		printf("%s\n", cube->map.map[j]);
-	}
-	// printf("\n\n\tThe map texture are is:\n");
-	// for (int j = 0; j < cube->map.num_textures; j++)
-	// 		printf("%s\n", cube->map.texture[j]);
-	// printf("\n\nThe floor colors are:\n");
-	// for (int j = 0; j < 3; j++)
-	// 		printf("%d ", cube->map.floor_col[j]);
-	// printf("\n\nThe ceiling colors are:\n");
-	// for (int j = 0; j < 3; j++)
-	// 		printf("%d ", cube->map.ceiling_col[j]);
-	// printf("\n\nPlayer's data are:\n");
-	// printf("player's x position: %f\n", cube->player.matrix_pos.x);
-	// printf("player's y position: %f\n", cube->player.matrix_pos.y);
-	// printf("player's initial view: %c\n", cube->player.init_view);
-	// printf("player's move: %d\n", cube->player.move);
-	// printf("player's rotate: %d\n", cube->player.rotate);
-	// printf("player's speed: %f\n", cube->player.player_speed);
-	// printf("player's rotation speed: %f\n", cube->player.player_rot_speed);
-	// printf("\n\nmap_height: %d\n", cube->map.map_height);
-	// printf("\nmap_width: %d\n", cube->map.map_width);
+	j = -1;
+	printf("\n\n\tThe map texture are is:\n");
+	while (++j < cube->map.num_textures)
+		printf("%s\n", cube->map.texture[j]);
+	printf("\n\nThe floor colors are:\n");
+	j = -1;
+	while (++j < 3)
+		printf("%d ", cube->map.floor_col[j]);
+	j = -1;
+	printf("\n\nThe ceiling colors are:\n");
+	while (++j < 3)
+		printf("%d ", cube->map.ceiling_col[j]);
+	printf("\n\nPlayer's data are:\n");
+	printf("player's x position: %f\n", cube->player.m_pos.x);
+	printf("player's y position: %f\n", cube->player.m_pos.y);
+	printf("\n\nmap_height: %d\n", cube->map.map_height);
+	printf("\nmap_width: %d\n", cube->map.map_width);
 }
