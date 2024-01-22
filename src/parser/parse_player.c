@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/22 14:41:31 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 14:53:52 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int  f_fill(t_cube *cube, int p_y, int p_x)
 //   printf("map width %d\n", map_w);
   printf("\nff pos y %d\t", c_y);
   printf("ff pos x %d\n", c_x);
-  if (c_y < 0  || c_x < 0 || c_y > map_h || cube->map.map[c_y][c_x] == '1' || cube->map.map[c_y][c_x] == 'F')
-	return (printf("nothing to check here \n"), 0);
-  if (cube->map.map[c_y][c_x] == ' ' || cube->map.map[c_y][c_x] == '\0') {
+  if (c_y >= map_h || cube->map.map[c_y][c_x] == ' ' || cube->map.map[c_y][c_x] == '\0') {
 	fprintf(stderr, "❌ Cube error: Map is not enclosed\n");
 	exit_program (cube, 1);
   }
+  if (c_y < 0  || c_x < 0  || cube->map.map[c_y][c_x] == '1' || cube->map.map[c_y][c_x] == 'F')
+	return (printf("nothing to check here \n"), 0);
   cube->map.map[c_y][c_x] = 'F';
   if ( f_fill(cube, c_y + 1, c_x) ||
 	f_fill(cube, c_y - 1, c_x) ||
@@ -67,8 +67,30 @@ int  f_fill(t_cube *cube, int p_y, int p_x)
   return (0);
 }
 
+void replace_spaces(char **map)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	j = 0;
+	while (map[i][j])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == ' ')
+				map[i][j] = '0';
+			j++;
+		}
+		i++;
+	}
+}
+
 int check_walls(t_cube *cube)
 {
+	replace_spaces(cube->map.map);
+	print_map_info(cube);
 	if (f_fill(cube, (int)cube->player.matrix_pos.y, (int)cube->player.matrix_pos.x))
 		return (print_map_info(cube), fprintf(stderr, "❌ Cube error: Map is not enclosed\n"), 1);
 	print_map_info(cube);
