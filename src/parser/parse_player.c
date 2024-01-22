@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/19 15:05:57 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 14:41:31 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,96 +38,39 @@ int	parse_player(t_cube *cube)
 	return (0);
 }
 
-bool is_map_enclosed(char **map, int width, int height)
+int  f_fill(t_cube *cube, int p_y, int p_x)
 {
-    // Check if the outermost edges have '1', indicating an open map
-    for (int i = 0; i < height; i++)
-    {
-        if (map[i][0] != '1' || map[i][width - 1] != '1')
-            return false;
-    }
+  int    c_x;
+  int    c_y;
+  int    map_h;
+  int    map_w;
 
-    for (int j = 0; j < width; j++)
-    {
-        if (map[0][j] != '1' || map[height - 1][j] != '1')
-            return false;
-    }
-
-    // Check if the inner area is enclosed by '1'
-    for (int i = 1; i < height - 1; i++)
-    {
-        for (int j = 1; j < width - 1; j++)
-        {
-            if (map[i][j] != '1')
-                return false;
-        }
-    }
-
-    // Map is enclosed by walls
-    return true;
-}
-
-void square_map(t_map *map)
-{
-    int i;
-    int j;
-    char *line;
-
-    i = 0;
-    while (i < map->map_height)
-    {
-        j = 0; // Reset j to 0 for each new row
-        if ((int)ft_strlen(map->map[i]) < map->map_width)
-        {
-            line = malloc(sizeof(char) * (map->map_width + 1));
-            while (map->map[i][j] != '\0')
-            {
-                if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'E' || map->map[i][j] == 'W')
-                    line[j] = map->map[i][j];
-                else if (map->map[i][j] != '1') // Compare with character '1'
-                    line[j] = '0'; // Replace characters other than '1' with '0'
-                else
-                    line[j] = '1';
-                j++;
-            }
-            while (j < map->map_width)
-                line[j++] = '0';
-            line[j] = '\0'; // Null terminate the new string
-            free(map->map[i]);
-            map->map[i] = ft_strdup(line);
-            free(line);
-        }
-        else
-        {
-            while (map->map[i][j] != '\0')
-            {
-                if (map->map[i][j] != '1')
-                    map->map[i][j] = '0'; // Replace characters other than '1' with '0'
-                j++;
-            }
-        }
-        i++;
-    }
+  c_x = p_x;
+  c_y = p_y;
+  map_w = cube->map.map_width;
+  map_h = cube->map.map_height;
+//   printf("map width %d\n", map_w);
+  printf("\nff pos y %d\t", c_y);
+  printf("ff pos x %d\n", c_x);
+  if (c_y < 0  || c_x < 0 || c_y > map_h || cube->map.map[c_y][c_x] == '1' || cube->map.map[c_y][c_x] == 'F')
+	return (printf("nothing to check here \n"), 0);
+  if (cube->map.map[c_y][c_x] == ' ' || cube->map.map[c_y][c_x] == '\0') {
+	fprintf(stderr, "❌ Cube error: Map is not enclosed\n");
+	exit_program (cube, 1);
+  }
+  cube->map.map[c_y][c_x] = 'F';
+  if ( f_fill(cube, c_y + 1, c_x) ||
+	f_fill(cube, c_y - 1, c_x) ||
+	f_fill(cube, c_y, c_x + 1) ||
+	f_fill(cube, c_y, c_x - 1))
+	return (1);
+  return (0);
 }
 
 int check_walls(t_cube *cube)
 {
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    square_map(&cube->map);
-
-    // Check if the modified map is enclosed by walls
-    if (is_map_enclosed(cube->map.map, cube->map.map_width, cube->map.map_height))
-    {
-        // Map is enclosed by walls, handle accordingly
-        return 1;
-    }
-    else
-    {
-        // Map is not enclosed by walls, handle accordingly
-        return 0;
-    }
+	if (f_fill(cube, (int)cube->player.matrix_pos.y, (int)cube->player.matrix_pos.x))
+		return (print_map_info(cube), fprintf(stderr, "❌ Cube error: Map is not enclosed\n"), 1);
+	print_map_info(cube);
+	return (0);
 }

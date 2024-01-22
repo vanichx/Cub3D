@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/19 08:31:03 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 13:14:51 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 			parse_floor_color(trimmed_line, cube, map_file[i]);
 		else if (!ft_strncmp(trimmed_line, "C ", 2))
 			parse_ceiling_color(trimmed_line, cube, map_file[i]);
-		else if (trimmed_line[0] == '1' || trimmed_line[0] == ' ')
+		else if (trimmed_line[0] == '1' || trimmed_line[0] == ' ' || trimmed_line[0] == '0')
 			if (parse_map_lines(map_file[i], buffer, cube))
 				return (free(trimmed_line), EXIT_FAILURE);
 		free(trimmed_line);

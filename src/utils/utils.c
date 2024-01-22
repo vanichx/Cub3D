@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:28:20 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 07:08:22 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 13:07:01 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,28 @@ char	*trim_whitespace(const char *str)
 	}
 	result[j] = '\0';
 	return (result);
+}
+
+char *custom_strdup(const char *src)
+{
+	char *dest;
+	size_t i;
+	size_t j;
+
+	j = 0;
+	i = ft_strlen(src) + 1;
+	dest = (char *)malloc(sizeof(char) * i);
+	if (dest == NULL)
+		return (0);
+	while (j < i)
+	{
+		if (src[j] == '\n' || src[j] == '\0')
+		{
+			dest[j] = '\0';
+			break ;
+		}
+		dest[j] = src[j];
+		j++;
+	}
+	return (dest);
 }

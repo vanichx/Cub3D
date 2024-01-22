@@ -80,9 +80,9 @@ MINILIBXCC := -I mlx -L $(DIR_MLX) -lmlx -lX11
 OPENGL :=	-framework OpenGL -framework AppKit -L/opt/X11/lib -lX11
 
 # Address sanitizing flags
-ASAN :=	#-fsanitize=address -fsanitize-recover=address
-ASAN +=	#-fno-omit-frame-pointer -fno-common
-ASAN +=	#-fsanitize=pointer-subtract -fsanitize=pointer-compare
+ASAN :=	-fsanitize=address -fsanitize-recover=address
+ASAN +=	-fno-omit-frame-pointer -fno-common
+ASAN +=	-fsanitize=pointer-subtract -fsanitize=pointer-compare
 
 
 #	----------------------------------------	RULES

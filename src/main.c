@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 14:56:38 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 13:11:38 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ bool	parse(char *map_path, t_cube *cube)
 	init_cube(cube);
 	if (parse_file(map_path, &cube->map.map_file) 
 		|| parse_map(cube->map.map_file, cube)
-		|| parse_player(cube)
-		|| check_walls(cube))
-	{
-		print_map_info(cube);
-		printf("Map is invalid\n");
+		|| parse_player(cube))
 		return (EXIT_FAILURE);
-	}
 	print_map_info(cube);
-	printf("Map is valid\n");
+	if (check_walls (cube))
+		return (printf("not closed map \n"), EXIT_FAILURE);
+	printf("Map is close\n");
 	return (EXIT_SUCCESS);
 }
 

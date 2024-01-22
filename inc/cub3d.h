@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 11:39:06 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 14:35:05 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void	*ft_realloc(void *ptr, size_t size);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 int		ft_isspace(int c);
 char	*trim_whitespace(const char *str);
+char	*custom_strdup(const char *src);
 /*****************************************	utils	******************************************/
 
 
@@ -149,6 +150,7 @@ void	ft_strdel(char **s);
 void	free_textures(t_cube *cube);
 void	free_2darray(char **array);
 void	cleanup(t_cube *cube);
+void	exit_program(t_cube *cube, int exit_code);
 /*****************************************	free	******************************************/
 
 #endif
