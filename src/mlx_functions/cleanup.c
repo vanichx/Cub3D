@@ -6,12 +6,13 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 16:02:06 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 19:18:12 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "error.h"
+#include "../mlx/mlx.h"
 
 void	ft_strdel(char **s)
 {
@@ -52,6 +53,8 @@ void	cleanup(t_cube *cube)
 	free_textures(cube);
 	free_2darray(cube->map.map);
 	free_2darray(cube->map.map_file);
+	mlx_destroy_image(cube->screen.mlx, cube->screen.img);
+	mlx_destroy_window(cube->screen.mlx, cube->screen.win);
 }
 
 void	exit_program(t_cube *cube, int exit_code, char *message)

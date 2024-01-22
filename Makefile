@@ -20,7 +20,7 @@ LDFLAGS				+=	-L $(MLX_DIR) -L /usr/X11/lib -lmlx -framework OpenGL -framework A
 MAKE_LIB			=	make --no-print-directory -C
 
 # Source and Object Files
-VPATH			=	src:include:src/free:src/parser:src/utils:include
+VPATH			=	src:include:src/mlx_functions:src/parser:src/geometry:src/utils:include
 CUB3D_INC		=	CUB3D.h
 CUB3D_SRC		=	$(shell find src -name '*.c')
 
@@ -39,7 +39,7 @@ $(LIBFT_FILE):
 					$(MAKE_LIB) $(LIBFT_DIR)
 
 $(MLX_FILE):
-					$(MAKE_LIB) $(MLX_DIR)
+					@$(MAKE_LIB) $(MLX_DIR)
 
 $(NAME):			$(LIBFT_FILE) $(MLX_FILE) $(CUB3D_OBJ)
 					@$(CC) $(CFLAGS) $(LDFLAGS) $(LIBFT_FILE) $(MLX_FILE) $(CUB3D_OBJ) -o $@

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 17:09:09 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:33:58 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include "keycodes.h"
+#include "structures.h"
+#include <math.h>
 #include "libft.h"
+#include "geo.h"
+#include "../mlx/mlx.h"
 #include "error.h"
 #include <unistd.h>
 #include <fcntl.h>
@@ -28,68 +32,6 @@
 #define HEIGHT 1080
 #define MAX_LINES 10000
 
-#define NORTH 0
-#define SOUTH 1
-#define EAST 2
-#define WEST 3
-
-#define PLAYER_SPEED 10
-#define PLAYER_ROT_SPEED 4
-
-typedef struct s_point
-{
-	float	x;
-	float	y;
-	float	z;
-	int		color;
-}		t_point;
-
-typedef	struct s_mlx
-{
-	int		width;
-	int		height;
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_mlx;
-
-typedef struct s_map
-{
-	char	*texture[4];
-	int		floor_col[3];
-	int		ceiling_col[3];
-	char	**map_file;
-	char	**map;
-	int 	map_width;
-	int		map_height;
-	int 	num_line;
-	int		num_textures;
-	int		map_x;
-	int		map_y;
-}				t_map;
-
-typedef struct s_player
-{
-	t_point		pos;
-	t_point		m_pos;
-	int			move;
-	int			rotate;
-	float		player_speed;
-	float		player_rot_speed;
-	char		init_view;
-} 			t_player;
-
-typedef struct s_cube
-{
-	t_mlx		screen;
-	t_player	player;
-	t_map		map;
-	int			fov;
-}			t_cube;
 
 /* main.c */
 bool	check_args(int argc, char *argv[]);
@@ -147,13 +89,17 @@ char	*custom_strdup(const char *src);
 
 
 
-/*****************************************	free	******************************************/
-/* free.c */
+/*************************************	mlx_functions	**************************************/
+/* cleanup.c */
 void	ft_strdel(char **s);
 void	free_textures(t_cube *cube);
 void	free_2darray(char **array);
 void	cleanup(t_cube *cube);
 void	exit_program(t_cube *cube, int exit_code, char *message);
+/* mouse_events.c */
+int		mouse_release(int button, int x, int y, void *param);
+int		mouse_press(int button, int x, int y, void *param);
+int		mouse_move(int x, int y, void *param);
 /*****************************************	free	******************************************/
 
 #endif

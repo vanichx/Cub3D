@@ -6,13 +6,11 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 16:23:01 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 20:32:54 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "error.h"
-#include "../mlx/mlx.h"
 
 bool	check_args(int argc, char *argv[])
 {
@@ -45,9 +43,8 @@ int main(int argc, char *argv[])
 	if (check_args(argc, argv))
 		return (EXIT_FAILURE);
 	parse(argv[1], &cube);
-	// if (init_window(&cube.screen))
-	// 	return (EXIT_FAILURE);
+	if (init_window(&cube.screen))
+		return (EXIT_FAILURE);
+	mlx_loop(&cube.screen.mlx);
 	cleanup(&cube);
-	
-	// mlx_loop(&cube.screen.mlx);
 }
