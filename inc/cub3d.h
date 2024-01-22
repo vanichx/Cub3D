@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 14:35:05 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:28:14 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <string.h>
 #include "keycodes.h"
 #include "libft.h"
+#include "error.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -92,21 +93,21 @@ typedef struct s_cube
 
 /* main.c */
 bool	check_args(int argc, char *argv[]);
-bool	parse(char *map_path, t_cube *cube);
+void	parse(char *map_path, t_cube *cube);
 
 
 /*****************************************	PARSER	******************************************/
 /* parse_file.c */
-int		parse_file(char *map_path, char ***map_file);
+void		parse_file(char *map_path, char ***map_file, t_cube *cube);
 
 /* parse_map.c */
-int		parse_map(char **map_file, t_cube *cube);
+void	parse_map(char **map_file, t_cube *cube);
 
 /* parse_info.c */
 void	parse_textures(char *trimmed_line, t_cube *cube);
 void	parse_floor_color(char *trimmed_line, t_cube *cube, char *line);
 void	parse_ceiling_color(char *trimmed_line, t_cube *cube, char *line);
-int		parse_map_lines(char *line, char **buffer, t_cube *cube);
+void	parse_map_lines(char *line, char **buffer, t_cube *cube);
 void	print_map_info(t_cube *cube);
 
 /* parse_colors.c */
@@ -114,14 +115,14 @@ int		parse_color_code(char *line, int *color);
 
 /* parse_utils.c */
 bool	is_valid_char(char c);
-int		is_valid_line(char *line);
+int		is_valid_line(char *line, t_cube *cube);
 int		read_file(char *map_path, int *fd);
 bool	line_has_walls(char *line);
 int		is_player(char *line);
 
 /* parse_player.c */
-int		parse_player(t_cube *cube);
-int 	check_walls(t_cube *cube);
+void	parse_player(t_cube *cube);
+void	check_walls(t_cube *cube);
 
 /* gnl.c */
 char	*get_next_line(int fd);
@@ -150,7 +151,7 @@ void	ft_strdel(char **s);
 void	free_textures(t_cube *cube);
 void	free_2darray(char **array);
 void	cleanup(t_cube *cube);
-void	exit_program(t_cube *cube, int exit_code);
+void	exit_program(t_cube *cube, int exit_code, char *message);
 /*****************************************	free	******************************************/
 
 #endif

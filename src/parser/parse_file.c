@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 12:57:11 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 15:39:26 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,27 @@ static int	copy_lines_to_map_file(char ***map_file, char **buffer, int count)
 	i = 0;
 	*map_file = malloc((count + 1) * sizeof(char *));
 	if (!*map_file)
-		return (fprintf(stderr, \
-			"❌ Malloc error: Failed to Allocate the map buffer\n"));
+		return (1);
 	while (i < count)
 	{
 		(*map_file)[i] = ft_strdup(buffer[i]);
 		if ((*map_file)[i++] == NULL)
-			return (free_2darray(buffer), fprintf(stderr, \
-				"❌ Malloc error: Failed to Allocate the map buffer\n"));
+			return (1);
 	}
 	(*map_file)[count] = NULL;
 	free_2darray(buffer);
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
-int	parse_file(char *map_path, char ***map_file)
+void	parse_file(char *map_path, char ***map_file, t_cube *cube)
 {
 	char	**buffer;
 	int		count;
 
 	count = read_file_and_store_lines(map_path, &buffer);
 	if (!count)
-		return (EXIT_FAILURE);
-	return (copy_lines_to_map_file(map_file, buffer, count));
+		exit_program(cube, 1, EMPTY_FILE);
+	count = copy_lines_to_map_file(map_file, buffer, count);
+	if (count)
+		exit_program(cube, 1, MALLOC_ERROR);
 }

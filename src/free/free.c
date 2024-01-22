@@ -6,11 +6,12 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 14:30:58 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:02:06 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 
 void	ft_strdel(char **s)
 {
@@ -53,8 +54,11 @@ void	cleanup(t_cube *cube)
 	free_2darray(cube->map.map_file);
 }
 
-void	exit_program(t_cube *cube, int exit_code)
+void	exit_program(t_cube *cube, int exit_code, char *message)
 {
 	cleanup(cube);
+	if (message[0] == '\0')
+		exit(exit_code);
+	fprintf(stderr, "%s", message);
 	exit(exit_code);
 }

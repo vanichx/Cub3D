@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:51:08 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/19 08:40:53 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:16:00 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 bool	is_valid_char(char c)
 {
-	if (c == '0' || c == '1' || c == '2' || c == 'N'
+	if (c == '0' || c == '1' || c == 'N'
 		|| c == 'S' || c == 'E' || c == 'W' || c == ' ')
 		return (true);
 	else
 		return (false);
 }
 
-int	is_valid_line(char *line)
+int	is_valid_line(char *line, t_cube *cube)
 {
 	static int	player_dir = 0;
 	int			i;
@@ -30,15 +30,16 @@ int	is_valid_line(char *line)
 	while (line && line[i] && line[i] != '\n')
 	{
 		if (!is_valid_char(line[i]))
-			return (fprintf(stderr, \
-				"❌ Cube error: Invalid character in map\n"));
+		{
+			exit_program(cube, 1, INV_CHARS);
+		}
 		if (line[i] == 'N' || line[i] == 'S'
 			|| line[i] == 'E' || line[i] == 'W')
 			player_dir++;
 		i++;
 	}
 	if (player_dir > 1)
-		return (fprintf(stderr, "❌ Cube error: Multiple players\n"), -1);
+		exit_program(cube, 1, MULT_PLAYERS);
 	return (player_dir);
 }
 

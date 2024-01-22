@@ -6,13 +6,13 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/22 15:18:50 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:28:02 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	parse_player(t_cube *cube)
+void	parse_player(t_cube *cube)
 {
 	int	i;
 	int player_start_positions = 0;
@@ -34,8 +34,7 @@ int	parse_player(t_cube *cube)
 		i++;
 	}
 	if (player_start_positions == 0)
-		return (fprintf(stderr, "❌ Cube error: No player\n"), 1);
-	return (0);
+		exit_program(cube, 1, NO_PLAYER);
 }
 
 int  f_fill(t_cube *cube, int p_y, int p_x)
@@ -43,21 +42,14 @@ int  f_fill(t_cube *cube, int p_y, int p_x)
   int    c_x;
   int    c_y;
   int    map_h;
-  int    map_w;
 
   c_x = p_x;
   c_y = p_y;
-  map_w = cube->map.map_width;
   map_h = cube->map.map_height;
-//   printf("map width %d\n", map_w);
-  printf("\nff pos y %d\t", c_y);
-  printf("ff pos x %d\n", c_x);
-  if (c_y >= map_h || cube->map.map[c_y][c_x] == ' ' || cube->map.map[c_y][c_x] == '\0') {
-	fprintf(stderr, "❌ Cube error: Map is not enclosed\n");
-	exit_program (cube, 1);
-  }
+  if (c_y >= map_h || cube->map.map[c_y][c_x] == ' ' || cube->map.map[c_y][c_x] == '\0')
+	exit_program (cube, 1, UNCLOSED_MAP);
   if (c_y < 0  || c_x < 0  || cube->map.map[c_y][c_x] == '1' || cube->map.map[c_y][c_x] == 'F')
-	return (printf("nothing to check here \n"), 0);
+	return (0);
   cube->map.map[c_y][c_x] = 'F';
   if ( f_fill(cube, c_y + 1, c_x) ||
 	f_fill(cube, c_y - 1, c_x) ||
@@ -79,7 +71,6 @@ void replace_spaces(char **map, int map_h)
 		j = 0;
 		while (map[i][j])
 		{
-			printf("map[%d][%d] = %c\n", i, j, map[i][j]);
 			if (map[i][j] == ' ')
 				map[i][j] = '0';
 			j++;
@@ -88,11 +79,9 @@ void replace_spaces(char **map, int map_h)
 	}
 }
 
-int check_walls(t_cube *cube)
+void check_walls(t_cube *cube)
 {
 	replace_spaces(cube->map.map, cube->map.map_height);
 	print_map_info(cube);
-	if (f_fill(cube, (int)cube->player.matrix_pos.y, (int)cube->player.matrix_pos.x))
-		return (print_map_info(cube), fprintf(stderr, "❌ Cube error: Map is not enclosed\n"), 1);
-	return (0);
+	f_fill(cube, (int)cube->player.matrix_pos.y, (int)cube->player.matrix_pos.x);
 }

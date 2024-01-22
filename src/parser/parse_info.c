@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 13:16:30 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:15:43 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	parse_floor_color(char *trimmed_line, t_cube *cube, char *line)
 	parse_result = parse_color_code(trimmed_line, cube->map.floor_col);
 	if (parse_result == 0)
 	{
-		printf("Error: Not enough color values\n");
 		free(trimmed_line);
 		free(line);
+		exit_program(cube, 1, INVALID_COLORS);
 	}
 	else if (parse_result == -1)
 	{
-		printf("Error: Color value out of range\n");
 		free(trimmed_line);
 		free(line);
+		exit_program(cube, 1, INVALID_COLORS);
 	}
 }
 
@@ -44,34 +44,33 @@ void	parse_ceiling_color(char *trimmed_line, t_cube *cube, char *line)
 	parse_result = parse_color_code(trimmed_line, cube->map.ceiling_col);
 	if (parse_result == 0)
 	{
-		printf("Error: Not enough color values\n");
 		free(trimmed_line);
 		free(line);
+		exit_program(cube, 1, INVALID_COLORS);
 	}
 	else if (parse_result == -1)
 	{
-		printf("Error: Color value out of range\n");
 		free(trimmed_line);
 		free(line);
+		exit_program(cube, 1, INVALID_COLORS);
 	}
 }
 
-int	parse_map_lines(char *line, char **buffer, t_cube *cube)
+void	parse_map_lines(char *line, char **buffer, t_cube *cube)
 {
 	static int	map_height = 0;
 	static int	map_width = 0;
 
-	if (is_valid_line(line) > 1)
-		return (EXIT_FAILURE);
+	if (is_valid_line(line, cube) > 1)
+		exit_program(cube, 1, MULT_PLAYERS);
 	buffer[map_height] = custom_strdup(line);
 	if (buffer[map_height] == NULL)
-		return (EXIT_FAILURE);
+		exit_program(cube, 1, DUPLICATE_ERROR);
 	map_height++;
 	if ((int)ft_strlen(line) > map_width)
 		map_width = ft_strlen(line);
 	cube->map.map_height = map_height;
 	cube->map.map_width = map_width;
-	return (EXIT_SUCCESS);
 }
 
 void	print_map_info(t_cube *cube)

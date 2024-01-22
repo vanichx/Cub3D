@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 15:14:52 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:23:01 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,14 @@ bool	check_args(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
-bool	parse(char *map_path, t_cube *cube)
+void	parse(char *map_path, t_cube *cube)
 {
 	init_cube(cube);
-	if (parse_file(map_path, &cube->map.map_file) 
-		|| parse_map(cube->map.map_file, cube)
-		|| parse_player(cube))
-		return (EXIT_FAILURE);
+	parse_file(map_path, &cube->map.map_file, cube);
+	parse_map(cube->map.map_file, cube);
+	parse_player(cube);
 	print_map_info(cube);
-	if (check_walls (cube))
-		return (printf("not closed map \n"), EXIT_FAILURE);
-	printf("Map is close\n");
-	return (EXIT_SUCCESS);
+	check_walls (cube);
 }
 
 int main(int argc, char *argv[])
@@ -48,8 +44,7 @@ int main(int argc, char *argv[])
 	ft_bzero(&cube, sizeof(t_cube));
 	if (check_args(argc, argv))
 		return (EXIT_FAILURE);
-	if (parse(argv[1], &cube))
-		return (cleanup(&cube), EXIT_FAILURE);
+	parse(argv[1], &cube);
 	// if (init_window(&cube.screen))
 	// 	return (EXIT_FAILURE);
 	cleanup(&cube);
