@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 19:18:12 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/23 11:46:19 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ void	free_2darray(char **array)
 	array = NULL;
 }
 
-void	cleanup(t_cube *cube)
+int	cleanup(t_cube *cube)
 {
 	free_textures(cube);
 	free_2darray(cube->map.map);
 	free_2darray(cube->map.map_file);
 	mlx_destroy_image(cube->screen.mlx, cube->screen.img);
 	mlx_destroy_window(cube->screen.mlx, cube->screen.win);
+	return(0);
 }
 
 void	exit_program(t_cube *cube, int exit_code, char *message)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/23 10:52:35 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/23 11:45:21 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*custom_strdup(const char *src);
 void	ft_strdel(char **s);
 void	free_textures(t_cube *cube);
 void	free_2darray(char **array);
-void	cleanup(t_cube *cube);
+int	cleanup(t_cube *cube);
 void	exit_program(t_cube *cube, int exit_code, char *message);
 /* mouse_events.c */
 int		mouse_release(int button, int x, int y, void *param);
