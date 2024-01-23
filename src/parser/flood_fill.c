@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_player.c                                     :+:      :+:    :+:   */
+/*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/22 17:11:05 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:42:38 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ static void	replace_spaces(char **map, int map_h)
 void	check_walls(t_cube *cube)
 {
 	replace_spaces(cube->map.map, cube->map.map_height);
-	print_map_info(cube);
+	// print_map_info(cube);
 	f_fill(cube, (int)cube->player.m_pos.y,
 		(int)cube->player.m_pos.x);
+	// print_map_info(cube);
 }
