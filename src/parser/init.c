@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/19 09:32:55 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/23 12:54:07 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ bool	init_window(t_mlx *screen)
 	if (!display)
 		return (fprintf(stderr, "❌ Cube error: %s\n", strerror(errno)));
 	s = DefaultScreenOfDisplay(display);
-	screen->width = s->width;
-	screen->height = s->height;
+	screen->width = s->width / 2;
+	screen->height = s->height / 2 ;
 	screen->mlx = mlx_init();
 	if (!screen->mlx)
 		return (fprintf(stderr, "❌ Cube error: %s\n", strerror(errno)));

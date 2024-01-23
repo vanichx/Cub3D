@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/23 11:54:59 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:47:51 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ int main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	if (hooking(&cube))
 		return (EXIT_FAILURE);
-	cleanup(&cube);
+	// cleanup(&cube);
 }

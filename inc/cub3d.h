@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/23 11:45:21 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:53:47 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#define WIDTH 1920
-#define HEIGHT 1080
 #define MAX_LINES 10000
 
 # define MAPSCALE 64
@@ -91,18 +89,24 @@ char	*custom_strdup(const char *src);
 
 
 /*************************************	mlx_functions	**************************************/
+
 /* cleanup.c */
 void	ft_strdel(char **s);
 void	free_textures(t_cube *cube);
 void	free_2darray(char **array);
 int	cleanup(t_cube *cube);
 void	exit_program(t_cube *cube, int exit_code, char *message);
+
 /* mouse_events.c */
 int		mouse_release(int button, int x, int y, void *param);
 int		mouse_press(int button, int x, int y, void *param);
 int		mouse_move(int x, int y, void *param);
+
 /* hooking.c */
 bool	hooking(t_cube *cube);
+
+/* key_hooks.c */
+int key_press(int key, void *param);
 /*****************************************	free	******************************************/
 
 #endif
