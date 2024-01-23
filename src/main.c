@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 20:32:54 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:52:50 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
 	parse(argv[1], &cube);
 	if (init_window(&cube.screen))
 		return (EXIT_FAILURE);
-	mlx_loop(&cube.screen.mlx);
+	if (hooking(&cube))
+		return (EXIT_FAILURE);
 	cleanup(&cube);
 }

@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 20:33:58 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:52:35 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #define HEIGHT 1080
 #define MAX_LINES 10000
 
+# define MAPSCALE 64
 
 /* main.c */
 bool	check_args(int argc, char *argv[]);
@@ -100,6 +101,8 @@ void	exit_program(t_cube *cube, int exit_code, char *message);
 int		mouse_release(int button, int x, int y, void *param);
 int		mouse_press(int button, int x, int y, void *param);
 int		mouse_move(int x, int y, void *param);
+/* hooking.c */
+bool	hooking(t_cube *cube);
 /*****************************************	free	******************************************/
 
 #endif

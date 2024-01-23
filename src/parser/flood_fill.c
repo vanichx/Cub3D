@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/23 09:42:38 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:38:29 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	parse_player(t_cube *cube)
 			cube->player.m_pos.y = i;
 			cube->player.init_view = cube->map.map[(int)cube->player.m_pos.y]
 			[(int)cube->player.m_pos.x];
+			cube->player.front = get_dir_vec(cube->player.init_view);
 			cube->player.move = 0;
 			cube->player.rotate = 0;
 			cube->player.player_speed = PLAYER_SPEED;
