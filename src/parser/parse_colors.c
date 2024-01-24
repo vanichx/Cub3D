@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:24:47 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/17 14:45:53 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/24 03:47:00 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@ static int	parse_color_values(char *line, int *color)
 	int		i;
 	int		j;
 	char	*num_start;
+	int 	commas;
 
 	i = 2;
 	j = 0;
+	commas = 0;
 	num_start = &line[i];
-	while (line[i] != '\0' && j < 3)
+	while (line[i] != '\0' && j < COLORS_COMPONENTS)
 	{
 		if (line[i] == ',')
 		{
+			commas++;
+			if (commas > 2)
+				return (-1);
 			line[i] = '\0';
 			color[j] = ft_atoi(num_start);
 			num_start = &line[i + 1];
@@ -58,7 +63,8 @@ int	parse_color_code(char *line, int *color)
 {
 	int	check;
 
-	if (parse_color_values(line, color) < 3)
+	check = parse_color_values(line, color);
+	if (check != COLORS_COMPONENTS)
 		return (0);
 	check = check_color_values(color);
 	if (check == -1)

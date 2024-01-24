@@ -1,6 +1,8 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
+#include <stdbool.h>
+
 #define NORTH 0
 #define SOUTH 1
 #define EAST 2
@@ -11,6 +13,8 @@
 
 #define PLAYER_SPEED 10
 #define PLAYER_ROT_SPEED 4
+
+#define DEG_TO_RAD(angle) (angle * M_PI / 180)
 
 typedef struct s_point
 {
@@ -59,8 +63,8 @@ typedef struct s_player
 	t_point	m_pos;
 	t_vec	front;
 	t_vec	cam;
-	int		move;
-	int		rotate;
+	bool	move;
+	bool	rotate;
 	float	player_speed;
 	float	player_rot_speed;
 	char	init_view;

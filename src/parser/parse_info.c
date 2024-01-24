@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 17:15:08 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/24 03:57:35 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 void	parse_textures(char *trimmed_line, t_cube *cube)
 {
-	cube->map.texture[cube->map.num_textures] = ft_strdup(trimmed_line + 3);
+	char *texture_path;
+
+	if (cube->map.num_textures >= MAX_NUM_TEXT)
+		exit_program(cube, 1, TOO_MANY_TEXTURES);
+	texture_path = ft_strdup(trimmed_line + 3);
+	if (texture_path == NULL)
+		exit_program(cube, 1, DUPLICATE_ERROR);
+	cube->map.texture[cube->map.num_textures] = texture_path;
 	cube->map.num_textures++;
 }
 
-void	parse_floor_color(char *trimmed_line, t_cube *cube, char *line)
+void	parse_floor_color(char *trimmed_line, t_cube *cube)
 {
 	int	parse_result;
 
@@ -26,18 +33,16 @@ void	parse_floor_color(char *trimmed_line, t_cube *cube, char *line)
 	if (parse_result == 0)
 	{
 		free(trimmed_line);
-		free(line);
-		exit_program(cube, 1, INVALID_COLORS);
+		exit_program(cube, 1, INV_NUM_COL_FLOOR);
 	}
 	else if (parse_result == -1)
 	{
 		free(trimmed_line);
-		free(line);
-		exit_program(cube, 1, INVALID_COLORS);
+		exit_program(cube, 1, INV_RGB_COL_FLOOR);
 	}
 }
 
-void	parse_ceiling_color(char *trimmed_line, t_cube *cube, char *line)
+void	parse_ceiling_color(char *trimmed_line, t_cube *cube)
 {
 	int	parse_result;
 
@@ -45,14 +50,12 @@ void	parse_ceiling_color(char *trimmed_line, t_cube *cube, char *line)
 	if (parse_result == 0)
 	{
 		free(trimmed_line);
-		free(line);
-		exit_program(cube, 1, INVALID_COLORS);
+		exit_program(cube, 1, INV_NUM_COL_CEIL);
 	}
 	else if (parse_result == -1)
 	{
 		free(trimmed_line);
-		free(line);
-		exit_program(cube, 1, INVALID_COLORS);
+		exit_program(cube, 1, INV_RGB_COL_CEIL);
 	}
 }
 

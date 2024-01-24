@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/23 12:53:47 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/24 05:16:04 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@
 #define MAX_LINES 10000
 
 # define MAPSCALE 64
+# define MAX_NUM_TEXT 4
+# define COLORS_COMPONENTS 3
 
 /* main.c */
-bool	check_args(int argc, char *argv[]);
+void	check_args(int argc, char *argv[]);
 void	parse(char *map_path, t_cube *cube);
 
 /* ../src/parser */
@@ -43,7 +45,7 @@ char	*get_next_line(int fd);
 
 /* init.c */
 void	init_cube(t_cube *cube);
-bool	init_window(t_mlx *screen);
+void	init_window(t_cube *cube);
 
 /* parse_colors.c */
 int		parse_color_code(char *line, int *color);
@@ -53,8 +55,8 @@ void	parse_file(char *map_path, char ***map_file, t_cube *cube);
 
 /* parse_info.c */
 void	parse_textures(char *trimmed_line, t_cube *cube);
-void	parse_floor_color(char *trimmed_line, t_cube *cube, char *line);
-void	parse_ceiling_color(char *trimmed_line, t_cube *cube, char *line);
+void	parse_floor_color(char *trimmed_line, t_cube *cube);
+void	parse_ceiling_color(char *trimmed_line, t_cube *cube);
 void	parse_map_lines(char *line, char **buffer, t_cube *cube);
 void	print_map_info(t_cube *cube); //DEBUG
 
@@ -107,6 +109,6 @@ bool	hooking(t_cube *cube);
 
 /* key_hooks.c */
 int key_press(int key, void *param);
-/*****************************************	free	******************************************/
+/*************************************	mlx_functions	**************************************/
 
 #endif

@@ -6,8 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Tue Jan 23 09:47:25 2024
+# Make data base, printed on Wed Jan 24 05:03:17 2024
 
 # Variables
 
@@ -26,6 +27,7 @@ VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # makefile
 CURDIR := /Users/eseferi/cub3D
 # makefile
+ 
 SHELL = /bin/sh
 # makefile (from `Makefile', line 5)
 RM = rm -rf
@@ -34,7 +36,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","osLocale":"en","availableLanguages":{},"_
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 17)
-CFLAGS = -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I $(LIBFT_DIR)/include -I $(MLX_DIR)
+CFLAGS = -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include -fsanitize=address -fno-omit-frame-pointer -I $(LIBFT_DIR)/include -I $(MLX_DIR)
 # makefile (from `Makefile', line 29)
 CUB3D_OBJ = $(addprefix $(OBJ_DIR)/, $(CUB3D_SRC:.c=.o))
 # makefile (from `Makefile', line 1)
@@ -50,7 +52,7 @@ BOLD = \033[1m
 # makefile (from `Makefile', line 23)
 VPATH = src:include:src/mlx_functions:src/parser:src/geometry:src/utils:include
 # environment
-LaunchInstanceID = 5A6C69D5-3442-40A9-A4E2-1F547CFFC96D
+LaunchInstanceID = FDFA3A74-D6E4-4129-ACF8-F9DD40122A61
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 18)
@@ -60,7 +62,7 @@ LDFLAGS = -L $(MLX_DIR) -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKi
 # makefile (from `Makefile', line 11)
 LIBFT_DIR = lib/libft
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.68iGsSuzu2/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.MUJlFv1Pzd/Listeners
 # makefile (from `Makefile', line 16)
 MLX_FILE = $(MLX_DIR)/libmlx.a
 # automatic
@@ -68,7 +70,7 @@ MLX_FILE = $(MLX_DIR)/libmlx.a
 # environment
 HOMEBREW_TEMP = /tmp/eseferi/Homebrew/Temp
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.qCSafibhen/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.tpww5eOBOU/org.xquartz:0
 # environment
 PWD = /Users/eseferi/cub3D
 # environment
@@ -138,11 +140,13 @@ MFLAGS = -sRrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000001.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # makefile (from `Makefile', line 90)
 YELLOW = \033[1;33m
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = 
 # automatic
 +F = $(notdir $+)
 # environment
@@ -164,7 +168,7 @@ LC_ALL = C
 # makefile (from `Makefile', line 87)
 DEFAULT = \033[0m
 # environment
-SECURITYSESSIONID = 186a8
+SECURITYSESSIONID = 186a7
 # makefile (from `Makefile', line 12)
 LIBFT_FILE = $(LIBFT_DIR)/$(LIBFT)
 # automatic
@@ -180,9 +184,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2451
+VSCODE_PID = 4210
 # variable set hash-table stats:
-# Load=85/1024=8%, Rehash=0, Collisions=3/149=2%
+# Load=86/1024=8%, Rehash=0, Collisions=3/150=2%
 
 # Pattern-specific Variable Values
 
@@ -190,15 +194,20 @@ VSCODE_PID = 2451
 
 # Directories
 
+# src/mlx_functions/obj/src/geometry: could not be stat'd.
 # include: could not be stat'd.
 # . (device 16777225, inode 2813534): 13 files, no impossibilities.
-# src/mlx_functions (device 16777225, inode 2813768): 4 files, no impossibilities so far.
+# src/mlx_functions (device 16777225, inode 2813768): No files, no impossibilities so far.
+# src/utils/obj/src/geometry: could not be stat'd.
+# src/obj/src/geometry: could not be stat'd.
+# src/parser/obj/src/geometry: could not be stat'd.
+# src/geometry/obj/src/geometry: could not be stat'd.
 # src/utils (device 16777225, inode 2813780): No files, no impossibilities so far.
-# src (device 16777225, inode 2813767): 4 files, no impossibilities so far.
-# src/parser (device 16777225, inode 2813771): 3 files, no impossibilities so far.
+# src (device 16777225, inode 2813767): No files, no impossibilities so far.
+# src/parser (device 16777225, inode 2813771): No files, no impossibilities so far.
 # src/geometry (device 16777225, inode 2815879): 3 files, no impossibilities so far.
 
-# 27 files, no impossibilities in 7 directories.
+# 16 files, no impossibilities in 12 directories.
 
 # Implicit Rules
 
@@ -214,12 +223,18 @@ obj/%.o: %.c
 
 lib/mlx/libmlx.a:
 #  Implicit rule search has not been done.
-#  Last modified 2024-01-23 09:39:28
+#  Last modified 2024-01-24 04:06:09
 #  File has been updated.
 #  Successfully updated.
 #  commands to execute (from `Makefile', line 42):
 	@$(MAKE_LIB) $(MLX_DIR)
 	
+
+# Not a target:
+obj/src/mlx_functions/key_hooks.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: cub3D
 #  Phony target (prerequisite of .PHONY).
@@ -231,27 +246,20 @@ all: cub3D
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/6=0%
 
-obj/src/mlx_functions/cleanup.o: src/mlx_functions/cleanup.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/mlx_functions/cleanup'
-#  Last modified 2024-01-23 09:39:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 35):
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
-	
+# Not a target:
+obj/src/mlx_functions/cleanup.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 .PHONY: all lib_clean lib_fclean clean fclean re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-cub3D: lib/libft/libft.a lib/mlx/libmlx.a obj/src/geometry/vector_utils.o obj/src/main.o obj/src/mlx_functions/cleanup.o obj/src/mlx_functions/mouse_events.o obj/src/parser/flood_fill.o obj/src/parser/gnl.o obj/src/parser/init.o obj/src/parser/parse_colors.o obj/src/parser/parse_file.o obj/src/parser/parse_info.o obj/src/parser/parse_map.o obj/src/parser/parse_utils.o obj/src/utils/utils.o
+cub3D: lib/libft/libft.a lib/mlx/libmlx.a obj/src/geometry/rayse.o obj/src/geometry/vector_utils.o obj/src/main.o obj/src/mlx_functions/cleanup.o obj/src/mlx_functions/hooking.o obj/src/mlx_functions/key_hooks.o obj/src/mlx_functions/mouse_events.o obj/src/parser/flood_fill.o obj/src/parser/gnl.o obj/src/parser/init.o obj/src/parser/parse_colors.o obj/src/parser/parse_file.o obj/src/parser/parse_info.o obj/src/parser/parse_map.o obj/src/parser/parse_utils.o obj/src/utils/utils.o
 #  Implicit rule search has not been done.
-#  Last modified 2024-01-23 09:41:35
+#  Last modified 2024-01-24 04:06:11
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -267,25 +275,47 @@ obj/src/parser/parse_map.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/src/mlx_functions/mouse_events.o: src/mlx_functions/mouse_events.c
-#  Implicit rule search has been done.
- 
-#  Implicit/static pattern stem: `src/mlx_functions/mouse_events'
-#  Last modified 2024-01-23 09:39:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 35):
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
-	
+# Not a target:
+obj/src/mlx_functions/mouse_events.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 obj/src/parser/parse_file.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+obj/src/geometry/rayse.o: src/geometry/rayse.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `src/geometry/rayse'
+ 
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := obj/src/geometry/rayse.o
+# automatic
+# % := 
+# automatic
+# * := src/geometry/rayse
+# automatic
+# + := src/geometry/rayse.c
+# automatic
+# | := 
+# automatic
+# < := src/geometry/rayse.c
+# automatic
+# ^ := src/geometry/rayse.c
+# automatic
+# ? := src/geometry/rayse.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=2/17=12%
+#  commands to execute (from `Makefile', line 35):
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	
 
 # Not a target:
 .SUFFIXES:
@@ -302,49 +332,17 @@ obj/src/parser/parse_info.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2024-01-22 19:41:59
+#  Last modified 2024-01-24 04:05:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-src/geometry/vector_utils.c:
-#  Implicit rule search has been done.
-#  Last modified 2024-01-22 20:30:00
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-obj/src/parser/flood_fill.o: src/parser/flood_fill.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/parser/flood_fill'
-#  Last modified 2024-01-23 09:41:35
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj/src/parser/flood_fill.o
-# automatic
-# % := 
-# automatic
-# * := src/parser/flood_fill
-# automatic
-# + := src/parser/flood_fill.c
-# automatic
-# | := 
-# automatic
-# < := src/parser/flood_fill.c
-# automatic
-# ^ := src/parser/flood_fill.c
-# automatic
-# ? := src/parser/flood_fill.c
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/17=12%
-#  commands to execute (from `Makefile', line 35):
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
-	
+obj/src/parser/flood_fill.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 fclean: clean lib_fclean
 #  Phony target (prerequisite of .PHONY).
@@ -356,21 +354,12 @@ fclean: clean lib_fclean
 	@echo "$(RED)$(NAME) program deleted!$(DEFAULT)"
 	
 
-# Not a target:
-src/main.c:
-#  Implicit rule search has been done.
-#  Last modified 2024-01-22 20:32:54
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
 leaks: cub3D
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 79):
-	$(LEAKS) ./$(NAME)
+	$(LEAKS) ./$(NAME) maps/testing.cub
 	
 
 # Not a target:
@@ -397,6 +386,12 @@ obj/src/parser/parse_utils.o:
 #  File has not been updated.
 
 # Not a target:
+obj/src/mlx_functions/hooking.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 obj/src/parser/gnl.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -407,15 +402,6 @@ re: fclean all
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-
-# Not a target:
-src/mlx_functions/cleanup.c:
-#  Implicit rule search has been done.
-#  Last modified 2024-01-22 19:18:12
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 clean: lib_clean
 #  Phony target (prerequisite of .PHONY).
@@ -428,26 +414,19 @@ clean: lib_clean
 	
 
 # Not a target:
-src/mlx_functions/mouse_events.c:
+src/geometry/rayse.c:
 #  Implicit rule search has been done.
-#  Last modified 2024-01-22 20:41:42
+#  Last modified 2024-01-24 05:03:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-obj/src/geometry/vector_utils.o: src/geometry/vector_utils.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/geometry/vector_utils'
-#  Last modified 2024-01-23 09:39:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 35):
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
-	
+# Not a target:
+obj/src/geometry/vector_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 lib_fclean:
 #  Phony target (prerequisite of .PHONY).
@@ -471,7 +450,7 @@ lib_clean:
 
 lib/libft/libft.a:
 #  Implicit rule search has not been done.
-#  Last modified 2024-01-23 09:39:23
+#  Last modified 2024-01-24 04:06:06
 #  File has been updated.
 #  Successfully updated.
 #  commands to execute (from `Makefile', line 39):
@@ -484,15 +463,6 @@ obj/src/parser/init.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-src/parser/flood_fill.c:
-#  Implicit rule search has been done.
-#  Last modified 2024-01-23 09:42:38
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
 valgrind: cub3D
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -501,18 +471,11 @@ valgrind: cub3D
 	$(VALGRIND) ./$(NAME)
 	
 
-obj/src/main.o: src/main.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/main'
-#  Last modified 2024-01-23 09:39:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 35):
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
-	
+# Not a target:
+obj/src/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 obj/src/parser/parse_colors.o:
@@ -521,7 +484,7 @@ obj/src/parser/parse_colors.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=34/1024=3%, Rehash=0, Collisions=0/91=0%
+# Load=33/1024=3%, Rehash=0, Collisions=0/87=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -534,6 +497,6 @@ obj/src/parser/parse_colors.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Jan 23 09:47:25 2024
+# Finished Make data base on Wed Jan 24 05:03:17 2024
 
  

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/22 17:05:39 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/24 03:56:57 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 			|| !ft_strncmp(trimmed_line, "WE ", 3))
 			parse_textures(trimmed_line, cube);
 		else if (!ft_strncmp(trimmed_line, "F ", 2))
-			parse_floor_color(trimmed_line, cube, map_file[i]);
+			parse_floor_color(trimmed_line, cube);
 		else if (!ft_strncmp(trimmed_line, "C ", 2))
-			parse_ceiling_color(trimmed_line, cube, map_file[i]);
+			parse_ceiling_color(trimmed_line, cube);
 		else if (trimmed_line[0] == '1' || trimmed_line[0] == ' '
 			|| trimmed_line[0] == '0')
 			parse_map_lines(map_file[i], buffer, cube);
@@ -58,4 +58,5 @@ void	parse_map(char **map_file, t_cube *cube)
 	}
 	cube->map.map[cube->map.map_height] = NULL;
 	free_2darray(buffer);
+	parse_player(cube);
 }

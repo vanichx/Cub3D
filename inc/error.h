@@ -8,13 +8,22 @@
 #define EMPTY_MAP "❌ Cube error: Empty map\n"
 #define EMPTY_FILE "❌ Cube error: Empty file\n"
 
+#define DISPLAY_ERROR "❌ Display error: Failed to open display\n"
+#define MLX_ERROR "❌ Mlx error: Failed to initialize mlx\n"
+#define MLX_WIN_ERROR "❌ Mlx error: Failed to create window\n"
+#define MLX_IMG_ERROR "❌ Mlx error: Failed to create image\n"
+
 #define MALLOC_ERROR "❌ Malloc error: Failed to allocate memory\n"
 #define DUPLICATE_ERROR "❌ Duplicate error: Failed to duplicate string\n"
 
-#define INVALID_COLORS "❌ Cube error: Invalid colors\n"
+#define INV_NUM_COL_FLOOR "❌ Cube error: Invalid syntax in floor colors\n"
+#define INV_RGB_COL_FLOOR "❌ Cube error: Invalid RGB values in floor colors\n"
+#define INV_NUM_COL_CEIL "❌ Cube error: Invalid syntax in ceiling colors\n"
+#define INV_RGB_COL_CEIL "❌ Cube error: Invalid RGB values in ceiling colors\n"
 #define INV_CHARS "❌ Cube error: Invalid characters in map\n"
 #define MULT_PLAYERS "❌ Cube error: Multiple players\n"
 #define NO_PLAYER "❌ Cube error: No player\n"
+#define TOO_MANY_TEXTURES "❌ Cube error: Too many textures\n"
 
 #define UNCLOSED_MAP "❌ Cube error: Map is not enclosed\n"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/23 12:54:07 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/24 01:00:17 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,28 @@ void	init_cube(t_cube *cube)
 	cube->player.rotate = 0;
 }
 
-bool	init_window(t_mlx *screen)
+void	init_window(t_cube *cube)
 {
 	Display	*display;
 	Screen	*s;
 
 	display = XOpenDisplay(NULL);
 	if (!display)
-		return (fprintf(stderr, "❌ Cube error: %s\n", strerror(errno)));
+		exit_program(cube, EXIT_FAILURE, DISPLAY_ERROR);
 	s = DefaultScreenOfDisplay(display);
-	screen->width = s->width / 2;
-	screen->height = s->height / 2 ;
-	screen->mlx = mlx_init();
-	if (!screen->mlx)
-		return (fprintf(stderr, "❌ Cube error: %s\n", strerror(errno)));
-	screen->win = mlx_new_window(screen->mlx, screen->width, screen->height, \
+	cube->screen.width = s->width / 2;
+	cube->screen.height = s->height / 2 ;
+	cube->screen.mlx = mlx_init();
+	if (!cube->screen.mlx)
+		exit_program(cube, EXIT_FAILURE, MLX_ERROR);
+	cube->screen.win = mlx_new_window(cube->screen.mlx, cube->screen.width, cube->screen.height, \
 		"Cub3D");
-	if (!screen->win)
-		return (fprintf(stderr, "❌ Cube error: %s\n", strerror(errno)));
-	screen->img = mlx_new_image(screen->mlx, screen->width, screen->height);
-	if (!screen->img)
-		return (fprintf(stderr, "❌ Cube error: %s\n", strerror(errno)));
-	screen->addr = mlx_get_data_addr(screen->img, &screen->bits_per_pixel, \
-		&screen->line_length, &screen->endian);
+	if (!cube->screen.win)
+		exit_program(cube, EXIT_FAILURE, MLX_WIN_ERROR);
+	cube->screen.img = mlx_new_image(cube->screen.mlx, cube->screen.width, cube->screen.height);
+	if (!cube->screen.img)
+		exit_program(cube, EXIT_FAILURE, MLX_IMG_ERROR);
+	cube->screen.addr = mlx_get_data_addr(cube->screen.img, &cube->screen.bits_per_pixel, \
+		&cube->screen.line_length, &cube->screen.endian);
 	XCloseDisplay(display);
-	return (EXIT_SUCCESS);
 }

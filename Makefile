@@ -1,6 +1,6 @@
 # Variables
 CC					=	gcc
-CFLAGS				=	-Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include #-fsanitize=address -fno-omit-frame-pointer
+CFLAGS				=	-Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include -fsanitize=address -fno-omit-frame-pointer
 
 RM					=	rm -rf
 CUB3D				=   cub3D
@@ -76,7 +76,7 @@ valgrind: $(NAME)
 
 # Leaks at exit testing
 leaks: $(NAME)
-	$(LEAKS) ./$(NAME)
+	$(LEAKS) ./$(NAME) maps/testing.cub
 
 .SILENT:
 

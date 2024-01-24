@@ -1,36 +1,9 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/eseferi/cub3D'
-make --no-print-directory -C lib/libft
- 
-make --no-print-directory -C lib/mlx
 mkdir -p obj/src/geometry/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/geometry/vector_utils.c -o obj/src/geometry/vector_utils.o
-mkdir -p obj/src/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/main.c -o obj/src/main.o
-mkdir -p obj/src/mlx_functions/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/mlx_functions/cleanup.c -o obj/src/mlx_functions/cleanup.o
-mkdir -p obj/src/mlx_functions/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/mlx_functions/mouse_events.c -o obj/src/mlx_functions/mouse_events.o
+gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include -fsanitize=address -fno-omit-frame-pointer -I lib/libft/include -I lib/mlx -c src/geometry/rayse.c -o obj/src/geometry/rayse.o
  
-mkdir -p obj/src/parser/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/parser/flood_fill.c -o obj/src/parser/flood_fill.o
-mkdir -p obj/src/parser/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/parser/gnl.c -o obj/src/parser/gnl.o
-mkdir -p obj/src/parser/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/parser/init.c -o obj/src/parser/init.o
-mkdir -p obj/src/parser/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/parser/parse_colors.c -o obj/src/parser/parse_colors.o
-mkdir -p obj/src/parser/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/parser/parse_file.c -o obj/src/parser/parse_file.o
-mkdir -p obj/src/parser/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/parser/parse_info.c -o obj/src/parser/parse_info.o
-mkdir -p obj/src/parser/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/parser/parse_map.c -o obj/src/parser/parse_map.o
-mkdir -p obj/src/parser/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/parser/parse_utils.c -o obj/src/parser/parse_utils.o
-mkdir -p obj/src/utils/
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -c src/utils/utils.c -o obj/src/utils/utils.o
-gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include  -I lib/libft/include -I lib/mlx -L lib/mlx -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKit -lX11 lib/libft/libft.a lib/mlx/libmlx.a obj/src/geometry/vector_utils.o obj/src/main.o obj/src/mlx_functions/cleanup.o obj/src/mlx_functions/mouse_events.o obj/src/parser/flood_fill.o obj/src/parser/gnl.o obj/src/parser/init.o obj/src/parser/parse_colors.o obj/src/parser/parse_file.o obj/src/parser/parse_info.o obj/src/parser/parse_map.o obj/src/parser/parse_utils.o obj/src/utils/utils.o -o cub3D
+gcc -Wall -Wextra -Iinc -Isrc -O3 -g -I/usr/X11/include -fsanitize=address -fno-omit-frame-pointer -I lib/libft/include -I lib/mlx -L lib/mlx -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKit -lX11 lib/libft/libft.a lib/mlx/libmlx.a obj/src/geometry/rayse.o obj/src/geometry/vector_utils.o obj/src/main.o obj/src/mlx_functions/cleanup.o obj/src/mlx_functions/hooking.o obj/src/mlx_functions/key_hooks.o obj/src/mlx_functions/mouse_events.o obj/src/parser/flood_fill.o obj/src/parser/gnl.o obj/src/parser/init.o obj/src/parser/parse_colors.o obj/src/parser/parse_file.o obj/src/parser/parse_info.o obj/src/parser/parse_map.o obj/src/parser/parse_utils.o obj/src/utils/utils.o -o cub3D
 echo "\033[1;32mcub3D was successfully created!\033[0m"
 make: Leaving directory `/Users/eseferi/cub3D'
  

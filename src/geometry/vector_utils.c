@@ -51,15 +51,15 @@ t_vec	get_dir_vec(char dir)
 	return (vec);
 }
 
-t_vec	rotate_vec(t_vec vec, float ang)
+t_vec rotate_vec(t_vec vec, float ang)
 {
-	t_vec new_vec;
-	float rad;
+    t_vec new_vec;
+    float rad;
 
-	rad = ang * M_PI / 180;
-	new_vec.dir[X] = vec.dir[X] * cos(rad) - vec.dir[Y] * sin(rad);
-	new_vec.dir[Y] = vec.dir[X] * sin(rad) + vec.dir[Y] * cos(rad);
-	return (vec);
+    rad = ang * M_PI / 180;
+    new_vec.dir[X] = vec.dir[X] * cos(rad) - vec.dir[Y] * sin(rad);
+    new_vec.dir[Y] = vec.dir[X] * sin(rad) + vec.dir[Y] * cos(rad);
+    return new_vec;
 }
 
 /** 
