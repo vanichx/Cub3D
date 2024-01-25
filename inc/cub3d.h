@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/25 14:39:51 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:12:09 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ char	*custom_strdup(const char *src);
 
 
 /*************************************	mlx_functions	**************************************/
+
+int render(t_cube *cube);
+
 
 /* cleanup.c */
 void	ft_strdel(char **s);

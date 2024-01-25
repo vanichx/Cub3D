@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/24 01:00:17 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/25 14:53:22 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	init_window(t_cube *cube)
 	if (!display)
 		exit_program(cube, EXIT_FAILURE, DISPLAY_ERROR);
 	s = DefaultScreenOfDisplay(display);
-	cube->screen.width = s->width / 2;
-	cube->screen.height = s->height / 2 ;
+	cube->screen.width = 1000; //	cube->screen.width = s->width;
+	cube->screen.height = 500; //	cube->screen.height = s->height;
 	cube->screen.mlx = mlx_init();
 	if (!cube->screen.mlx)
 		exit_program(cube, EXIT_FAILURE, MLX_ERROR);
