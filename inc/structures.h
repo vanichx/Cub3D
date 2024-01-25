@@ -70,6 +70,7 @@ typedef struct s_player
 	float	player_speed;
 	float	player_rot_speed;
 	char	init_view;
+	int		fov;
 } 			t_player;
 
 typedef struct s_cube
@@ -77,7 +78,6 @@ typedef struct s_cube
 	t_mlx		screen;
 	t_player	player;
 	t_map		map;
-	int			fov;
 }			t_cube;
 
 #endif
