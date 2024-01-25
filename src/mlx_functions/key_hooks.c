@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/23 13:08:46 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:41:09 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int key_press(int key, void *param)
 
 	cub = (t_cube *)param;
 	if (key == KEY_ESC)
-		cleanup(cub);
+		cleanup(cub, EXIT_SUCCESS);
 	if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN || key == KEY_D || key == KEY_A)
 		//move_player
 	if (key == KEY_LEFT || key == KEY_RIGHT) {
