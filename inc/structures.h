@@ -28,6 +28,8 @@ typedef	struct s_mlx
 {
 	int		width;
 	int		height;
+	int		default_w;
+	int		default_h;
 	void	*mlx;
 	void	*win;
 	void	*img;

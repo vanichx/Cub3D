@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/25 15:12:09 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:39:31 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 #include <errno.h>
 
 #define MAX_LINES 10000
+
+
+# define EXPAND 1
+# define REDUCE 0
 
 # define MAPSCALE 64
 # define MAX_NUM_TEXT 4
@@ -94,6 +98,9 @@ char	*custom_strdup(const char *src);
 
 int render(t_cube *cube);
 
+
+/* resize_window.c */
+void resize_window(t_cube *cub, int flag);
 
 /* cleanup.c */
 void	ft_strdel(char **s);

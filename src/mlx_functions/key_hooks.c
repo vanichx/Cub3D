@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/25 15:48:14 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:39:21 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,7 @@ void decrease_player_speed(t_cube *cube)
 }
 
 
-void resize_window(t_cube *cub, int new_width, int new_height)
-{
-	void *new_mlx;
-	void *new_win;
 
-	new_mlx = mlx_init();
-	new_win = mlx_new_window(new_mlx, new_width, new_height, "Cub3D");
-	mlx_destroy_window(cub->screen.mlx, cub->screen.win);
-	
-	cub->screen.mlx = new_mlx;
-	cub->screen.win = new_win;
-
-	mlx_hook(cub->screen.win, 2, 0, key_press, cub);
-	mlx_loop_hook(cub->screen.mlx, render, cub);
-}
 
 int key_press(int key, void *param)
 {
@@ -67,16 +53,8 @@ int key_press(int key, void *param)
 	if (key == KEY_RES || key == KEY_RES2)
 		decrease_player_speed(cub);
 	if (key == KEY_I)
-	{
-		cub->screen.width *= 2;
-		cub->screen.height *= 2;
-		resize_window(cub, cub->screen.width, cub->screen.height);
-	}
+		resize_window(cub, EXPAND);
 	if (key == KEY_U)
-	{
-		cub->screen.width /= 2;
-		cub->screen.height /= 2;
-		resize_window(cub, cub->screen.width, cub->screen.height);
-	}
+		resize_window(cub, REDUCE);
 	return (EXIT_SUCCESS);
 }
