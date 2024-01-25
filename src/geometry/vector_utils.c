@@ -24,6 +24,15 @@ t_vec	get_vunit(t_point p1, t_point p2)
 	return (vec);
 }
 
+t_vec	get_cam_vec(t_vec front)
+{
+	t_vec vec;
+
+	vec.dir[X] = -front.dir[Y];
+	vec.dir[Y] = front.dir[X];
+	return (vec);
+}
+
 t_vec	get_dir_vec(char dir)
 {
 	t_vec vec;

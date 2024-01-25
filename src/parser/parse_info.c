@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/24 03:57:35 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/25 18:40:59 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 void	parse_textures(char *trimmed_line, t_cube *cube)
 {
 	char *texture_path;
+	int	h;
+	int	w;
 
+	h = 64;
+	w = 64;
 	if (cube->map.num_textures >= MAX_NUM_TEXT)
 		exit_program(cube, 1, TOO_MANY_TEXTURES);
 	texture_path = ft_strdup(trimmed_line + 3);
 	if (texture_path == NULL)
 		exit_program(cube, 1, DUPLICATE_ERROR);
 	cube->map.texture[cube->map.num_textures] = texture_path;
+	cube->map.text[cube->map.num_textures] = mlx_xpm_file_to_image(cube->screen.mlx, \
+		cube->map.texture[cube->map.num_textures], &h, &w);
 	cube->map.num_textures++;
 }
 

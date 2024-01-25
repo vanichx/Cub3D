@@ -3,16 +3,17 @@
 
 #include <stdbool.h>
 
-#define NORTH 0
-#define SOUTH 1
-#define EAST 2
-#define WEST 3
-
 #define X 0
 #define Y 1
 
 #define PLAYER_SPEED 10
 #define PLAYER_ROT_SPEED 4
+
+#define NO 0
+#define S0 1
+#define EA 2
+#define WE 3
+
 
 #define DEG_TO_RAD(angle) (angle * M_PI / 180)
 
@@ -20,7 +21,6 @@ typedef struct s_point
 {
 	float	x;
 	float	y;
-	float	z;
 	int		color;
 }		t_point;
 
@@ -42,6 +42,7 @@ typedef	struct s_mlx
 typedef struct s_map
 {
 	char	*texture[4];
+	void	*text[4];
 	int		floor_col[3];
 	int		ceiling_col[3];
 	char	**map_file;
@@ -56,7 +57,7 @@ typedef struct s_map
 
 typedef struct	s_vec
 {
-	float dir[2];
+	double dir[2];
 }		t_vec;
 
 typedef struct s_player
@@ -70,6 +71,7 @@ typedef struct s_player
 	float	player_speed;
 	float	player_rot_speed;
 	char	init_view;
+	int		fov;
 } 			t_player;
 
 typedef struct s_cube
@@ -77,7 +79,7 @@ typedef struct s_cube
 	t_mlx		screen;
 	t_player	player;
 	t_map		map;
-	int			fov;
 }			t_cube;
+
 
 #endif
