@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/25 17:00:14 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:40:03 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	parse_player(t_cube *cube)
 			player_start_positions++;
 			cube->player.m_pos.x = is_player(cube->map.map[i]);
 			cube->player.m_pos.y = i;
+			cube->player.pos.x = cube->player.m_pos.x + 0.5; // shifting the player in the center of the grid square
+			cube->player.pos.y = cube->player.m_pos.y + 0.5; // shifting the player in the center of the grid square
 			cube->player.init_view = cube->map.map[(int)cube->player.m_pos.y]
 			[(int)cube->player.m_pos.x];
 			cube->player.front = get_dir_vec(cube->player.init_view);

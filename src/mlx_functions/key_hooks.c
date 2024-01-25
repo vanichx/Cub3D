@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/25 16:39:21 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:43:17 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ int key_press(int key, void *param)
 	}
 	if (key == KEY_R){
 		//rotate "camera"
+		mlx_put_image_to_window(cub->screen.mlx, cub->screen.win, \
+		cub->map.text[1], 0, 0);
 	}
-	if (key == KEY_X && cub->fov > 2)
-		cub->fov--;
-	if (key == KEY_Z)
-		cub->fov++;
+	// if (key == KEY_X && cub->fov > 2)
+	// 	cub->fov--;
+	// if (key == KEY_Z)
+	// 	cub->fov++;
 	if (key == KEY_SUM || key == KEY_SUM2)
 		increase_player_speed(cub);
 	if (key == KEY_RES || key == KEY_RES2)
