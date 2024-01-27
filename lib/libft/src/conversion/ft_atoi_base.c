@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:54:21 by eseferi           #+#    #+#             */
-/*   Updated: 2023/10/05 15:50:37 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/27 13:47:53 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ static int	ft_atoi_base_error(char *base)
 
 static int	ft_atoi_base_test(char str, char *base)
 {
-	int	retour;
 	int	i;
 
-	retour = 0;
 	i = 0;
 	while (base[i])
 	{

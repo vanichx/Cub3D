@@ -1,5 +1,4 @@
-#include "structures.h"
-#include "math.h"
+#include <cub3d.h>
 
 float	vec_to_ang(t_vec vec)
 {

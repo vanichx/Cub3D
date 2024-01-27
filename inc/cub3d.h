@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/25 16:39:31 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:51:35 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,19 @@
 #include <math.h>
 #include "libft.h"
 #include "geo.h"
-#include "../mlx/mlx.h"
 #include "error.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <X11/Xlib.h>
+
+// ------------------------ MINILIBX ----------------------------
+
+# ifdef __APPLE__
+#  include "../lib/mlx/mlx.h"
+# else
+#  include "../lib/mlx_linux/mlx.h"
+# endif
 
 #define MAX_LINES 10000
 

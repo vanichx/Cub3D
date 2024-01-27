@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/25 14:40:55 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/28 00:02:54 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int main(int argc, char *argv[])
 	
 	check_args(argc, argv);
 	ft_bzero(&cube, sizeof(t_cube));
-	parse(argv[1], &cube);
 	init_window(&cube);
+	parse(argv[1], &cube);
 	// game_loop(&cube);
 	if (hooking(&cube))
 		return (EXIT_FAILURE);
