@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keycodes.h                                         :+:      :+:    :+:   */
+/*   keycodes_mac.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:25 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/15 11:24:27 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:46:24 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYCODES_H
-#define KEYCODES_H
+#ifndef KEYCODES_MAC_H
+#define KEYCODES_MAC_H
 
 # define KEY_ESC	53
 # define KEY_1		18
@@ -28,7 +28,7 @@
 # define KEY_RES	44
 # define KEY_SUM2	69
 # define KEY_RES2	78
-# define KEY_A		0
+# define KEY_A		0 
 # define KEY_S		1
 # define KEY_D		2
 # define KEY_F		3

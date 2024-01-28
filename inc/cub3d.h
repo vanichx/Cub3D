@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/27 21:51:35 by segfault         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:46:36 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "keycodes.h"
 #include "structures.h"
 #include <math.h>
 #include "libft.h"
@@ -32,9 +31,14 @@
 
 # ifdef __APPLE__
 #  include "../lib/mlx/mlx.h"
+#  include "keycodes_mac.h"
+#  define PLATFORM "mac"
 # else
 #  include "../lib/mlx_linux/mlx.h"
+#  include "keycodes_linux.h"
+#  define PLATFORM "linux"
 # endif
+
 
 #define MAX_LINES 10000
 

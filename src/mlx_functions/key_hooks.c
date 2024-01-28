@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/25 18:43:17 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/01/28 13:38:47 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void decrease_player_speed(t_cube *cube)
 	if (cube->player.player_rot_speed > 1)
 		cube->player.player_rot_speed -= 0.05;
 }
-
-
 
 
 int key_press(int key, void *param)

@@ -31,7 +31,7 @@ int render(t_cube *cube)
 
 bool hooking(t_cube *cube)
 {
-	mlx_hook(cube->screen.win, 2, 0, key_press, cube);
+	mlx_key_hook(cube->screen.win, key_press, cube);
 	// mlx_hook(cube->screen.win, 3, 0, key_release, cube);
 	// mlx_hook(cube->screen.win, 4, 0, mouse_press, cube);
 	// mlx_hook(cube->screen.win, 5, 0, mouse_release, cube);
