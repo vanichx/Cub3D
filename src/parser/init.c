@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/28 12:27:05 by segfault         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:36:58 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_cube(t_cube *cube)
 	cube->player.player_rot_speed = 4;
 	cube->player.move = 0;
 	cube->player.rotate = 0;
+	cube->beg = 0;
 }
 
 void	init_window(t_cube *cube)

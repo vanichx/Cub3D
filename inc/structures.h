@@ -79,6 +79,7 @@ typedef struct s_cube
 	t_mlx		screen;
 	t_player	player;
 	t_map		map;
+	int			beg;
 }			t_cube;
 
 

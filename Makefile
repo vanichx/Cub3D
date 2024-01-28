@@ -18,6 +18,11 @@ MLX_LIN				=	lib/mlx_linux
 # Detect the operating system
 UNAME_S := $(shell uname -s)
 
+# debug
+VALGRIND_LEAKS = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose
+LEAKS_AT_EXIT = leaks --atExit -- 
+VALGRIND = valgrind --tool=memcheck
+
 # macOS
 ifeq ($(UNAME_S),Darwin)
 MLX_DIR = $(MLX_MAC)
@@ -79,11 +84,14 @@ re:					fclean all
 
 # Valgrind testing
 valgrind:			$(NAME)
-					$(VALGRIND) ./$(NAME)
+					$(VALGRIND) ./$(NAME) maps/testing.cub
 
 # Leaks at exit testing
 leaks:				$(NAME)
-					$(LEAKS) ./$(NAME) maps/testing.cub
+					$(LEAKS_AT_EXIT) ./$(NAME) maps/testing.cub
+
+leaks_valgrind:		$(NAME)
+					$(VALGRIND_LEAKS) ./$(NAME) maps/testing.cub
 
 .SILENT:
 
