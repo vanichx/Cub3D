@@ -5,6 +5,7 @@ int mouse_release(int button, int x, int y, void *param)
 {
 	t_cube *cub;
 
+	(void) cub;
 	(void) button;
 	(void) x;
 	(void) y;
@@ -17,6 +18,7 @@ int mouse_press(int button, int x, int y, void *param)
 {
 	t_cube *cub;
 
+	(void) cub;
 	(void) button;
 	(void) x;
 	(void) y;

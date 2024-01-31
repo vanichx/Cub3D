@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:38:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/28 14:41:35 by segfault         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:35:47 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ static void init_new_window(t_cube *cube) {
     cube->screen.addr = mlx_get_data_addr(cube->screen.img, &cube->screen.bits_per_pixel, &cube->screen.line_length, &cube->screen.endian);
 }
 
-static void create_new_window(t_cube *cub)
-{
-	cub->beg++;
-	init_new_window(cub);
-}
-
 static void hook_events(t_cube *cub)
 {
 	mlx_hook(cub->screen.win, 2, 0, key_press, cub);
@@ -73,6 +67,6 @@ static void hook_events(t_cube *cub)
 void resize_window(t_cube *cub, int flag) {
     update_dimensions(cub, flag);
     destroy_window(cub); // Destroy the old window before creating a new one
-    create_new_window(cub);
+    init_new_window(cub);
     hook_events(cub);
 }

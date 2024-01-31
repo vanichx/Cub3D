@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/28 12:23:30 by segfault         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:07:48 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
 	ft_bzero(&cube, sizeof(t_cube));
 	init_window(&cube);
 	parse(argv[1], &cube);
+	performRaycasting(&cube);
 	// game_loop(&cube);
 	if (hooking(&cube))
 		return (EXIT_FAILURE);

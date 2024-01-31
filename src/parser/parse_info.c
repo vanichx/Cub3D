@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/28 00:04:44 by segfault         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:53:17 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	parse_textures(char *trimmed_line, t_cube *cube)
 	if (texture_path == NULL)
 		exit_program(cube, 1, DUPLICATE_ERROR);
 	cube->map.texture[cube->map.num_textures] = texture_path;
-	cube->map.text[cube->map.num_textures] = mlx_xpm_file_to_image(cube->screen.mlx, \
+	cube->grid.img_text[cube->map.num_textures] = mlx_xpm_file_to_image(cube->screen.mlx, \
 		cube->map.texture[cube->map.num_textures], &h, &w);
 	cube->map.num_textures++;
 }

@@ -10,7 +10,7 @@
 #define PLAYER_ROT_SPEED 4
 
 #define NO 0
-#define S0 1
+#define SO 1
 #define EA 2
 #define WE 3
 
@@ -42,7 +42,7 @@ typedef	struct s_mlx
 typedef struct s_map
 {
 	char	*texture[4];
-	void	*text[4];
+	char 	*
 	int		floor_col[3];
 	int		ceiling_col[3];
 	char	**map_file;
@@ -66,20 +66,29 @@ typedef struct s_player
 	t_point	m_pos;
 	t_vec	front;
 	t_vec	cam;
+	int		player_height;
 	bool	move;
 	bool	rotate;
 	float	player_speed;
 	float	player_rot_speed;
 	char	init_view;
-	int		fov;
+	double	fov;
+	double	sub_angles;
 } 			t_player;
+
+typedef struct s_grid
+{
+	t_point center;
+	int		size;
+	void	*img_text[4];
+}		t_grid;
 
 typedef struct s_cube
 {
 	t_mlx		screen;
 	t_player	player;
 	t_map		map;
-	int			beg;
+	t_grid		grid;
 }			t_cube;
 
 

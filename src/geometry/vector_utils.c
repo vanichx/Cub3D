@@ -9,6 +9,11 @@ float	vec_to_ang(t_vec vec)
 	return (ang);
 }
 
+double ang_to_rad(double ang)
+{
+	return (ang * M_PI / 180);
+}
+
 t_vec	get_vunit(t_point p1, t_point p2)
 {
 	t_point point;
@@ -30,6 +35,14 @@ t_vec	get_cam_vec(t_vec front)
 	vec.dir[X] = -front.dir[Y];
 	vec.dir[Y] = front.dir[X];
 	return (vec);
+}
+
+double get_front_length(t_cube *cube)
+{
+	double front_length;
+
+	front_length = (cube->screen.width / 2) / tan(cube->player.fov / 2);
+	return (front_length);
 }
 
 t_vec	get_dir_vec(char dir)
@@ -69,6 +82,19 @@ t_vec rotate_vec(t_vec vec, float ang)
     new_vec.dir[Y] = vec.dir[X] * sin(rad) + vec.dir[Y] * cos(rad);
     return new_vec;
 }
+
+// normalise the x and y components of the vector between [-1, 1] and return the vector
+t_vec find_casting_vec(t_cube *cube, int x)
+{
+	double camera_x;
+	t_vec ray;
+
+	camera_x = 2 * x / (double)cube->screen.width - 1;
+	ray.dir[X] = cube->player.front.dir[X] + cube->player.cam.dir[X] * camera_x;
+	ray.dir[Y] = cube->player.front.dir[Y] + cube->player.cam.dir[Y] * camera_x;
+	return (ray);
+}
+
 
 /** 
  * This functions ensure that the magnitude of the vec is 1,so it only represents

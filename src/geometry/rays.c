@@ -1,88 +1,154 @@
 #include "cub3d.h"
 
-#define FOV 60
-#define RAY_ANGLE (FOV / cube->screen.width)
 
-// void performRaycasting(t_cube *cube) {
-//     for (int x = 0; x < cube->screen.width; x++) {
-//         // Calculate ray position and direction
-// 		t_vec rayDir;
-// 		t_vec camera;
-//         camera.dir[X] = 2 * x / (double)scube->screen.width - 1;
-//         rayDir.dir[X] = cube->player.front.dir[X] + cube->player.cam.dir[X] * camera.dir[X];
-//         rayDir.dir[Y] = cube->player.front.dir[Y] + cube->player->cam.dir[Y] * camera.dir[X];
+void render_static(t_cube *cube, int x, int drawStart, int drawEnd) {
+    // Determine the color of the wall based on the side
+    int wallColor = 0x00FFFFFF; // Default color (white)
 
-//         // Length of ray from current position to next x or y-side
-//         double sideDist[2], deltaDist[2];
+    // Adjust colors, textures, or shading based on the distance to create a 3D effect
 
-//         // Length of ray from one x or y-side to next x or y-side
-//         double deltaDist[X] = fabs(1 / rayDir.dir[X]);
-//         double deltaDist[Y] = fabs(1 / rayDir.dir[Y]);
+    // Draw the wall slice
+    for (int y = drawStart; y <= drawEnd; y++) {
+        mlx_pixel_put(cube->screen.mlx, cube->screen.win, x, y, wallColor);
+    }
+}
 
-//         // Calculate step and initial sideDist
-//         int step[2];
-//         int hit = 0; // Was a wall hit?
-//         int side;    // Was the wall hit on the x or y side?
+void get_center_grid(t_cube *cube) {
+    cube->grid.center.x = cube->screen.width / 2;
+    cube->grid.center.y = cube->screen.height / 2;
+}
 
-//         if (rayDir.dir[X] < 0) {
-//             step[X] = -1;
-//             sideDist[X] = (cube->player.pos.x - cube->player.m_pos.x) * deltaDist[X];
-//         } else {
-//             step[X] = 1;
-//             sideDist[X] = (cube->player.m_pos.x + 1.0 - cube->player.pos.x) * deltaDist[X];
-//         }
+// prepares the DDA variables necessary for the algorithm
+void prepare_DDA(t_cube *cube, t_vec ray_dir, int step[2], double sideDist[2])
+{
+	// Calculate step and initial sideDist for the X direction
+	if (ray_dir.dir[X] < 0)
+	{
+		step[X] = -1;
+		sideDist[X] = (cube->player.m_pos.x - cube->player.pos.x) * (1 / ray_dir.dir[X]); 
+	}
+	else
+	{
+		step[X] = 1;
+		sideDist[X] = (cube->player.pos.x + 1.0 - cube->player.m_pos.x) * (1 / ray_dir.dir[X]);
+	}
 
-//         if (rayDir[Y] < 0) {
-//             step[Y] = -1;
-//             sideDist[Y] = (cube->player.pos.y - cube->player.m_pos.y) * deltaDist[Y];
-//         } else {
-//             step[Y] = 1;
-//             sideDist[Y] = (cube->player.m_pos.y + 1.0 - cube->player.pos.y) * deltaDist[Y];
-//         }
+	// Calculate step and initial sideDist for the Y direction
+	if (ray_dir.dir[Y] < 0)
+	{
+		step[Y] = -1;
+		sideDist[Y] = (cube->player.m_pos.y - cube->player.pos.y) * (1 / ray_dir.dir[Y]); 
+	}
+	else
+	{
+		step[Y] = 1;
+		sideDist[Y] = (cube->player.pos.y + 1.0 - cube->player.m_pos.y) * (1 / ray_dir.dir[Y]);
+	}
+}
 
-//         // Perform DDA
-//         while (!hit) {
-//             // Jump to the next map square, either in x-direction or y-direction
-//             if (sideDist[X] < sideDist[Y]) {
-//                 sideDist[X] += deltaDist[X];
-//                 cube->player.m_pos.x += step[X];
-//                 side = 0;
-//             } else {
-//                 sideDist[Y] += deltaDist[Y];
-//                 cube->player.m_pos.y += step[Y];
-//                 side = 1;
-//             }
+// performs the DDA algorithm
+double perform_DDA(t_cube *cube, t_vec ray_dir, int step[2], double sideDist[2])
+{
+	int hit;
+	int side; // variable to store which side of the wall was hit
+	double deltaDist[2];
+	double wall_dist;
 
-//             // Check if ray has hit a wall
-//             if (cube->map.map[cube->player.m_pos.x][cube->player.m_pos.y] == '1') {
-//                 hit = 1;
-//             }
-//         }
+	deltaDist[X] = fabs(1 / ray_dir.dir[X]);
+	deltaDist[Y] = fabs(1 / ray_dir.dir[Y]);
+	hit = 0; // initialise the hit flag to 0
+	while (!hit)
+	{
+		// jump to the next map square, either in x-direction, or in y-direction
+		if (sideDist[X] < sideDist[Y])
+		{
+			sideDist[X] += deltaDist[X];
+			cube->player.m_pos.x += step[X];
+			side = X; // record the Wall was hit on the x side
+		}
+		else
+		{
+			sideDist[Y] += deltaDist[Y];
+			cube->player.m_pos.y += step[Y];
+			side = Y; // record the Wall was hit on the y side
+		}
+		// Check if ray has hit a wall
+		if (cube->map.map[(int)cube->player.m_pos.y][(int)cube->player.m_pos.x] == '1')
+			hit = 1; // set the hit flag to true if a wall was hit
+	}
+	if (side == X)
+		wall_dist = (cube->player.m_pos.x - cube->player.pos.x + (1 - step[X]) / 2) / ray_dir.dir[X];
+	else
+		wall_dist = (cube->player.m_pos.y - cube->player.pos.y + (1 - step[Y]) / 2) / ray_dir.dir[Y];
+	return (wall_dist);
+}
 
-//         // Calculate distance to the point of impact
-//         double perpWallDist;
-//         if (side == 0) {
-//             perpWallDist = (cube->player.m_pos.x - cube->player.pos.x + (1 - step[X]) / 2) / rayDir[X];
-//         } else {
-//             perpWallDist = (cube->player.m_pos.y + (1 - step[Y]) / 2) / rayDir[Y];
-//         }
+// casting the rays
+int cast_ray(t_cube *cube, t_vec ray_dir)
+{
+	int step[2];
+	double sideDist[2];
+	double wall_dist;
 
-//         // Calculate height of line to draw on screen
-//         int lineHeight = (int)(cube->screen.height / perpWallDist);
 
-//         // Calculate starting and ending points for drawing the wall slice
-//         int drawStart = -lineHeight / 2 + cube->screen.height / 2;
-//         if (drawStart < 0) {
-//             drawStart = 0;
-//         }
-//         int drawEnd = lineHeight / 2 + cube->screen.height / 2;
-//         if (drawEnd >= cube->screen.height) {
-//             drawEnd = cube->screen.height - 1;
-//         }
+	prepare_DDA(cube, ray_dir, step, sideDist);
+	wall_dist = perform_DDA(cube, ray_dir, step, sideDist);
+	return (wall_dist);
+}
 
-//         // Now, you can use the drawStart and drawEnd values to render the wall slice
-//         // You may also use the 'side' variable to determine if the wall was hit on the x or y side
-//         // Adjust colors, textures, or shading based on the distance to create a 3D effect
-//     }
-// }
+// renders the wall slice
+void render_wall_slice(t_cube *cube, int x, double wall_dist)
+{
+	// calculate height of the wall slice on the screen
+	int wall_height;
+	int draw_start;
+	int draw_end;
+	void *img;
+
+	if (cube->player.init_view == 'N')
+		img = cube->grid.img_text[NO];
+	else if (cube->player.init_view == 'S')
+		img = cube->grid.img_text[SO];
+	else if (cube->player.init_view == 'E')
+		img = cube->grid.img_text[EA];
+	else
+		img = cube->grid.img_text[WE];
+	
+	wall_height = (int)(cube->screen.height / wall_dist);
+	draw_start = cube->grid.center.y - wall_height / 2;
+	draw_end = cube->grid.center.y + wall_height / 2;
+	double tex_step = (double)64 / wall_height;
+    double tex_pos = 0.0;
+	// clip drawing bounds to screen boundaries
+	for (int y = draw_start; y <= draw_end; y++)
+	{
+		//calculate texture coordinate for this pixel
+		int text_y = (int)tex_pos % 64;
+		tex_pos += tex_step;
+		mlx_pixel_put(cube->screen.mlx, cube->screen.win, x, y, 0x00FFFFFF);
+	}
+	
+}
+
+// the width and the height of the projection plane is the same as the resolution
+void	performRaycasting(t_cube *cube)
+{
+	int front_length;
+	t_vec ray_dir;
+	int x;
+	double wall_dist;
+	
+	x = 0;
+	front_length = get_front_length(cube);
+	get_center_grid(cube);
+	cube->player.sub_angles = cube->player.fov / cube->screen.width;
+	while (x < cube->screen.width)
+	{
+		ray_dir = find_casting_vec(cube, x);
+		wall_dist = cast_ray(cube, ray_dir);
+		render_wall_slice(cube, x, wall_dist);
+		x++;
+	}
+}
+
 

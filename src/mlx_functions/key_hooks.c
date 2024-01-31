@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/28 13:38:47 by segfault         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:54:43 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int key_press(int key, void *param)
 	if (key == KEY_R){
 		//rotate "camera"
 		mlx_put_image_to_window(cub->screen.mlx, cub->screen.win, \
-		cub->map.text[1], 0, 0);
+		cub->grid.img_text[1], 0, 0);
 	}
 	// if (key == KEY_X && cub->fov > 2)
 	// 	cub->fov--;
