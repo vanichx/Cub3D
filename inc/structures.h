@@ -15,6 +15,7 @@
 #define WE 3
 
 
+
 #define DEG_TO_RAD(angle) (angle * M_PI / 180)
 
 typedef struct s_point
@@ -42,7 +43,6 @@ typedef	struct s_mlx
 typedef struct s_map
 {
 	char	*texture[4];
-	char 	*
 	int		floor_col[3];
 	int		ceiling_col[3];
 	char	**map_file;
@@ -59,6 +59,19 @@ typedef struct	s_vec
 {
 	double dir[2];
 }		t_vec;
+
+typedef struct s_wall_text
+{
+	int		valid;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}			t_wall_text;
+
 
 typedef struct s_player
 {
@@ -89,6 +102,7 @@ typedef struct s_cube
 	t_player	player;
 	t_map		map;
 	t_grid		grid;
+	t_wall_text wall_text[4];
 }			t_cube;
 
 

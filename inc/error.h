@@ -26,5 +26,10 @@
 #define TOO_MANY_TEXTURES "❌ Cube error: Too many textures\n"
 
 #define UNCLOSED_MAP "❌ Cube error: Map is not enclosed\n"
+#define TEXT_UNEXIST "❌ Texture error: Texture does not exist\n"
+#define TEXT_DIR_ERR "❌ Texture error: Invalid texture direction\n"
+#define TEXT_LOC_ERR "❌ Texture error: Invalid texture location\n"
+#define TEXT_EXT_ERR "❌ Texture error: Invalid texture extension\n"
+#define TEXT_ERR_FORMAT "❌ Texture error: Invalid texture format\n"
 
 #endif

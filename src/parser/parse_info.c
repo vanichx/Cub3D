@@ -6,22 +6,36 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/31 10:53:17 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:44:17 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int check_text_dir(char *text, int i)
+{
+	if ((i == NO && !ft_strncmp(text, "NO ", 3))
+		|| (i == SO && !ft_strncmp(text, "SO ", 3))
+		|| (i == EA && !ft_strncmp(text, "EA ", 3))
+		|| (i == WE && !ft_strncmp(text, "WE ", 3)))
+		return (0);
+	else
+		return (-1);
+}
 
 void	parse_textures(char *trimmed_line, t_cube *cube)
 {
 	char *texture_path;
 	int	h;
 	int	w;
+	static int i = 0;
 
 	h = 64;
 	w = 64;
 	if (cube->map.num_textures >= MAX_NUM_TEXT)
 		exit_program(cube, 1, TOO_MANY_TEXTURES);
+	if (check_text_dir(trimmed_line, i) == -1)
+		exit_program(cube, 1, TEXT_DIR_ERR);
 	texture_path = ft_strdup(trimmed_line + 3);
 	if (texture_path == NULL)
 		exit_program(cube, 1, DUPLICATE_ERROR);
@@ -29,6 +43,7 @@ void	parse_textures(char *trimmed_line, t_cube *cube)
 	cube->grid.img_text[cube->map.num_textures] = mlx_xpm_file_to_image(cube->screen.mlx, \
 		cube->map.texture[cube->map.num_textures], &h, &w);
 	cube->map.num_textures++;
+	i++;
 }
 
 void	parse_floor_color(char *trimmed_line, t_cube *cube)

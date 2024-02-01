@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/27 13:55:40 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:25:11 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	cleanup(t_cube *cube, int exit_code)
 		mlx_destroy_image(cube->screen.mlx, cube->screen.img);
 	if (cube->screen.win)
 		mlx_destroy_window(cube->screen.mlx, cube->screen.win);
-	exit(exit_code);
+	if (!cube)
+		exit(exit_code);
 	return(0);
 }
 
