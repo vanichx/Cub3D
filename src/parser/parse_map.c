@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/01 11:35:13 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:50:01 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,18 @@ static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 	}
 }
 
-void check_file_loc(t_cube *cube, char *text)
-{
-	if (ft_strncmp(text, "./textures/", 11))
-		exit_program(cube, 1, TEXT_LOC_ERR);
-	if (ft_strcmp(&text[ft_strlen(text) - 4], ".xpm"))
-		exit_program(cube, 1, TEXT_EXT_ERR);
-}
-
-void validate_text(t_cube *cube, char *text)
-{
-	if (ft_strlen(text) < 16)
-		exit_program(cube, 1, TEXT_ERR_FORMAT);
-	// if (check_text_dir(text) == -1)
-	// 	exit_program(cube, 1, TEXT_DIR_ERR);
-	check_file_loc(cube, text);
-}
-
 void parse_textures_files(t_cube *cube)
 {
 	int i;
 	i = NO;
-	while (i <= WE)
+	while (i <= EA)
 	{
-		printf("texture[%d]: %s\n", i, cube->map.texture[i]);
-		validate_text(cube, cube->map.texture[i]);
+		if (ft_strlen(cube->map.texture[i]) < 16)
+			exit_program(cube, 1, TEXT_ERR_FORMAT);
+		if (ft_strncmp(cube->map.texture[i], "./textures/", 11))
+			exit_program(cube, 1, TEXT_LOC_ERR);
+		if (ft_strcmp(&cube->map.texture[i][ft_strlen(cube->map.texture[i]) - 4], ".xpm"))
+			exit_program(cube, 1, TEXT_EXT_ERR);
 		i++;
 	}
 }

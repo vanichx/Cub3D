@@ -11,8 +11,8 @@
 
 #define NO 0
 #define SO 1
-#define EA 2
-#define WE 3
+#define WE 2
+#define EA 3
 
 
 
