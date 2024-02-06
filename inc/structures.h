@@ -60,18 +60,6 @@ typedef struct	s_vec
 	double dir[2];
 }		t_vec;
 
-typedef struct s_wall_text
-{
-	int		valid;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}			t_wall_text;
-
 
 typedef struct s_player
 {
@@ -102,7 +90,6 @@ typedef struct s_cube
 	t_player	player;
 	t_map		map;
 	t_grid		grid;
-	t_wall_text wall_text[4];
 }			t_cube;
 
 
