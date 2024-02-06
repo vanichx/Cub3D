@@ -1,6 +1,6 @@
 # Variables
 CC					=	gcc -Wall -Wextra -Werror
-CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/include/X11/include/ #-fsanitize=address -fno-omit-frame-pointer
+CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/include/X11/include/ -fsanitize=address -fno-omit-frame-pointer
 
 RM					=	rm -rf
 CUB3D				=   cub3D
@@ -39,7 +39,7 @@ endif
 MAKE_LIB			=	make --no-print-directory -C
 
 # Source and Object Files
-VPATH			=	src:include:src/mlx_functions:src/parser:src/geometry:src/utils:include
+VPATH			=	src:includes:src/drawers:src/geometry:src/mlx_window:src/parser:src/startup:include
 CUB3D_INC		=	CUB3D.h
 CUB3D_SRC		=	$(shell find src -name '*.c')
 
