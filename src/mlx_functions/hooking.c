@@ -38,7 +38,7 @@ bool hooking(t_cube *cube)
 	// mlx_hook(cube->screen.win, 5, 0, mouse_release, cube);
 	// mlx_hook(cube->screen.win, 6, 0, mouse_move, cube);
 	// mlx_hook(cube->screen.win, 17, 0, cleanup, cube);
-	mlx_loop_hook(cube->screen.mlx, render, cube);
+	mlx_loop_hook(cube->screen.mlx, render_cube, cube);
 	mlx_loop(cube->screen.mlx);
 	return (EXIT_SUCCESS);
 }

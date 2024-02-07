@@ -107,6 +107,9 @@ typedef struct s_textures
 	t_img	img_text[4];
 	int		**text_pixels;
 	int		*textures[4];
+	int		text_point[2];
+	double	tex_step;
+	double	tex_pos;
 }		t_textures;
 
 typedef struct s_cube

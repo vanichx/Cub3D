@@ -15,8 +15,6 @@ double get_front_length(t_cube *cube);
 t_vec find_casting_vec(t_cube *cube, int x);
 
 /* rays.c */
-void prepare_DDA(t_cube *cube, t_vec ray_dir, int step[2], double sideDist[2]);
-void    performRaycasting(t_cube *cube);
-int cast_ray(t_cube *cube, t_vec ray_dir);
+int render_cube(t_cube *cube);
 
 #endif
