@@ -31,5 +31,6 @@
 #define TEXT_LOC_ERR "❌ Texture error: Invalid texture location\n"
 #define TEXT_EXT_ERR "❌ Texture error: Invalid texture extension\n"
 #define TEXT_ERR_FORMAT "❌ Texture error: Invalid texture format\n"
+#define TEXT_LOAD_ERR "❌ Texture error: Failed to load texture\n"
 
 #endif

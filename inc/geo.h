@@ -10,7 +10,7 @@ t_vec	get_vunit(t_point p1, t_point p2);
 t_vec	get_dir_vec(char dir);
 t_vec	rotate_vec(t_vec vec, float ang);
 t_vec	normalize_vec(t_vec vec);
-t_vec	get_cam_vec(t_vec front);
+t_vec	get_cam_vec(t_vec front, float fov);
 double get_front_length(t_cube *cube);
 t_vec find_casting_vec(t_cube *cube, int x);
 

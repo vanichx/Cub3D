@@ -14,7 +14,10 @@
 #define WE 2
 #define EA 3
 
+#define START 0
+#define END 1
 
+#define TEXT_SIZE 128
 
 #define DEG_TO_RAD(angle) (angle * M_PI / 180)
 
@@ -25,6 +28,16 @@ typedef struct s_point
 	int		color;
 }		t_point;
 
+typedef struct s_img
+{
+	void	*img;
+	char 	*addr;
+	int		*casted_addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_img;
+
 typedef	struct s_mlx
 {
 	int		width;
@@ -33,11 +46,7 @@ typedef	struct s_mlx
 	int		default_h;
 	void	*mlx;
 	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	t_img	img;
 }				t_mlx;
 
 typedef struct s_map
@@ -61,6 +70,21 @@ typedef struct	s_vec
 }		t_vec;
 
 
+typedef struct s_ray
+{
+	double	camera_x;
+	t_vec	ray_dir;
+	t_point	map_point;
+	int		step[2];
+	double	side_dist[2];
+	double	delta_dist[2];
+	double	wall_dist;
+	double	wall_x;
+	int		side;
+	int		line_height;
+	int		draw[2];
+}	t_ray;
+
 typedef struct s_player
 {
 	t_point	pos;
@@ -73,23 +97,24 @@ typedef struct s_player
 	float	player_speed;
 	float	player_rot_speed;
 	char	init_view;
-	double	fov;
 	double	sub_angles;
+	float	fov;
+	t_ray	ray;
 } 			t_player;
 
-typedef struct s_grid
+typedef struct s_textures
 {
-	t_point center;
-	int		size;
-	void	*img_text[4];
-}		t_grid;
+	t_img	img_text[4];
+	int		**text_pixels;
+	int		*textures[4];
+}		t_textures;
 
 typedef struct s_cube
 {
 	t_mlx		screen;
 	t_player	player;
 	t_map		map;
-	t_grid		grid;
+	t_textures		wall_text;
 }			t_cube;
 
 

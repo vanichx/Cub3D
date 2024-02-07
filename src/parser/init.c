@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/31 11:54:48 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:08:49 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	init_cube(t_cube *cube)
 	cube->player.rotate = 0;
 	cube->player.fov = ang_to_rad(initial_fov);
 	cube->player.player_height = 32;
-	cube->grid.size = 64;
 }
 
 void	init_window(t_cube *cube)
@@ -52,10 +51,10 @@ void	init_window(t_cube *cube)
 		"Cub3D");
 	if (!cube->screen.win)
 		exit_program(cube, EXIT_FAILURE, MLX_WIN_ERROR);
-	cube->screen.img = mlx_new_image(cube->screen.mlx, cube->screen.width, cube->screen.height);
-	if (!cube->screen.img)
+	cube->screen.img.img = mlx_new_image(cube->screen.mlx, cube->screen.width, cube->screen.height);
+	if (!cube->screen.img.img)
 		exit_program(cube, EXIT_FAILURE, MLX_IMG_ERROR);
-	cube->screen.addr = mlx_get_data_addr(cube->screen.img, &cube->screen.bits_per_pixel, \
-		&cube->screen.line_length, &cube->screen.endian);
+	cube->screen.img.addr = mlx_get_data_addr(cube->screen.img.img, &cube->screen.img.bpp, \
+		&cube->screen.img.line_length, &cube->screen.img.endian);
 	XCloseDisplay(display);
 }

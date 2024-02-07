@@ -28,12 +28,18 @@ t_vec	get_vunit(t_point p1, t_point p2)
 	return (vec);
 }
 
-t_vec	get_cam_vec(t_vec front)
+
+// x' = x * cos(θ) - y * sin(θ)
+// y' = x * sin(θ) + y * cos(θ)
+// the rotation of a vector is done by multiplying the vector by a rotation matrix
+t_vec	get_cam_vec(t_vec front, float fov)
 {
 	t_vec vec;
+	float half_ang;
 
-	vec.dir[X] = -front.dir[Y];
-	vec.dir[Y] = front.dir[X];
+	half_ang = fov / 2;
+	vec.dir[X] = front.dir[X] * cos(half_ang) - front.dir[Y] * sin(half_ang);
+	vec.dir[Y] = front.dir[X] * sin(half_ang) + front.dir[Y] * cos(half_ang);
 	return (vec);
 }
 

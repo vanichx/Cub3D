@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/01/25 17:40:03 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/06 12:03:42 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	parse_player(t_cube *cube)
 			cube->player.init_view = cube->map.map[(int)cube->player.m_pos.y]
 			[(int)cube->player.m_pos.x];
 			cube->player.front = get_dir_vec(cube->player.init_view);
-			cube->player.cam = get_cam_vec(cube->player.front);
+			cube->player.fov = 60;
+			cube->player.cam = get_cam_vec(cube->player.front, cube->player.fov);
 			cube->player.move = 0;
 			cube->player.rotate = 0;
 			cube->player.player_speed = PLAYER_SPEED;

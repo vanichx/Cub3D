@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/06 10:42:46 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:21:34 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,23 @@ static int check_text_dir(char *text, int i)
 		return (-1);
 }
 
+void load_texture(t_img *img, void *mlx, char *path, t_cube *cube)
+{
+	int size;
+
+	size = TEXT_SIZE;
+	img->img = mlx_xpm_file_to_image(mlx, path, &size, &size);
+	if (img->img == NULL)
+		exit_program(cube, 1, TEXT_LOAD_ERR);
+	img->casted_addr = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->line_length, &img->endian);
+	
+}
+
 void	parse_textures(char *trimmed_line, t_cube *cube)
 {
 	char *texture_path;
-	int	h;
-	int	w;
 	static int i = 0;
 
-	h = 64;
-	w = 64;
 	if (cube->map.num_textures >= MAX_NUM_TEXT)
 		exit_program(cube, 1, TOO_MANY_TEXTURES);
 	if (check_text_dir(trimmed_line, i) == -1)
@@ -40,8 +48,7 @@ void	parse_textures(char *trimmed_line, t_cube *cube)
 	if (texture_path == NULL)
 		exit_program(cube, 1, DUPLICATE_ERROR);
 	cube->map.texture[cube->map.num_textures] = texture_path;
-	cube->grid.img_text[cube->map.num_textures] = mlx_xpm_file_to_image(cube->screen.mlx, \
-		cube->map.texture[cube->map.num_textures], &h, &w);
+	load_texture(&cube->wall_text.img_text[cube->map.num_textures], cube->screen.mlx, texture_path, cube);
 	cube->map.num_textures++;
 	i++;
 }

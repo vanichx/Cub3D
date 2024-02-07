@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/06 10:55:36 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:35:52 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,40 @@ void	free_2darray(char **array)
 	array = NULL;
 }
 
+void	destroy_screen(t_mlx *screen)
+{
+	if (screen->img.img)
+		mlx_destroy_image(screen->mlx, screen->img.img);
+	if (screen->win)
+		mlx_destroy_window(screen->mlx, screen->win);
+	if (screen->mlx)
+		mlx_destroy_display(screen->mlx);
+}
+
+void	destroy_wall_textures(t_textures *wall_textures, t_mlx *screen)
+{
+	int i;
+	
+	if (!wall_textures)
+		return ;
+	i = NO;
+	while (i <= EA)
+	{
+		if (wall_textures->img_text[i].img)
+			mlx_destroy_image(screen->mlx, wall_textures->img_text[i].img);
+		i++;
+	}
+}
+
 int	cleanup(t_cube *cube, int exit_code)
 {
 	free_textures(cube);
 	free_2darray(cube->map.map);
 	if (cube->map.map_file)
 		free_2darray(cube->map.map_file);
-	if (cube->screen.img)
-		mlx_destroy_image(cube->screen.mlx, cube->screen.img);
-	if (cube->screen.win)
-		mlx_destroy_window(cube->screen.mlx, cube->screen.win);
+	destroy_wall_textures(&cube->wall_text, &cube->screen);
+	if (cube->screen.mlx)
+		destroy_screen(&cube->screen);
 	if (!cube)
 		exit(exit_code);
 	return(0);
