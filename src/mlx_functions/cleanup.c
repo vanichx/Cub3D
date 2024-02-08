@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/07 15:35:52 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/08 08:10:19 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	destroy_wall_textures(t_textures *wall_textures, t_mlx *screen)
 	{
 		if (wall_textures->img_text[i].img)
 			mlx_destroy_image(screen->mlx, wall_textures->img_text[i].img);
+		if (wall_textures->textures[i])
+			free(wall_textures->textures[i]);
 		i++;
 	}
 }

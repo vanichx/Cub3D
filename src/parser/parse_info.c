@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/07 15:21:34 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/08 08:28:32 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,26 @@ static int check_text_dir(char *text, int i)
 		return (-1);
 }
 
-void load_texture(t_img *img, void *mlx, char *path, t_cube *cube)
+void load_texture(t_img *img, void *mlx, char *path, t_cube *cube, int **textures)
 {
 	int size;
-
+	int i[2];
+	
 	size = TEXT_SIZE;
 	img->img = mlx_xpm_file_to_image(mlx, path, &size, &size);
 	if (img->img == NULL)
 		exit_program(cube, 1, TEXT_LOAD_ERR);
 	img->casted_addr = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->line_length, &img->endian);
-	
+	(*textures) = malloc(sizeof(int) * size * size);
+	if (!(*textures))
+		exit_program(cube, 1, MALLOC_ERROR);
+	i[Y] = -1;
+	while (++i[Y] < size)
+	{
+		i[X] = -1;
+		while(++i[X] < size)
+			(*textures)[i[Y] * size + i[X]] = img->casted_addr[i[Y] * size + i[X]];
+	}
 }
 
 void	parse_textures(char *trimmed_line, t_cube *cube)
@@ -48,7 +58,7 @@ void	parse_textures(char *trimmed_line, t_cube *cube)
 	if (texture_path == NULL)
 		exit_program(cube, 1, DUPLICATE_ERROR);
 	cube->map.texture[cube->map.num_textures] = texture_path;
-	load_texture(&cube->wall_text.img_text[cube->map.num_textures], cube->screen.mlx, texture_path, cube);
+	load_texture(&cube->wall_text.img_text[cube->map.num_textures], cube->screen.mlx, texture_path, cube, &cube->wall_text.textures[cube->map.num_textures]);
 	cube->map.num_textures++;
 	i++;
 }

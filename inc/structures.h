@@ -105,7 +105,7 @@ typedef struct s_player
 typedef struct s_textures
 {
 	t_img	img_text[4];
-	int		**text_pixels;
+	int		*text_pixels[4];
 	int		*textures[4];
 	int		text_point[2];
 	double	tex_step;

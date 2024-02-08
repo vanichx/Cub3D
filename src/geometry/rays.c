@@ -115,45 +115,71 @@ int get_texture_index(t_ray *ray)
     }
 }
 
-// void update_texts_pixels(t_cube *cube, t_ray *ray, int x)
-// {
-//     int y;
-//     int color;
-//     int texture_index;
+void realloc_text_pixels(int *(*text_pixels)[4], t_cube *cube)
+{
+    int i;
 
-//     texture_index = get_texture_index(ray);
-//     cube->wall_text.text_point[X] = ray->wall_x * TEXT_SIZE;
-//     if (((ray->side == 0) && (ray->ray_dir.dir[X] < 0))
-//         || ((ray->side == 1) && (ray->ray_dir.dir[Y] > 0)))
-//         cube->wall_text.text_point[X] = TEXT_SIZE - cube->wall_text.text_point[X] - 1;
-//     cube->wall_text.tex_step = 1.0 * TEXT_SIZE / ray->line_height;
-//     cube->wall_text.tex_pos = (ray->draw[START] - cube->screen.height / 2 + ray->line_height / 2) * cube->wall_text.tex_step;
-//     y = ray->draw[START];
-//     while (y < ray->draw[END])
-//     {
-//         cube->wall_text.text_point[Y] = (int)cube->wall_text.tex_pos & (TEXT_SIZE - 1);
-//         cube->wall_text.tex_pos += cube->wall_text.tex_step;
-//         color = cube->wall_text.text_pixels[TEXT_SIZE * cube->wall_text.text_point[Y] + cube->wall_text.text_point[X]];
-//         if (texture_index == NO || texture_index == EA)
-//             color = (color >> 1) & 8355711;
-//         if (color > 0)
-//             cube->wall_text.text_pixels[y][x] = color;
-//         y++;
-//     }
-// }
+    i = NO;
+    while (i < EA)
+    {
+        if ((*text_pixels)[i] == NULL)
+        {
+            (*text_pixels)[i] = malloc(sizeof(int) * TEXT_SIZE * TEXT_SIZE);
+            if (!(*text_pixels)[i])
+                exit_program(cube, 1, MALLOC_ERROR);
+        }
+        else
+        {
+            (*text_pixels)[i] = realloc((*text_pixels)[i], sizeof(int) * TEXT_SIZE * TEXT_SIZE);
+            if (!(*text_pixels)[i])
+                exit_program(cube, 1, MALLOC_ERROR);
+        }
+        i++;
+    }
+}
+
+void update_texts_pixels(t_cube *cube, t_ray *ray, int x)
+{
+    int y;
+    int color;
+    int texture_index;
+
+    texture_index = get_texture_index(ray);
+    cube->wall_text.text_point[X] = (int)(ray->wall_x * TEXT_SIZE);
+    //printf("cube->wall_text.text_point[X]: %f\n", cube->wall_text.text_point[X]);
+    if (((ray->side == 0) && (ray->ray_dir.dir[X] < 0))
+        || ((ray->side == 1) && (ray->ray_dir.dir[Y] > 0)))
+        cube->wall_text.text_point[X] = TEXT_SIZE - cube->wall_text.text_point[X] - 1;
+    cube->wall_text.tex_step = 1.0 * TEXT_SIZE / ray->line_height;
+    cube->wall_text.tex_pos = (ray->draw[START] - cube->screen.height / 2 + ray->line_height / 2) * cube->wall_text.tex_step;
+    y = ray->draw[START];
+    while (y < ray->draw[END])
+    {
+        cube->wall_text.text_point[Y] = (int)cube->wall_text.tex_pos & (TEXT_SIZE - 1);
+        cube->wall_text.tex_pos += cube->wall_text.tex_step;
+        color = cube->wall_text.textures[texture_index][TEXT_SIZE * cube->wall_text.text_point[Y] + cube->wall_text.text_point[X]];
+        if (texture_index == NO || texture_index == EA)
+            color = (color >> 1) & 8355711;
+        if (color > 0)
+            if (y >= 0 && y < TEXT_SIZE && x >= 0 && x < TEXT_SIZE)
+                cube->wall_text.text_pixels[y][x] = color;
+        y++;
+    }
+}
 
 void raycast(t_cube *cube, t_ray *ray)
 {
     int x;
 
     x = 0;
+    realloc_text_pixels(&cube->wall_text.text_pixels, cube);
     while (x < cube->screen.width)
     {
         setup_ray_params(cube, ray, x);
         setup_dda_params(cube, ray);
         perform_dda(cube, ray);
         calculate_line_height(cube, ray);
-        // update_texts_pixels(cube, ray, x);
+        update_texts_pixels(cube, ray, x);
         x++;
     }
 }
