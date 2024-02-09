@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/08 08:28:32 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/09 08:56:22 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ void load_texture(t_img *img, void *mlx, char *path, t_cube *cube, int **texture
 	if (img->img == NULL)
 		exit_program(cube, 1, TEXT_LOAD_ERR);
 	img->casted_addr = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->line_length, &img->endian);
-	(*textures) = malloc(sizeof(int) * size * size);
-	if (!(*textures))
-		exit_program(cube, 1, MALLOC_ERROR);
 	i[Y] = -1;
+	(*textures) = ft_calloc(1, sizeof(int) * size * size);
+	if ((*textures) == NULL)
+		exit_program(cube, 1, MALLOC_ERROR);
 	while (++i[Y] < size)
 	{
 		i[X] = -1;
 		while(++i[X] < size)
+
 			(*textures)[i[Y] * size + i[X]] = img->casted_addr[i[Y] * size + i[X]];
 	}
 }

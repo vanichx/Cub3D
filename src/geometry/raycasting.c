@@ -1,28 +1,5 @@
 #include "cub3d.h"
 
-void realloc_text_pixels(int *(*text_pixels)[4], t_cube *cube)
-{
-    int i;
-
-    i = NO;
-    while (i < EA)
-    {
-        if ((*text_pixels)[i] == NULL)
-        {
-            (*text_pixels)[i] = malloc(sizeof(int) * TEXT_SIZE * TEXT_SIZE);
-            if (!(*text_pixels)[i])
-                exit_program(cube, 1, MALLOC_ERROR);
-        }
-        else
-        {
-            (*text_pixels)[i] = realloc((*text_pixels)[i], sizeof(int) * TEXT_SIZE * TEXT_SIZE);
-            if (!(*text_pixels)[i])
-                exit_program(cube, 1, MALLOC_ERROR);
-        }
-        i++;
-    }
-}
-
 void    setup_dda_params(t_cube *cube, t_ray *ray)
 {
     if (ray->ray_dir.dir[X] < 0)
@@ -97,8 +74,7 @@ void update_texts_pixels(t_cube *cube, t_ray *ray, int x)
         if (texture_index == NO || texture_index == EA)
             color = (color >> 1) & 8355711;
         if (color > 0)
-            if (y >= 0 && y < TEXT_SIZE && x >= 0 && x < TEXT_SIZE)
-                cube->wall_text.text_pixels[y][x] = color;
+            cube->wall_text.text_pixels[y][x] = color;
         y++;
     }
 }
@@ -109,7 +85,7 @@ void raycast(t_cube *cube, t_ray *ray)
     int x;
 
     x = 0;
-    realloc_text_pixels(&cube->wall_text.text_pixels, cube);
+    ft_bzero(&cube->wall_text.text_pixels, 0);
     while (x < cube->screen.width)
     {
         setup_ray_params(cube, ray, x);

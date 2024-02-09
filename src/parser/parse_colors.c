@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:24:47 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/24 03:47:00 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/08 12:00:13 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int	parse_color_code(char *line, int *color)
 	check = check_color_values(color);
 	if (check == -1)
 		return (-1);
+	
 	return (1);
 }

@@ -6,11 +6,17 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/06 10:50:01 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:11:15 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void convert_to_rgb(t_map *map)
+{
+	map->c_col = (map->ceiling_col[0] << 16) + (map->ceiling_col[1] << 8) + map->ceiling_col[2];
+	map->f_col = (map->floor_col[0] << 16) + (map->floor_col[1] << 8) + map->floor_col[2];
+}
 
 static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 {
@@ -35,6 +41,7 @@ static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 			parse_map_lines(map_file[i], buffer, cube);
 		free(trimmed_line);
 	}
+	convert_to_rgb(&cube->map);
 }
 
 void parse_textures_files(t_cube *cube)

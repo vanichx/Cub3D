@@ -54,6 +54,8 @@ typedef struct s_map
 	char	*texture[4];
 	int		floor_col[3];
 	int		ceiling_col[3];
+	int		c_col;
+	int		f_col;
 	char	**map_file;
 	char	**map;
 	int 	map_width;
@@ -105,7 +107,7 @@ typedef struct s_player
 typedef struct s_textures
 {
 	t_img	img_text[4];
-	int		*text_pixels[4];
+	int		**text_pixels;
 	int		*textures[4];
 	int		text_point[2];
 	double	tex_step;
