@@ -2,34 +2,6 @@
 
 #define WHITE 0xFFFFFF
 
-
-static void	print_low_bar(t_cube *cube, int height, int width)
-{
-	int		bottom;
-	int		mid;
-
-
-
-	height = cube->screen.height;
-	width = cube->screen.width;
-	mid = width / 2 ;
-	bottom = height / 2;
-	// mlx_put_image_to_window(cube->screen.mlx, cube->screen.win,
-	// 	cube->img->bg_count, mid - 150, bottom - 15);
-	mlx_string_put(cube->screen.mlx, cube->screen.win,
-		mid, bottom, WHITE, "CUB3D");
-	
-}
-
-
-
-int render(t_cube *cube)
-{
-	print_low_bar(cube, cube->map.map_height, cube->map.map_width);
-	return (0);
-}
-
-
 bool hooking(t_cube *cube)
 {
 	mlx_hook(cube->screen.win, 2, 1L << 0, key_press, cube);

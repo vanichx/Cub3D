@@ -67,6 +67,5 @@ int render_cube(t_cube *cube)
     allocate_text_pixels(cube);
     init_ray(&cube->player.ray);
     raycast(cube, &cube->player.ray);
-    // render(cube);
     return (0);
 }
