@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/09 09:01:25 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:30:02 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,6 @@ int	window_close(t_cube *cube)
 {
 	cleanup(cube, EXIT_SUCCESS);
 	return (0);
-}
-
-void	allocate_text_pixels(t_cube *cube)
-{
-	int i;
-	
-	i = 0;
-	cube->wall_text.text_pixels = ft_calloc(cube->screen.height + 1, sizeof * cube->wall_text.text_pixels);
-	if (cube->wall_text.text_pixels == NULL)
-		exit_program(cube, 1, MALLOC_ERROR);
-	while (i < cube->screen.height)
-	{
-		cube->wall_text.text_pixels[i] = ft_calloc(cube->screen.width + 1, sizeof * cube->wall_text.text_pixels);
-		if (cube->wall_text.text_pixels[i] == NULL)
-			exit_program(cube, 1, MALLOC_ERROR);
-		i++;
-	
-	}
 }
 
 void	check_args(int argc, char *argv[])
@@ -55,7 +37,6 @@ void	parse(char *map_path, t_cube *cube)
 	parse_map(cube->map.map_file, cube);
 	print_map_info(cube);
 	check_walls (cube);
-	allocate_text_pixels(cube);
 }
 
 int main(int argc, char *argv[])
@@ -66,7 +47,7 @@ int main(int argc, char *argv[])
 	ft_bzero(&cube, sizeof(t_cube));
 	init_window(&cube);
 	parse(argv[1], &cube);
-	// game_loop(&cube);
+	render_cube(&cube);
 	if (hooking(&cube))
 		return (EXIT_FAILURE);
 }

@@ -2,10 +2,17 @@
 
 void init_ray(t_ray *ray)
 {
+    ray->camera_x = 0;
+    ray->ray_dir.dir[X] = 0;
+    ray->ray_dir.dir[Y] = 0;
+    ray->map_point.x = 0;
+    ray->map_point.y = 0;
     ray->step[X] = 0;
     ray->step[Y] = 0;
     ray->side_dist[X] = 0;
     ray->side_dist[Y] = 0;
+    ray->delta_dist[X] = 0;
+    ray->delta_dist[Y] = 0;
     ray->wall_dist = 0;
     ray->wall_x = 0;
     ray->side = 0;

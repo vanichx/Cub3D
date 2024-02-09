@@ -85,7 +85,6 @@ void raycast(t_cube *cube, t_ray *ray)
     int x;
 
     x = 0;
-    ft_bzero(&cube->wall_text.text_pixels, 0);
     while (x < cube->screen.width)
     {
         setup_ray_params(cube, ray, x);
@@ -93,7 +92,7 @@ void raycast(t_cube *cube, t_ray *ray)
         perform_dda(cube, ray);
         calculate_line_height(cube, ray);
         update_texts_pixels(cube, ray, x);
-        render_frame(cube);
         x++;
     }
+    render_frame(cube);
 }

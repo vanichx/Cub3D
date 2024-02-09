@@ -1,5 +1,25 @@
 #include "cub3d.h"
 
+void	allocate_text_pixels(t_cube *cube)
+{
+	int i;
+	
+	i = 0;
+	if (cube->wall_text.text_pixels)
+		free_2darray((void **)cube->wall_text.text_pixels);
+	cube->wall_text.text_pixels = ft_calloc(cube->screen.height + 1, sizeof * cube->wall_text.text_pixels);
+	if (cube->wall_text.text_pixels == NULL)
+		exit_program(cube, 1, MALLOC_ERROR);
+	while (i < cube->screen.height)
+	{
+		cube->wall_text.text_pixels[i] = ft_calloc(cube->screen.width + 1, sizeof * cube->wall_text.text_pixels);
+		if (cube->wall_text.text_pixels[i] == NULL)
+			exit_program(cube, 1, MALLOC_ERROR);
+		i++;
+	
+	}
+}
+
 void    set_image_pixel(t_img *img, int i[2], int color, t_cube *cube)
 {
     int pixel;
@@ -44,6 +64,7 @@ void    render_frame(t_cube *cube)
 
 int render_cube(t_cube *cube)
 {
+    allocate_text_pixels(cube);
     init_ray(&cube->player.ray);
     raycast(cube, &cube->player.ray);
     // render(cube);

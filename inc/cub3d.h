@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/28 12:46:36 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:11:38 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void resize_window(t_cube *cub, int flag);
 /* cleanup.c */
 void	ft_strdel(char **s);
 void	free_textures(t_cube *cube);
-void	free_2darray(char **array);
+void	free_2darray(void **array);
 int	cleanup(t_cube *cube, int exit_code);
 void	exit_program(t_cube *cube, int exit_code, char *message);
 
