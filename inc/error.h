@@ -33,4 +33,6 @@
 #define TEXT_ERR_FORMAT "❌ Texture error: Invalid texture format\n"
 #define TEXT_LOAD_ERR "❌ Texture error: Failed to load texture\n"
 
+#define HOOKING_ERROR "❌ Hooking error: Failed to hook events\n"
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/07 15:01:43 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:39:08 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,9 @@ int key_press(int key, void *param)
 	if (key == KEY_LEFT || key == KEY_RIGHT) {
 		//turn_player
 	}
-	if (key == KEY_R){
+	if (key == KEY_R)
+	{
 		//rotate "camera"
-		if (cub == NULL) {
-			printf("cub is NULL\n");
-		}
-		if (cub->screen.mlx == NULL) {
-			printf("cub->screen.mlx is NULL\n");
-		}
-		if (cub->screen.win == NULL) {
-			printf("cub->screen.win is NULL\n");
-		}
-		if (cub->wall_text.img_text[1].img == NULL) {
-			printf("cub->wall_text.img_text[1].img is NULL\n");
-		}
 		mlx_put_image_to_window(cub->screen.mlx, cub->screen.win, \
 		cub->wall_text.img_text[1].img, 0, 0);
 	}

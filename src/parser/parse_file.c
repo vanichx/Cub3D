@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/24 03:15:09 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/09 09:36:03 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	copy_lines_to_map_file(char ***map_file, char **buffer, int count)
 		i++;
 	}
 	(*map_file)[count] = NULL;
-	free_2darray(buffer);
+	free_2darray((void **)buffer);
 	return (0);
 }
 
@@ -64,7 +64,7 @@ void	parse_file(char *map_path, char ***map_file, t_cube *cube)
 	count = read_file_and_store_lines(map_path, &buffer);
 	if (!count)
 	{
-		free_2darray(buffer);
+		free_2darray((void **)buffer);
 		exit_program(cube, 1, EMPTY_FILE);
 	}
 	count = copy_lines_to_map_file(map_file, buffer, count);

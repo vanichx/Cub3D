@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/09 09:30:02 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:41:07 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ int main(int argc, char *argv[])
 	parse(argv[1], &cube);
 	render_cube(&cube);
 	if (hooking(&cube))
-		return (EXIT_FAILURE);
+		exit_program(&cube, EXIT_FAILURE, HOOKING_ERROR);
 }

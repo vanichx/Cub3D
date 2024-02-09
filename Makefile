@@ -1,6 +1,6 @@
 # Variables
 CC					=	gcc -Wall -Wextra -Werror
-CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/include/X11/include/ -fsanitize=address -fno-omit-frame-pointer
+CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/include/X11/include/ #-fsanitize=address -fno-omit-frame-pointer
 
 RM					=	rm -rf
 CUB3D				=   cub3D

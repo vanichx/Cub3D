@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/08 12:11:15 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:36:25 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	parse_map(char **map_file, t_cube *cube)
 			exit_program(cube, 1, DUPLICATE_ERROR);
 	}
 	cube->map.map[cube->map.map_height] = NULL;
-	free_2darray(buffer);
+	free_2darray((void **)buffer);
 	parse_player(cube);
 	parse_textures_files(cube);
 }
