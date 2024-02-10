@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/07 14:08:49 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/10 11:35:17 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ void	init_cube(t_cube *cube)
 	cube->map.map_y = 0;
 	cube->map.num_line = 0;
 	cube->map.num_textures = 0;
-	cube->player.pos.x = 0;
-	cube->player.pos.y = 0;
+	cube->player.pos[X] = 0;
+	cube->player.pos[Y] = 0;
 	cube->player.player_speed = 10;
 	cube->player.player_rot_speed = 4;
 	cube->player.move = 0;
 	cube->player.rotate = 0;
 	cube->player.fov = ang_to_rad(initial_fov);
+	cube->wall_text.tex_size = TEXT_SIZE;
 	cube->player.player_height = 32;
 }
 

@@ -20,26 +20,22 @@ void	allocate_text_pixels(t_cube *cube)
 	}
 }
 
-void    set_image_pixel(t_img *img, int i[2], int color, t_cube *cube)
+void    set_image_pixel(t_img *img, int i[2], int color)
 {
     int pixel;
 
-    if (i[X] >= 0 && i[X] < cube->screen.width && i[Y] >= 0 && i[Y] < cube->screen.height) {
-        pixel = i[Y] * (img->line_length / 4) + i[X];
-        img->casted_addr[pixel] = color;
-    }
-    else
-        exit_program(cube, 1, "Error: pixel out of bounds");
+    pixel = i[Y] * (img->line_length / 4) + i[X];
+    img->casted_addr[pixel] = color;
 }
 
 void    set_frame_image_pixel(t_cube *cube, t_img *img, int i[2])
 {
     if (cube->wall_text.text_pixels[i[Y]][i[X]] > 0)
-        set_image_pixel(img, i, cube->wall_text.text_pixels[i[Y]][i[X]], cube);
+        set_image_pixel(img, i, cube->wall_text.text_pixels[i[Y]][i[X]]);
     else if (i[Y] < cube->screen.height / 2)
-        set_image_pixel(img, i, cube->map.c_col, cube);
-    else if (i[Y] < cube->screen.height - 1 && i[Y] > cube->screen.height / 2)
-        set_image_pixel(img, i, cube->map.f_col, cube);
+        set_image_pixel(img, i, cube->map.c_col);
+    else if (i[Y] < cube->screen.height - 1 && i[Y] >= cube->screen.height / 2)
+        set_image_pixel(img, i, cube->map.f_col);
 }
 
 void    render_frame(t_cube *cube)
@@ -47,7 +43,7 @@ void    render_frame(t_cube *cube)
     t_img   img;
     int     i[2];
 
-    img.img = mlx_new_image(cube->screen.mlx, cube->screen.height, cube->screen.width);
+    img.img = mlx_new_image(cube->screen.mlx, cube->screen.width, cube->screen.height);
     if (img.img == NULL)
         exit_program(cube, 1, MLX_IMG_ERROR);
     img.casted_addr = (int *)mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);

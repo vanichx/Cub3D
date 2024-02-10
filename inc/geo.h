@@ -7,7 +7,7 @@
 float	vec_to_ang(t_vec vec);
 double  ang_to_rad(double ang);
 t_vec	get_vunit(t_point p1, t_point p2);
-t_vec	get_dir_vec(char dir);
+void	set_front_cam_vec(char player, t_vec *front, t_vec *cam);
 t_vec	rotate_vec(t_vec vec, float ang);
 t_vec	normalize_vec(t_vec vec);
 t_vec	get_cam_vec(t_vec front, float fov);
@@ -18,7 +18,7 @@ t_vec   find_casting_vec(t_cube *cube, int x);
 int     render_cube(t_cube *cube);
 void    render_frame(t_cube *cube);
 void    set_frame_image_pixel(t_cube *cube, t_img *img, int i[2]);
-void    set_image_pixel(t_img *img, int i[2], int color, t_cube *cube);
+void    set_image_pixel(t_img *img, int i[2], int color);
 
 /* rays.c */
 void    init_ray(t_ray *ray);
@@ -27,7 +27,6 @@ void    calculate_line_height(t_cube *cube, t_ray *ray);
 int     get_texture_index(t_ray *ray);
 
 /* raycasting.c */
-void    realloc_text_pixels(int *(*text_pixels)[4], t_cube *cube);
 void    setup_dda_params(t_cube *cube, t_ray *ray);
 void    perform_dda(t_cube *cube, t_ray *ray);
 void    update_texts_pixels(t_cube *cube, t_ray *ray, int x);

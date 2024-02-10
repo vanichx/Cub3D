@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/09 08:56:22 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/10 12:52:16 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,27 @@ static int check_text_dir(char *text, int i)
 
 void load_texture(t_img *img, void *mlx, char *path, t_cube *cube, int **textures)
 {
-	int size;
 	int i[2];
+	int *buffer;
 	
-	size = TEXT_SIZE;
-	img->img = mlx_xpm_file_to_image(mlx, path, &size, &size);
+	img->img = mlx_xpm_file_to_image(mlx, path, &cube->wall_text.tex_size, &cube->wall_text.tex_size);
 	if (img->img == NULL)
 		exit_program(cube, 1, TEXT_LOAD_ERR);
 	img->casted_addr = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->line_length, &img->endian);
 	i[Y] = -1;
-	(*textures) = ft_calloc(1, sizeof(int) * size * size);
-	if ((*textures) == NULL)
-		exit_program(cube, 1, MALLOC_ERROR);
-	while (++i[Y] < size)
+	buffer = ft_calloc(1, sizeof * buffer * cube->wall_text.tex_size * cube->wall_text.tex_size);
+	if (!buffer)
+		exit_program(cube, EXIT_FAILURE, MALLOC_ERROR);
+	(*textures) = buffer;
+	// even if textrues have different size the will allocate the same amount of memory
+	while (++i[Y] < cube->wall_text.tex_size)
 	{
 		i[X] = -1;
-		while(++i[X] < size)
+		while(++i[X] < cube->wall_text.tex_size)
 
-			(*textures)[i[Y] * size + i[X]] = img->casted_addr[i[Y] * size + i[X]];
+			(*textures)[i[Y] * cube->wall_text.tex_size + i[X]] = img->casted_addr[i[Y] * cube->wall_text.tex_size + i[X]];
 	}
+	mlx_destroy_image(mlx, img->img);
 }
 
 void	parse_textures(char *trimmed_line, t_cube *cube)

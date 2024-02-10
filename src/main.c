@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/09 09:41:07 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/10 12:50:36 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	parse(char *map_path, t_cube *cube)
 	init_cube(cube);
 	parse_file(map_path, &cube->map.map_file, cube);
 	parse_map(cube->map.map_file, cube);
-	print_map_info(cube);
+	// print_map_info(cube);
 	check_walls (cube);
 }
 

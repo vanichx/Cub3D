@@ -51,31 +51,36 @@ double get_front_length(t_cube *cube)
 	return (front_length);
 }
 
-t_vec	get_dir_vec(char dir)
+void	set_front_cam_vec(char player, t_vec *front, t_vec *cam)
 {
-	t_vec vec;
-
-	if (dir == 'N')
+	if (player == 'N')
 	{
-		vec.dir[X] = 0;
-		vec.dir[Y] = -1;
+		front->dir[X] = 0;
+		front->dir[Y] = -1;
+		cam->dir[X] = 0.66;
+		cam->dir[Y] = 0;
  	}
-	if (dir == 'S')
+	if (player == 'S')
 	{
-		vec.dir[X] = 0;
-		vec.dir[Y] = 1;
+		front->dir[X] = 0;
+		front->dir[Y] = 1;
+		cam->dir[X] = -0.66;
+		cam->dir[Y] = 0;
 	}
-	if (dir == 'E')
+	if (player == 'E')
 	{
-		vec.dir[X] = 1;
-		vec.dir[Y] = 0;
+		front->dir[X] = 1;
+		front->dir[Y] = 0;
+		cam->dir[X] = 0;
+		cam->dir[Y] = -0.66;
 	}
-	if (dir == 'W')
+	if (player == 'W')
 	{
-		vec.dir[X] = -1;
-		vec.dir[Y] = 0;
+		front->dir[X] = -1;
+		front->dir[Y] = 0;
+		cam->dir[X] = 0;
+		cam->dir[Y] = 0.66;
 	}
-	return (vec);
 }
 
 t_vec rotate_vec(t_vec vec, float ang)

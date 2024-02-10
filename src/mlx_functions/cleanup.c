@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/09 09:12:19 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/10 11:55:08 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	destroy_screen(t_mlx *screen)
 		mlx_destroy_display(screen->mlx);
 }
 
-void	destroy_wall_textures(t_textures *wall_textures, t_mlx *screen)
+void	destroy_wall_textures(t_textures *wall_textures)
 {
 	int i;
 	
@@ -70,8 +70,6 @@ void	destroy_wall_textures(t_textures *wall_textures, t_mlx *screen)
 	i = NO;
 	while (i <= EA)
 	{
-		if (wall_textures->img_text[i].img)
-			mlx_destroy_image(screen->mlx, wall_textures->img_text[i].img);
 		if (wall_textures->textures[i])
 			free(wall_textures->textures[i]);
 		i++;
@@ -84,7 +82,7 @@ int	cleanup(t_cube *cube, int exit_code)
 	free_2darray((void **)cube->map.map);
 	if (cube->map.map_file)
 		free_2darray((void **)cube->map.map_file);
-	destroy_wall_textures(&cube->wall_text, &cube->screen);
+	destroy_wall_textures(&cube->wall_text);
 	if (cube->screen.mlx)
 		destroy_screen(&cube->screen);
 	if (!cube)

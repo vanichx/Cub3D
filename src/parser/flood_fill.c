@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/06 12:03:42 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/10 12:51:39 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ void	parse_player(t_cube *cube)
 			player_start_positions++;
 			cube->player.m_pos.x = is_player(cube->map.map[i]);
 			cube->player.m_pos.y = i;
-			cube->player.pos.x = cube->player.m_pos.x + 0.5; // shifting the player in the center of the grid square
-			cube->player.pos.y = cube->player.m_pos.y + 0.5; // shifting the player in the center of the grid square
+			cube->player.pos[X] = (double)cube->player.m_pos.x + 0.5; // shifting the player in the center of the grid square
+			cube->player.pos[Y] = (double)cube->player.m_pos.y + 0.5; // shifting the player in the center of the grid square
 			cube->player.init_view = cube->map.map[(int)cube->player.m_pos.y]
 			[(int)cube->player.m_pos.x];
-			cube->player.front = get_dir_vec(cube->player.init_view);
+			set_front_cam_vec(cube->player.init_view, &cube->player.front, &cube->player.cam);
 			cube->player.fov = 60;
-			cube->player.cam = get_cam_vec(cube->player.front, cube->player.fov);
 			cube->player.move = 0;
 			cube->player.rotate = 0;
 			cube->player.player_speed = PLAYER_SPEED;
@@ -91,8 +90,6 @@ static void	replace_spaces(char **map, int map_h)
 void	check_walls(t_cube *cube)
 {
 	replace_spaces(cube->map.map, cube->map.map_height);
-	// print_map_info(cube);
 	f_fill(cube, (int)cube->player.m_pos.y,
 		(int)cube->player.m_pos.x);
-	// print_map_info(cube);
 }

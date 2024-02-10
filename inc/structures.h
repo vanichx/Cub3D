@@ -76,7 +76,7 @@ typedef struct s_ray
 {
 	double	camera_x;
 	t_vec	ray_dir;
-	t_point	map_point;
+	int		map_point[2];
 	int		step[2];
 	double	side_dist[2];
 	double	delta_dist[2];
@@ -89,7 +89,7 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	t_point	pos;
+	double	pos[2];
 	t_point	m_pos;
 	t_vec	front;
 	t_vec	cam;
@@ -112,6 +112,7 @@ typedef struct s_textures
 	int		text_point[2];
 	double	tex_step;
 	double	tex_pos;
+	int		tex_size;
 }		t_textures;
 
 typedef struct s_cube
