@@ -94,8 +94,8 @@ typedef struct s_player
 	t_vec	front;
 	t_vec	cam;
 	int		player_height;
-	bool	move;
-	bool	rotate;
+	int		move[2];
+	int		rotate;
 	float	player_speed;
 	float	player_rot_speed;
 	char	init_view;

@@ -19,6 +19,7 @@ int     render_cube(t_cube *cube);
 void    render_frame(t_cube *cube);
 void    set_frame_image_pixel(t_cube *cube, t_img *img, int i[2]);
 void    set_image_pixel(t_img *img, int i[2], int color);
+int render(t_cube *cube);
 
 /* rays.c */
 void    init_ray(t_ray *ray);
@@ -31,5 +32,8 @@ void    setup_dda_params(t_cube *cube, t_ray *ray);
 void    perform_dda(t_cube *cube, t_ray *ray);
 void    update_texts_pixels(t_cube *cube, t_ray *ray, int x);
 void    raycast(t_cube *cube, t_ray *ray);
+
+/* movement.c */
+int move_player(t_cube *cube);
 
 #endif

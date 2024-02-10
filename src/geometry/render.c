@@ -60,8 +60,26 @@ void    render_frame(t_cube *cube)
 
 int render_cube(t_cube *cube)
 {
+    int player_has_moved;
+
+    player_has_moved = move_player(cube);
+    if (player_has_moved == 0)
+        return (0);
     allocate_text_pixels(cube);
     init_ray(&cube->player.ray);
     raycast(cube, &cube->player.ray);
+    return (0);
+}
+
+int render(t_cube *cube)
+{
+    int player_has_moved;
+
+
+    player_has_moved = 0;
+    player_has_moved += move_player(cube);
+    if (player_has_moved == 0)
+        return (0);
+    render_cube(cube);
     return (0);
 }

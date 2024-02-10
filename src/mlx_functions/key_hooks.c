@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/09 09:39:08 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:06:06 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,21 @@ int key_press(int key, void *param)
 	if (key == KEY_ESC)
 		exit_program(cub, EXIT_SUCCESS, "Exiting the game\n");
 	if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN || key == KEY_D || key == KEY_A)
-		//move_player
+	{
+		if (key == KEY_W)
+			cub->player.move[X] = 1;
+		else if (key == KEY_S)
+			cub->player.move[X] = -1;
+		if (key == KEY_D)
+			cub->player.move[Y] = 1;
+		else if (key == KEY_A)
+			cub->player.move[Y] = -1;
+	}
 	if (key == KEY_LEFT || key == KEY_RIGHT) {
-		//turn_player
+		if (key == KEY_LEFT)
+			cub->player.rotate = -1;
+		else if (key == KEY_RIGHT)
+			cub->player.rotate = 1;
 	}
 	if (key == KEY_R)
 	{

@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/10 12:51:39 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:07:21 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	parse_player(t_cube *cube)
 			[(int)cube->player.m_pos.x];
 			set_front_cam_vec(cube->player.init_view, &cube->player.front, &cube->player.cam);
 			cube->player.fov = 60;
-			cube->player.move = 0;
+			cube->player.move[X] = 0;
+			cube->player.move[Y] = 0;
 			cube->player.rotate = 0;
 			cube->player.player_speed = PLAYER_SPEED;
 			cube->player.player_rot_speed = PLAYER_ROT_SPEED;
