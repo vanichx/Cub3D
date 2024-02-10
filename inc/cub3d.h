@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/09 09:11:38 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:22:13 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ bool	hooking(t_cube *cube);
 
 /* key_hooks.c */
 int key_press(int key, void *param);
+int key_release(int key, void *param);
 /*************************************	mlx_functions	**************************************/
 
 #endif

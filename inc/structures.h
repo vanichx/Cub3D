@@ -96,8 +96,8 @@ typedef struct s_player
 	int		player_height;
 	int		move[2];
 	int		rotate;
-	float	player_speed;
-	float	player_rot_speed;
+	double	player_speed;
+	double	player_rot_speed;
 	char	init_view;
 	double	sub_angles;
 	float	fov;
@@ -120,7 +120,8 @@ typedef struct s_cube
 	t_mlx		screen;
 	t_player	player;
 	t_map		map;
-	t_textures		wall_text;
+	t_textures	wall_text;
+	int		    player_has_moved;
 }			t_cube;
 
 
