@@ -34,6 +34,6 @@ void    update_texts_pixels(t_cube *cube, t_ray *ray, int x);
 void    raycast(t_cube *cube, t_ray *ray);
 
 /* movement.c */
-int move_player(t_cube *cube);
+
 
 #endif

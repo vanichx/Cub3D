@@ -6,8 +6,8 @@
 #define X 0
 #define Y 1
 
-#define PLAYER_SPEED 10
-#define PLAYER_ROT_SPEED 4
+#define PLAYER_SPEED 1
+#define PLAYER_ROT_SPEED 1
 
 #define NO 0
 #define SO 1
@@ -95,7 +95,7 @@ typedef struct s_player
 	t_vec	cam;
 	int		player_height;
 	int		move[2];
-	int		rotate;
+	double	rotate;
 	double	player_speed;
 	double	player_rot_speed;
 	char	init_view;
@@ -115,12 +115,26 @@ typedef struct s_textures
 	int		tex_size;
 }		t_textures;
 
+typedef struct s_keys
+{
+	int		key_esc;
+	int		key_s;
+	int		key_w;
+	int		key_a;
+	int		key_d;
+	int		key_left;
+	int		key_right;
+	int		key_i;
+	int		key_o;
+}			t_keys;
+
 typedef struct s_cube
 {
 	t_mlx		screen;
 	t_player	player;
 	t_map		map;
 	t_textures	wall_text;
+	t_keys      key;
 	int		    player_has_moved;
 }			t_cube;
 

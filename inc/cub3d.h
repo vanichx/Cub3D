@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/12 12:27:39 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:46:01 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,18 @@ bool	hooking(t_cube *cube);
 int key_press(int key, void *param);
 int key_release(int key, void *param);
 /*************************************	mlx_functions	**************************************/
+
+
+
+/*************************************	movements	**************************************/
+
+void move_forward(t_cube *cube);
+void move_backward(t_cube *cube);
+void move_left(t_cube *cube);
+void move_right(t_cube *cube);
+int		keys_execute(t_cube *cube);
+
+
+/*************************************	movements	**************************************/
 
 #endif
