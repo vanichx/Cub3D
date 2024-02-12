@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/10 11:55:08 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:27:52 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	destroy_screen(t_mlx *screen)
 		mlx_destroy_image(screen->mlx, screen->img.img);
 	if (screen->win)
 		mlx_destroy_window(screen->mlx, screen->win);
-	if (screen->mlx)
-		mlx_destroy_display(screen->mlx);
+	// if (screen->mlx)
+	// 	mlx_destroy_display(screen->mlx);
 }
 
 void	destroy_wall_textures(t_textures *wall_textures)

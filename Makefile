@@ -1,6 +1,6 @@
 # Variables
 CC					=	gcc -Wall -Wextra -Werror
-CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/include/X11/include/ #-fsanitize=address -fno-omit-frame-pointer
+CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/X11/include #-I/usr/include/X11/include/ #-fsanitize=address -fno-omit-frame-pointer
 
 RM					=	rm -rf
 CUB3D				=   cub3D
@@ -27,7 +27,7 @@ VALGRIND = valgrind --tool=memcheck
 ifeq ($(UNAME_S),Darwin)
 MLX_DIR = $(MLX_MAC)
 MLX_FILE = $(MLX_DIR)/libmlx.a
-LDFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+LDFLAGS = -L$(MLX_DIR) -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKit -lX11 #-lmlx -lX11 -framework OpenGL -framework AppKit
 
 # Linux
 else

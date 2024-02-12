@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/10 21:22:13 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:27:39 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 // ------------------------ MINILIBX ----------------------------
 
 # ifdef __APPLE__
-#  include "../lib/mlx/mlx.h"
+#  include "../lib/mlx_mac/mlx.h"
 #  include "keycodes_mac.h"
 #  define PLATFORM "mac"
 # else
