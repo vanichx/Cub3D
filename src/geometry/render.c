@@ -68,7 +68,6 @@ int	render_cube(t_cube *cube)
 
 int	render(t_cube *cube)
 {
-	// mlx_clear_window(cube->screen.mlx, cube->screen.win);
 	keys_execute(cube);
 	render_cube(cube);
 	return (0);

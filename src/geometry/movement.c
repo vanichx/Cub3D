@@ -56,26 +56,30 @@ void move_right(t_cube *cube)
 		cube->player.pos[Y] += cube->player.front.dir[X] * cube->player.player_speed;
 }
 
-// int rotate_left_right(t_cube *cube, double rootspeed)
-// {
-// 	double tmp_x;
+void rotate_left(t_cube *cube)
+{
+	double old_dir_x;
+	double old_plane_x;
 
-// 	tmp_x = cube->player.front.dir[X];
-// 	cube->player.front.dir[X] = cube->player.front.dir[X] * cos(rootspeed) - cube->player.front.dir[Y] * sin(rootspeed);
-// 	cube->player.front.dir[Y] = tmp_x * sin(rootspeed) + cube->player.front.dir[Y] * cos(rootspeed);
-// 	tmp_x = cube->player.cam.dir[X];
-// 	cube->player.cam.dir[X] = cube->player.cam.dir[X] * cos(rootspeed) - cube->player.cam.dir[Y] * sin(rootspeed);
-// 	cube->player.cam.dir[Y] = tmp_x * sin(rootspeed) + cube->player.cam.dir[Y] * cos(rootspeed);
-// 	return (1);
-// }
+	old_dir_x = cube->player.front.dir[X];
+	old_plane_x = cube->player.cam.dir[X];
+	cube->player.front.dir[X] = cube->player.front.dir[X] * cos(-cube->player.player_rot_speed) - cube->player.front.dir[Y] * sin(-cube->player.player_rot_speed);
+	cube->player.front.dir[Y] = old_dir_x * sin(-cube->player.player_rot_speed) + cube->player.front.dir[Y] * cos(-cube->player.player_rot_speed);
+	cube->player.cam.dir[X] = cube->player.cam.dir[X] * cos(-cube->player.player_rot_speed) - cube->player.cam.dir[Y] * sin(-cube->player.player_rot_speed);
+	cube->player.cam.dir[Y] = old_plane_x * sin(-cube->player.player_rot_speed) + cube->player.cam.dir[Y] * cos(-cube->player.player_rot_speed);
+}
 
-// int rotate(t_cube *cube, int dir)
-// {
-// 	int moved;
-// 	double rootspeed;
+void rotate_right(t_cube *cube)
+{
+	double old_dir_x;
+	double old_plane_x;
 
-// 	moved = 0;
-// 	rootspeed = cube->player.player_rot_speed * dir;
-// 	moved += rotate_left_right(cube, rootspeed);
-// 	return (moved);
-// }
+	old_dir_x = cube->player.front.dir[X];
+	old_plane_x = cube->player.cam.dir[X];
+	cube->player.front.dir[X] = cube->player.front.dir[X] * cos(cube->player.player_rot_speed) - cube->player.front.dir[Y] * sin(cube->player.player_rot_speed);
+	cube->player.front.dir[Y] = old_dir_x * sin(cube->player.player_rot_speed) + cube->player.front.dir[Y] * cos(cube->player.player_rot_speed);
+	cube->player.cam.dir[X] = cube->player.cam.dir[X] * cos(cube->player.player_rot_speed) - cube->player.cam.dir[Y] * sin(cube->player.player_rot_speed);
+	cube->player.cam.dir[Y] = old_plane_x * sin(cube->player.player_rot_speed) + cube->player.cam.dir[Y] * cos(cube->player.player_rot_speed);
+	
+	
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/10 21:02:43 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:24:04 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	init_cube(t_cube *cube)
 	cube->map.num_textures = 0;
 	cube->player.pos[X] = 0;
 	cube->player.pos[Y] = 0;
-	cube->player.player_speed = 0.1275;
-	cube->player.player_rot_speed = 0.115;
+	cube->player.player_speed = PLAYER_SPEED;
+	cube->player.player_rot_speed = PLAYER_ROT_SPEED;
 	// cube->player.fov = ang_to_rad(initial_fov);
 	cube->wall_text.tex_size = TEXT_SIZE;
 	cube->player.player_height = 32;

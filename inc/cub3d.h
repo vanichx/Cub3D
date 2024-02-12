@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/12 15:46:01 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:57:12 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,13 @@ int key_release(int key, void *param);
 
 /*************************************	movements	**************************************/
 
-void move_forward(t_cube *cube);
-void move_backward(t_cube *cube);
-void move_left(t_cube *cube);
-void move_right(t_cube *cube);
 int		keys_execute(t_cube *cube);
+void	move_forward(t_cube *cube);
+void	move_backward(t_cube *cube);
+void	move_left(t_cube *cube);
+void	move_right(t_cube *cube);
+void	rotate_left(t_cube *cube);
+void	rotate_right(t_cube *cube);
 
 
 /*************************************	movements	**************************************/

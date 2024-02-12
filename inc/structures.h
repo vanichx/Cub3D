@@ -6,8 +6,8 @@
 #define X 0
 #define Y 1
 
-#define PLAYER_SPEED 1
-#define PLAYER_ROT_SPEED 1
+#define PLAYER_SPEED 0.06
+#define PLAYER_ROT_SPEED 0.04
 
 #define NO 0
 #define SO 1
