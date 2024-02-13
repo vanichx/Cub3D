@@ -1,25 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
+/*   Updated: 2024/02/13 16:28:20 by ipetruni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURES_H
-#define STRUCTURES_H
+# define STRUCTURES_H
 
-#include <stdbool.h>
+# include <stdbool.h>
 
-#define X 0
-#define Y 1
+# define X 0
+# define Y 1
 
-#define PLAYER_SPEED 0.05
-#define PLAYER_ROT_SPEED 0.05
+# define PLAYER_SPEED 0.05
+# define PLAYER_ROT_SPEED 0.05
 
-#define NO 0
-#define SO 1
-#define WE 2
-#define EA 3
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
 
-#define START 0
-#define END 1
+# define START 0
+# define END 1
 
-#define TEXT_SIZE 128
-
-#define DEG_TO_RAD(angle) (angle * M_PI / 180)
+# define TEXT_SIZE 128
 
 typedef struct s_point
 {
@@ -31,14 +41,14 @@ typedef struct s_point
 typedef struct s_img
 {
 	void	*img;
-	char 	*addr;
+	char	*addr;
 	int		*casted_addr;
 	int		bpp;
 	int		line_length;
 	int		endian;
 }	t_img;
 
-typedef	struct s_mlx
+typedef struct s_mlx
 {
 	int		width;
 	int		height;
@@ -58,19 +68,18 @@ typedef struct s_map
 	int		f_col;
 	char	**map_file;
 	char	**map;
-	int 	map_width;
+	int		map_width;
 	int		map_height;
-	int 	num_line;
+	int		num_line;
 	int		num_textures;
 	int		map_x;
 	int		map_y;
 }				t_map;
 
-typedef struct	s_vec
+typedef struct s_vec
 {
-	double dir[2];
+	double	dir[2];
 }		t_vec;
-
 
 typedef struct s_ray
 {
@@ -102,7 +111,7 @@ typedef struct s_player
 	double	sub_angles;
 	float	fov;
 	t_ray	ray;
-} 			t_player;
+}			t_player;
 
 typedef struct s_textures
 {
@@ -134,9 +143,8 @@ typedef struct s_cube
 	t_player	player;
 	t_map		map;
 	t_textures	wall_text;
-	t_keys      key;
-	int		    player_has_moved;
+	t_keys		key;
+	int			player_has_moved;
 }			t_cube;
-
 
 #endif
