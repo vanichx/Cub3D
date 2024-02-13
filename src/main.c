@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/10 12:50:36 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:03:22 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void	parse(char *map_path, t_cube *cube)
 	init_cube(cube);
 	parse_file(map_path, &cube->map.map_file, cube);
 	parse_map(cube->map.map_file, cube);
-	// print_map_info(cube);
 	check_walls (cube);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_cube cube;
-	
+	t_cube	cube;
+
 	check_args(argc, argv);
 	ft_bzero(&cube, sizeof(t_cube));
 	init_window(&cube);

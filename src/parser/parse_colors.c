@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:24:47 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/08 12:00:13 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:58:59 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	parse_color_values(char *line, int *color)
 	int		i;
 	int		j;
 	char	*num_start;
-	int 	commas;
+	int		commas;
 
 	i = 2;
 	j = 0;
@@ -69,6 +69,5 @@ int	parse_color_code(char *line, int *color)
 	check = check_color_values(color);
 	if (check == -1)
 		return (-1);
-	
 	return (1);
 }

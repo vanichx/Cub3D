@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:50:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/12 12:27:52 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:22:47 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	free_textures(t_cube *cube)
 	while (i < cube->map.num_textures)
 	{
 		free(cube->map.texture[i]);
-		// free_image(&textures[i].img);
 		i++;
 	}
 }
@@ -57,43 +56,4 @@ void	destroy_screen(t_mlx *screen)
 		mlx_destroy_image(screen->mlx, screen->img.img);
 	if (screen->win)
 		mlx_destroy_window(screen->mlx, screen->win);
-	// if (screen->mlx)
-	// 	mlx_destroy_display(screen->mlx);
-}
-
-void	destroy_wall_textures(t_textures *wall_textures)
-{
-	int i;
-	
-	if (!wall_textures)
-		return ;
-	i = NO;
-	while (i <= EA)
-	{
-		if (wall_textures->textures[i])
-			free(wall_textures->textures[i]);
-		i++;
-	}
-}
-
-int	cleanup(t_cube *cube, int exit_code)
-{
-	free_textures(cube);
-	free_2darray((void **)cube->map.map);
-	if (cube->map.map_file)
-		free_2darray((void **)cube->map.map_file);
-	destroy_wall_textures(&cube->wall_text);
-	if (cube->screen.mlx)
-		destroy_screen(&cube->screen);
-	if (!cube)
-		exit(exit_code);
-	return(0);
-}
-
-void	exit_program(t_cube *cube, int exit_code, char *message)
-{
-	if (cube)
-		cleanup(cube, exit_code);
-	fprintf(stderr, "%s", message);
-	exit(exit_code);
 }

@@ -6,42 +6,47 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/12 16:21:02 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:55:14 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parse_player(t_cube *cube)
+void	initialize_player(t_cube *c, int i)
+{
+	c->player.m_pos.x = is_player(c->map.map[i]);
+	c->player.m_pos.y = i;
+	c->player.pos[X] = (double)c->player.m_pos.x + 0.5;
+	c->player.pos[Y] = (double)c->player.m_pos.y + 0.5;
+	c->player.init_v = c->map.map[(int)c->player.m_pos.y]
+	[(int)c->player.m_pos.x];
+	set_fr_cam_v(c->player.init_v, &c->player.front, &c->player.cam);
+	c->player.fov = 60;
+	c->player.move[X] = 0;
+	c->player.move[Y] = 0;
+	c->player.rotate = 0;
+	c->player.player_speed = PLAYER_SPEED;
+	c->player.player_rot_speed = PLAYER_ROT_SPEED;
+}
+
+void	parse_player(t_cube *c)
 {
 	int	i;
 	int	player_start_positions;
 
 	i = 0;
 	player_start_positions = 0;
-	while (cube->map.map[i])
+	while (c->map.map[i])
 	{
-		if (is_player(cube->map.map[i]))
+		if (is_player(c->map.map[i]))
 		{
 			player_start_positions++;
-			cube->player.m_pos.x = is_player(cube->map.map[i]);
-			cube->player.m_pos.y = i;
-			cube->player.pos[X] = (double)cube->player.m_pos.x + 0.5; // shifting the player in the center of the grid square
-			cube->player.pos[Y] = (double)cube->player.m_pos.y + 0.5; // shifting the player in the center of the grid square
-			cube->player.init_view = cube->map.map[(int)cube->player.m_pos.y]
-			[(int)cube->player.m_pos.x];
-			set_front_cam_vec(cube->player.init_view, &cube->player.front, &cube->player.cam);
-			cube->player.fov = 60;
-			cube->player.move[X] = 0;
-			cube->player.move[Y] = 0;
-			cube->player.rotate = 0;
-			cube->player.player_speed = PLAYER_SPEED;
-			cube->player.player_rot_speed = PLAYER_ROT_SPEED;
+			initialize_player(c, i);
 		}
 		i++;
 	}
 	if (player_start_positions == 0)
-		exit_program(cube, 1, NO_PLAYER);
+		exit_program(c, 1, NO_PLAYER);
 }
 
 static int	f_fill(t_cube *cube, int p_y, int p_x)

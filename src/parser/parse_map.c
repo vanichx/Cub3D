@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/09 09:36:25 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:33:06 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void convert_to_rgb(t_map *map)
+static void	convert_to_rgb(t_map *map)
 {
-	map->c_col = (map->ceiling_col[0] << 16) + (map->ceiling_col[1] << 8) + map->ceiling_col[2];
-	map->f_col = (map->floor_col[0] << 16) + (map->floor_col[1] << 8) + map->floor_col[2];
+	map->c_col = (map->ceiling_col[0] << 16) \
+	+ (map->ceiling_col[1] << 8) + map->ceiling_col[2];
+	map->f_col = (map->floor_col[0] << 16) \
+	+ (map->floor_col[1] << 8) + map->floor_col[2];
 }
 
 static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
@@ -44,9 +46,10 @@ static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 	convert_to_rgb(&cube->map);
 }
 
-void parse_textures_files(t_cube *cube)
+void	parse_textures_files(t_cube *cube)
 {
-	int i;
+	int	i;
+
 	i = NO;
 	while (i <= EA)
 	{
@@ -54,7 +57,8 @@ void parse_textures_files(t_cube *cube)
 			exit_program(cube, 1, TEXT_ERR_FORMAT);
 		if (ft_strncmp(cube->map.texture[i], "./textures/", 11))
 			exit_program(cube, 1, TEXT_LOC_ERR);
-		if (ft_strcmp(&cube->map.texture[i][ft_strlen(cube->map.texture[i]) - 4], ".xpm"))
+		if (ft_strcmp(&cube->map.texture[i] \
+		[ft_strlen(cube->map.texture[i]) - 4], ".xpm"))
 			exit_program(cube, 1, TEXT_EXT_ERR);
 		i++;
 	}

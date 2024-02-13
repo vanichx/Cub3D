@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooking.c                                          :+:      :+:    :+:   */
+/*   key_hooks2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:20:12 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 14:21:46 by ipetruni         ###   ########.fr       */
+/*   Created: 2024/02/13 14:17:43 by ipetruni          #+#    #+#             */
+/*   Updated: 2024/02/13 14:17:49 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	close_window(t_cube *cube)
+void	increase_player_speed(t_cube *cube)
 {
-	exit_program(cube, EXIT_SUCCESS, "Window closed\n");
-	return (0);
+	if (cube->player.player_speed < 0.45)
+		cube->player.player_speed += 0.01;
+	if (cube->player.player_rot_speed < 0.1)
+		cube->player.player_rot_speed += 0.01;
 }
 
-bool	hooking(t_cube *cube)
+void	decrease_player_speed(t_cube *cube)
 {
-	mlx_hook(cube->screen.win, 2, 1L << 0, key_press, cube);
-	mlx_hook(cube->screen.win, 3, 1L << 1, key_release, cube);
-	mlx_hook(cube->screen.win, 17, 0, close_window, cube);
-	mlx_loop_hook(cube->screen.mlx, render, cube);
-	mlx_loop(cube->screen.mlx);
-	return (EXIT_SUCCESS);
+	if (cube->player.player_speed > 0.06)
+		cube->player.player_speed -= 0.01;
+	if (cube->player.player_rot_speed > 0.04)
+		cube->player.player_rot_speed -= 0.01;
 }

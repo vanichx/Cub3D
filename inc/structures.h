@@ -6,8 +6,8 @@
 #define X 0
 #define Y 1
 
-#define PLAYER_SPEED 0.06
-#define PLAYER_ROT_SPEED 0.04
+#define PLAYER_SPEED 0.05
+#define PLAYER_ROT_SPEED 0.05
 
 #define NO 0
 #define SO 1
@@ -98,7 +98,7 @@ typedef struct s_player
 	double	rotate;
 	double	player_speed;
 	double	player_rot_speed;
-	char	init_view;
+	char	init_v;
 	double	sub_angles;
 	float	fov;
 	t_ray	ray;

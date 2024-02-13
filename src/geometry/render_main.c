@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooking.c                                          :+:      :+:    :+:   */
+/*   render_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:20:12 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 14:21:46 by ipetruni         ###   ########.fr       */
+/*   Created: 2024/02/13 14:57:07 by ipetruni          #+#    #+#             */
+/*   Updated: 2024/02/13 14:57:23 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	close_window(t_cube *cube)
+int	render_cube(t_cube *cube)
 {
-	exit_program(cube, EXIT_SUCCESS, "Window closed\n");
+	allocate_text_pixels(cube);
+	init_ray(&cube->player.ray);
+	raycast(cube, &cube->player.ray);
 	return (0);
 }
 
-bool	hooking(t_cube *cube)
+int	render(t_cube *cube)
 {
-	mlx_hook(cube->screen.win, 2, 1L << 0, key_press, cube);
-	mlx_hook(cube->screen.win, 3, 1L << 1, key_release, cube);
-	mlx_hook(cube->screen.win, 17, 0, close_window, cube);
-	mlx_loop_hook(cube->screen.mlx, render, cube);
-	mlx_loop(cube->screen.mlx);
-	return (EXIT_SUCCESS);
+	keys_execute(cube);
+	render_cube(cube);
+	return (0);
 }

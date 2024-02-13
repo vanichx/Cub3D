@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rays.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 14:34:12 by ipetruni          #+#    #+#             */
+/*   Updated: 2024/02/13 14:36:16 by ipetruni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	init_ray(t_ray *ray)
@@ -24,8 +36,10 @@ void	init_ray(t_ray *ray)
 void	setup_ray_params(t_cube *cube, t_ray *ray, int x)
 {
 	ray->camera_x = 2 * x / (double)cube->screen.width - 1;
-	ray->ray_dir.dir[X] = cube->player.front.dir[X] + cube->player.cam.dir[X] * ray->camera_x;
-	ray->ray_dir.dir[Y] = cube->player.front.dir[Y] + cube->player.cam.dir[Y] * ray->camera_x;
+	ray->ray_dir.dir[X] = cube->player.front.dir[X] \
+	+ cube->player.cam.dir[X] * ray->camera_x;
+	ray->ray_dir.dir[Y] = cube->player.front.dir[Y] \
+	+ cube->player.cam.dir[Y] * ray->camera_x;
 	ray->map_point[X] = (int)cube->player.pos[X];
 	ray->map_point[Y] = (int)cube->player.pos[Y];
 	ray->delta_dist[X] = fabs(1 / ray->ray_dir.dir[X]);
@@ -39,20 +53,22 @@ void	calculate_line_height(t_cube *cube, t_ray *ray)
 	else
 		ray->wall_dist = (ray->side_dist[Y] - ray->delta_dist[Y]);
 	ray->line_height = (int)(cube->screen.height / ray->wall_dist);
-	ray->draw[START] = -(ray->line_height )/ 2 + cube->screen.height / 2;
+	ray->draw[START] = -(ray->line_height) / 2 + cube->screen.height / 2;
 	if (ray->draw[START] < 0)
 		ray->draw[START] = 0;
 	ray->draw[END] = ray->line_height / 2 + cube->screen.height / 2;
 	if (ray->draw[END] >= cube->screen.height)
 		ray->draw[END] = cube->screen.height - 1;
-	if(ray->side == 0)
-		ray->wall_x = cube->player.pos[Y] + ray->wall_dist * ray->ray_dir.dir[Y];
+	if (ray->side == 0)
+		ray->wall_x = cube->player.pos[Y] \
+		+ ray->wall_dist * ray->ray_dir.dir[Y];
 	else
-		ray->wall_x = cube->player.pos[X] + ray->wall_dist * ray->ray_dir.dir[X];
+		ray->wall_x = cube->player.pos[X] \
+		+ ray->wall_dist * ray->ray_dir.dir[X];
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-int get_texture_index(t_ray *ray)
+int	get_texture_index(t_ray *ray)
 {
 	if (ray->side == 0)
 	{

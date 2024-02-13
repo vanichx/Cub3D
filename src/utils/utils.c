@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:28:20 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/22 13:07:01 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/13 12:24:55 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ char	*trim_whitespace(const char *str)
 	return (result);
 }
 
-char *custom_strdup(const char *src)
+char	*custom_strdup(const char *src)
 {
-	char *dest;
-	size_t i;
-	size_t j;
+	char	*dest;
+	size_t	i;
+	size_t	j;
 
 	j = 0;
 	i = ft_strlen(src) + 1;

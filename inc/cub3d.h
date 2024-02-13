@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/12 16:57:12 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:04:04 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define MAPSCALE 64
 # define MAX_NUM_TEXT 4
 # define COLORS_COMPONENTS 3
-
+# define WHITE 0xFFFFFF
 /* main.c */
 void	check_args(int argc, char *argv[]);
 void	parse(char *map_path, t_cube *cube);
@@ -80,7 +80,7 @@ void	print_map_info(t_cube *cube); //DEBUG
 void	parse_map(char **map_file, t_cube *cube);
 
 /* parse_player.c */
-void	parse_player(t_cube *cube);
+void	parse_player(t_cube *c);
 void	check_walls(t_cube *cube);
 
 /* parse_utils.c */
@@ -138,6 +138,8 @@ int key_release(int key, void *param);
 
 /*************************************	movements	**************************************/
 
+void	decrease_player_speed(t_cube *cube);
+void	increase_player_speed(t_cube *cube);
 int		keys_execute(t_cube *cube);
 void	move_forward(t_cube *cube);
 void	move_backward(t_cube *cube);
@@ -146,7 +148,10 @@ void	move_right(t_cube *cube);
 void	rotate_left(t_cube *cube);
 void	rotate_right(t_cube *cube);
 
+void	destroy_screen(t_mlx *screen);
 
+
+void	allocate_text_pixels(t_cube *cube);
 /*************************************	movements	**************************************/
 
 #endif

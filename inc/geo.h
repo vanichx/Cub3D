@@ -7,7 +7,7 @@
 float	vec_to_ang(t_vec vec);
 double  ang_to_rad(double ang);
 t_vec	get_vunit(t_point p1, t_point p2);
-void	set_front_cam_vec(char player, t_vec *front, t_vec *cam);
+void	set_fr_cam_v(char player, t_vec *front, t_vec *cam);
 t_vec	rotate_vec(t_vec vec, float ang);
 t_vec	normalize_vec(t_vec vec);
 t_vec	get_cam_vec(t_vec front, float fov);
