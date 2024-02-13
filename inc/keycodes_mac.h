@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   keycodes_mac.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:25 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/01/28 11:46:24 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:52:35 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYCODES_MAC_H
-#define KEYCODES_MAC_H
+# define KEYCODES_MAC_H
 
 # define KEY_ESC	53
 # define KEY_1		18
