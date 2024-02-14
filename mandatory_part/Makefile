@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/14 10:13:44 by ipetruni          #+#    #+#              #
+#    Updated: 2024/02/14 10:13:46 by ipetruni         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Variables
 CC					=	gcc -Wall -Wextra -Werror
 CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/X11/include #-fsanitize=address -fno-omit-frame-pointer #-I/usr/include/X11/include/
