@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/13 13:55:14 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:16:20 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	initialize_player(t_cube *c, int i)
 	c->player.pos[Y] = (double)c->player.m_pos.y + 0.5;
 	c->player.init_v = c->map.map[(int)c->player.m_pos.y]
 	[(int)c->player.m_pos.x];
-	set_fr_cam_v(c->player.init_v, &c->player.front, &c->player.cam);
-	c->player.fov = 60;
+	c->player.fov = 66;
+	set_fr_cam_v(c->player.init_v, &c->player.front, &c->player.cam, c->player.fov);
 	c->player.move[X] = 0;
 	c->player.move[Y] = 0;
 	c->player.rotate = 0;

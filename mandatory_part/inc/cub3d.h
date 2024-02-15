@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 16:52:21 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:41:54 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ void	rotate_left(t_cube *cube);
 void	rotate_right(t_cube *cube);
 
 /* src/geometry/set_cam_dir.c */
-void	north(t_vec *front, t_vec *cam);
-void	south(t_vec *front, t_vec *cam);
-void	east(t_vec *front, t_vec *cam);
-void	west(t_vec *front, t_vec *cam);
-void	set_fr_cam_v(char player, t_vec *front, t_vec *cam);
+void	north(t_vec *front, t_vec *cam, float fov);
+void	south(t_vec *front, t_vec *cam, float fov);
+void	east(t_vec *front, t_vec *cam, float fov);
+void	west(t_vec *front, t_vec *cam, float fov);
+void	set_fr_cam_v(char player, t_vec *front, t_vec *cam, float fov);
 
 /* src/geometry/vector_utils.c */
 float	vec_to_ang(t_vec vec);
@@ -96,6 +96,10 @@ double	get_front_length(t_cube *cube);
 t_vec	rotate_vec(t_vec vec, float ang);
 t_vec	find_casting_vec(t_cube *cube, int x);
 t_vec	normalize_vec(t_vec vec);
+
+/* src/geometry/vector_utils2.c */
+void zoom_in(t_cube *c);
+void zoom_out(t_cube *c);
 
 /* src/mlx_functions/cleanup.c */
 void	ft_strdel(char **s);
