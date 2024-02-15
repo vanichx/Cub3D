@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:37:00 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/15 15:02:32 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:19:08 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,39 @@ void	perform_dda(t_cube *cube, t_ray *ray)
 	}
 }
 
+float calculate_shadow_intensity(float wall_dist, float max_distance) {
+    float shadow_intensity;
+	
+	shadow_intensity = 1.0 - (wall_dist / max_distance);
+    shadow_intensity = fmaxf(0.0, fminf(1.0, shadow_intensity));
+    return (shadow_intensity);
+}
+
+int apply_shadow(int color, float shadow_intensity) {
+    int red;
+    int green;
+    int blue;
+
+	red = (color >> 16) & 0xFF;
+	green = (color >> 8) & 0xFF;
+	blue = color & 0xFF;
+    red = (int)(red * shadow_intensity);
+    green = (int)(green * shadow_intensity);
+    blue = (int)(blue * shadow_intensity);
+    return ((red << 16) | (green << 8) | blue);
+}
+
 void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
 {
 	int	y;
 	int	color;
 	int	texture_index;
+	float shadow_intesity;
 
 	texture_index = get_texture_index(ray);
 	cube->wall_text.text_point[X] = (int)(ray->wall_x \
 	* cube->wall_text.tex_size);
+	shadow_intesity = calculate_shadow_intensity(ray->wall_dist, 20);
 	if (((ray->side == 0) && (ray->ray_dir.dir[X] < 0))
 		|| ((ray->side == 1) && (ray->ray_dir.dir[Y] > 0)))
 		cube->wall_text.text_point[X] = cube->wall_text.tex_size \
@@ -93,6 +117,7 @@ void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
 		+ cube->wall_text.text_point[X]];
 		if (texture_index == NO || texture_index == EA)
 			color = (color >> 1) & 8355711;
+		color = apply_shadow(color, shadow_intesity);
 		if (color > 0)
 			cube->wall_text.text_pixels[y][x] = color;
 		y++;

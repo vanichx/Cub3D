@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:34:12 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/15 14:18:39 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:04:33 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	setup_ray_params(t_cube *cube, t_ray *ray, int x)
 
 void	calculate_line_height(t_cube *cube, t_ray *ray)
 {
-	if (ray->side == 0)
+	if (ray->side == X)
 		ray->wall_dist = (ray->side_dist[X] - ray->delta_dist[X]);
 	else
 		ray->wall_dist = (ray->side_dist[Y] - ray->delta_dist[Y]);
@@ -59,7 +59,7 @@ void	calculate_line_height(t_cube *cube, t_ray *ray)
 	ray->draw[END] = ray->line_height / 2 + cube->screen.height / 2;
 	if (ray->draw[END] >= cube->screen.height)
 		ray->draw[END] = cube->screen.height - 1;
-	if (ray->side == 0)
+	if (ray->side == X)
 		ray->wall_x = cube->player.pos[Y] \
 		+ ray->wall_dist * ray->ray_dir.dir[Y];
 	else
