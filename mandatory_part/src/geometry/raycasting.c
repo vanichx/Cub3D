@@ -6,7 +6,7 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:37:00 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/15 16:19:08 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:23:11 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
 	texture_index = get_texture_index(ray);
 	cube->wall_text.text_point[X] = (int)(ray->wall_x \
 	* cube->wall_text.tex_size);
-	shadow_intesity = calculate_shadow_intensity(ray->wall_dist, 20);
+	shadow_intesity = calculate_shadow_intensity(ray->wall_dist, 17);
 	if (((ray->side == 0) && (ray->ray_dir.dir[X] < 0))
 		|| ((ray->side == 1) && (ray->ray_dir.dir[Y] > 0)))
 		cube->wall_text.text_point[X] = cube->wall_text.tex_size \
