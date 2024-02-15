@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:37:00 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 14:46:42 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:02:32 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,7 @@ void	perform_dda(t_cube *cube, t_ray *ray)
 			ray->map_point[Y] += ray->step[Y];
 			ray->side = 1;
 		}
-		if (ray->map_point[Y] < 0.25 || ray->map_point[X] < 0.25
-			|| ray->map_point[Y] > cube->map.map_height - 0.25
-			|| ray->map_point[X] > cube->map.map_width - 1.25)
-			break ;
-		else if (cube->map.map[(int)ray->map_point[Y]]
+		if (cube->map.map[(int)ray->map_point[Y]]
 			[(int)ray->map_point[X]] == '1')
 			hit = 1;
 	}
