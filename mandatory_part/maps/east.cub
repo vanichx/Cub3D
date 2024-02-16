@@ -1,7 +1,7 @@
-NO ./textures/eagle.xpm    
-SO ./textures/eagle.xpm
-WE ./textures/eagle.xpm   
-EA ./textures/eagle.xpm
+NO ./textures/north.xpm
+SO ./textures/south.xpm
+WE ./textures/west.xpm   
+EA ./textures/east.xpm
 
 F 0,0,0 
 C 65,102,106
