@@ -6,13 +6,13 @@
 /*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/09 09:36:03 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:47:47 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	read_file_and_store_lines(char *map_path, char ***buffer)
+static int	read_file_and_store_lines(char *map_path, char ***buffer, t_cube *cube)
 {
 	int		fd;
 	char	*line;
@@ -21,9 +21,8 @@ static int	read_file_and_store_lines(char *map_path, char ***buffer)
 	count = 0;
 	*buffer = ft_calloc(MAX_LINES, sizeof(char *));
 	if (!*buffer)
-		return (fprintf(stderr, "❌ Malloc error: Failed to allocate memory\n"));
-	if (!read_file(map_path, &fd))
-		return (fprintf(stderr, "❌ Read error: Failed to read the file\n"));
+		exit_program(cube, 1, MALLOC_ERROR);
+	read_file(map_path, &fd, cube);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -61,7 +60,7 @@ void	parse_file(char *map_path, char ***map_file, t_cube *cube)
 	char	**buffer;
 	int		count;
 
-	count = read_file_and_store_lines(map_path, &buffer);
+	count = read_file_and_store_lines(map_path, &buffer, cube);
 	if (!count)
 	{
 		free_2darray((void **)buffer);

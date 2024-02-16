@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/14 13:59:58 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:44:15 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void	parse_map(char **map_file, t_cube *cube);
 /* src/parcer/parse_utils.c */
 bool	is_valid_char(char c);
 int		is_valid_line(char *line, t_cube *cube);
-int		read_file(char *map_path, int *fd);
+void		read_file(char *map_path, int *fd, t_cube *cube);
 bool	line_has_walls(char *line);
 int		is_player(char *line);
 
