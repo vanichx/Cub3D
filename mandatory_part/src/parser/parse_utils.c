@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:51:08 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 12:35:11 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:30:52 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,11 @@ int	is_valid_line(char *line, t_cube *cube)
 	return (player_dir);
 }
 
-int	read_file(char *map_path, int *fd)
+void	read_file(char *map_path, int *fd, t_cube *cube)
 {
 	*fd = open(map_path, O_RDONLY);
 	if (*fd < 0)
-	{
-		printf("Error\nCould not open file %s\n", map_path);
-		return (0);
-	}
-	return (1);
+		exit_program(cube, 1, READ_FILE_ERROR);
 }
 
 bool	line_has_walls(char *line)

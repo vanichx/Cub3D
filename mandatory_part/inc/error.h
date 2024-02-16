@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:23:32 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 16:23:35 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:34:48 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define WRONG_FILE_NAMING "❌ Cube error: Wrong file naming\n"
 # define EMPTY_MAP "❌ Cube error: Empty map\n"
 # define EMPTY_FILE "❌ Cube error: Empty file\n"
+# define READ_FILE_ERROR "❌ Cube error: File doesn't exist or failed to read!\n"
 
 # define DISPLAY_ERROR "❌ Display error: Failed to open display\n"
 # define MLX_ERROR "❌ Mlx error: Failed to initialize mlx\n"

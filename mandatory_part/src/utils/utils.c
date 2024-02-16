@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:28:20 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 12:24:55 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:18:30 by segfault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	*trim_whitespace(const char *str)
 	i = 0;
 	j = 0;
 	result = malloc(strlen(str) + 1);
+	if (result == NULL)
+		exit_program(NULL, 1, MALLOC_ERROR);
 	while (ft_isspace((unsigned char)str[i]))
 		i++;
 	while (str[i] != '\0')
