@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/16 10:44:15 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:30:55 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 
 # define MAPSCALE 64
 # define MINIMAPSCALE 5
-# define MAX_NUM_TEXT 4
+# define MAX_NUM_TEXT 6
 # define COLORS_COMPONENTS 3
 
 
@@ -57,7 +57,7 @@ void	move_right(t_cube *cube);
 void	setup_dda_params(t_cube *cube, t_ray *ray);
 void	perform_dda(t_cube *cube, t_ray *ray);
 void	update_texts_pixels(t_cube *cube, t_ray *ray, int x);
-void	raycast(t_cube *cube, t_ray *ray);
+void	raycast_bonus(t_cube *cube, t_ray *ray);
 
 /* src/geometry/rays.c */
 void	init_ray(t_ray *ray);

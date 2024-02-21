@@ -3,48 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   parse_info2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:36:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 12:36:15 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:43:24 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parse_floor_color(char *trimmed_line, t_cube *cube)
-{
-	int	parse_result;
+// void	parse_floor_color(char *trimmed_line, t_cube *cube)
+// {
+// 	int	parse_result;
 
-	parse_result = parse_color_code(trimmed_line, cube->map.floor_col);
-	if (parse_result == 0)
-	{
-		free(trimmed_line);
-		exit_program(cube, 1, INV_NUM_COL_FLOOR);
-	}
-	else if (parse_result == -1)
-	{
-		free(trimmed_line);
-		exit_program(cube, 1, INV_RGB_COL_FLOOR);
-	}
-}
+// 	parse_result = parse_color_code(trimmed_line, cube->map.floor_col);
+// 	if (parse_result == 0)
+// 	{
+// 		free(trimmed_line);
+// 		exit_program(cube, 1, INV_NUM_COL_FLOOR);
+// 	}
+// 	else if (parse_result == -1)
+// 	{
+// 		free(trimmed_line);
+// 		exit_program(cube, 1, INV_RGB_COL_FLOOR);
+// 	}
+// }
 
-void	parse_ceiling_color(char *trimmed_line, t_cube *cube)
-{
-	int	parse_result;
+// void	parse_ceiling_color(char *trimmed_line, t_cube *cube)
+// {
+// 	int	parse_result;
 
-	parse_result = parse_color_code(trimmed_line, cube->map.ceiling_col);
-	if (parse_result == 0)
-	{
-		free(trimmed_line);
-		exit_program(cube, 1, INV_NUM_COL_CEIL);
-	}
-	else if (parse_result == -1)
-	{
-		free(trimmed_line);
-		exit_program(cube, 1, INV_RGB_COL_CEIL);
-	}
-}
+// 	parse_result = parse_color_code(trimmed_line, cube->map.ceiling_col);
+// 	if (parse_result == 0)
+// 	{
+// 		free(trimmed_line);
+// 		exit_program(cube, 1, INV_NUM_COL_CEIL);
+// 	}
+// 	else if (parse_result == -1)
+// 	{
+// 		free(trimmed_line);
+// 		exit_program(cube, 1, INV_RGB_COL_CEIL);
+// 	}
+// }
 
 void	parse_map_lines(char *line, char **buffer, t_cube *cube)
 {

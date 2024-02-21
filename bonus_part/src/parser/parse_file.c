@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/16 10:47:47 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:24:58 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ static int	copy_lines_to_map_file(char ***map_file, char **buffer, int count)
 		return (1);
 	while (i < count)
 	{
-		(*map_file)[i] = ft_strdup(buffer[i]);
-		if ((*map_file)[i] == NULL)
-			return (1);
+		if (buffer[i])
+		{
+			(*map_file)[i] = ft_strdup(buffer[i]);
+			if ((*map_file)[i] == NULL)
+				return (1);
+		}
 		i++;
 	}
 	(*map_file)[count] = NULL;

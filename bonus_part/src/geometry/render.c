@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:56:30 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 14:56:56 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:49:08 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,17 @@ void	set_image_pixel(t_img *img, int i[2], int color)
 
 void	set_frame_image_pixel(t_cube *cube, t_img *img, int i[2])
 {
-	if (cube->wall_text.text_pixels[i[Y]][i[X]] > 0)
+	// cube->player.time[OLD] = cube->player.time[NEW];
+	// cube->player.time[NEW] = clock();
+	// cube->player.frame_time = cube->player.time[NEW] - cube->player.time[OLD];
+	// printf("fps = %f\n", 1.0 / (cube->player.frame_time / CLOCKS_PER_SEC));
+	
+	// if (cube->wall_text.text_pixels[i[Y]][i[X]] > 0)
 		set_image_pixel(img, i, cube->wall_text.text_pixels[i[Y]][i[X]]);
-	else if (i[Y] < cube->screen.height / 2)
-		set_image_pixel(img, i, cube->map.c_col);
-	else if (i[Y] < cube->screen.height - 1 && i[Y] >= cube->screen.height / 2)
-		set_image_pixel(img, i, cube->map.f_col);
+	// else if (i[Y] < cube->screen.height / 2)
+	// 	set_image_pixel(img, i, cube->map.c_col);
+	// else if (i[Y] < cube->screen.height - 1 && i[Y] >= cube->screen.height / 2)
+	// 	set_image_pixel(img, i, cube->wall_text.text_pixels[i[Y]][i[X]]);
 }
 
 void	render_frame(t_cube *cube)

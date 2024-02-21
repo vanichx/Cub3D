@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/13 13:49:55 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:22:24 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ void	init_cube(t_cube *cube)
 	cube->map.num_textures = 0;
 	cube->player.pos[X] = 0;
 	cube->player.pos[Y] = 0;
+	cube->player.time[0] = 0;
+	cube->player.time[1] = 0;
 	cube->player.player_speed = PLAYER_SPEED;
 	cube->player.player_rot_speed = PLAYER_ROT_SPEED;
 	cube->wall_text.tex_size = TEXT_SIZE;
-	cube->player.player_height = 32;
 }
 
 void	set_screen_dimensions(t_cube *cube, Screen *s)

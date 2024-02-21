@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/14 12:46:17 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:35:54 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@
 # define SO 1
 # define WE 2
 # define EA 3
+# define F 4
+# define C 5
 
 # define START 0
 # define END 1
+
+# define OLD 0
+# define NEW 1
 
 # define TEXT_SIZE 128
 
@@ -61,11 +66,7 @@ typedef struct s_mlx
 
 typedef struct s_map
 {
-	char	*texture[4];
-	int		floor_col[3];
-	int		ceiling_col[3];
-	int		c_col;
-	int		f_col;
+	char	*texture[6];
 	char	**map_file;
 	char	**map;
 	int		map_width;
@@ -85,6 +86,8 @@ typedef struct s_ray
 {
 	double	camera_x;
 	t_vec	ray_dir;
+	t_vec	ray_dir_l;
+	t_vec	ray_dir_r;
 	int		map_point[2];
 	int		step[2];
 	double	side_dist[2];
@@ -104,6 +107,8 @@ typedef struct s_player
 	t_vec	cam;
 	int		player_height;
 	int		move[2];
+	double 	time[2];
+	double	frame_time;
 	double	rotate;
 	double	player_speed;
 	double	player_rot_speed;
@@ -115,9 +120,9 @@ typedef struct s_player
 
 typedef struct s_textures
 {
-	t_img	img_text[4];
+	t_img	img_text[6];
 	int		**text_pixels;
-	int		*textures[4];
+	int		*textures[6];
 	int		text_point[2];
 	double	tex_step;
 	double	tex_pos;

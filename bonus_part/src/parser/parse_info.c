@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 14:06:11 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:41:56 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static int	check_text_dir(char *text, int i)
 	if ((i == NO && !ft_strncmp(text, "NO ", 3))
 		|| (i == SO && !ft_strncmp(text, "SO ", 3))
 		|| (i == EA && !ft_strncmp(text, "EA ", 3))
-		|| (i == WE && !ft_strncmp(text, "WE ", 3)))
+		|| (i == WE && !ft_strncmp(text, "WE ", 3))
+		|| (i == C && !ft_strncmp(text, "C ", 2))
+		|| (i == F && !ft_strncmp(text, "F ", 2)))
 		return (0);
 	else
 		return (-1);
@@ -59,13 +61,17 @@ void	parse_textures(char *trimmed_line, t_cube *cube)
 		exit_program(cube, 1, TOO_MANY_TEXTURES);
 	if (check_text_dir(trimmed_line, i) == -1)
 		exit_program(cube, 1, TEXT_DIR_ERR);
-	texture_path = ft_strdup(trimmed_line + 3);
+	if (i == F || i == C)
+		texture_path = ft_strdup(trimmed_line + 2);
+	else
+		texture_path = ft_strdup(trimmed_line + 3);
 	if (texture_path == NULL)
 		exit_program(cube, 1, DUPLICATE_ERROR);
 	cube->map.texture[cube->map.num_textures] = texture_path;
 	load_texture(&cube->wall_text.img_text[cube->map.num_textures], \
 		cube->screen.mlx, texture_path, cube, \
 		&cube->wall_text.textures[cube->map.num_textures]);
+	printf("texture %d loaded  --> %s\n", cube->map.num_textures, texture_path);
 	cube->map.num_textures++;
 	i++;
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+         #
+#    By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 10:13:35 by ipetruni          #+#    #+#              #
-#    Updated: 2024/02/14 12:37:24 by ipetruni         ###   ########.fr        #
+#    Updated: 2024/02/21 18:19:32 by eseferi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ VALGRIND = valgrind --tool=memcheck
 ifeq ($(UNAME_S),Darwin)
 MLX_DIR = $(MLX_MAC)
 MLX_FILE = $(MLX_DIR)/libmlx.a
-LDFLAGS = -L$(MLX_DIR) -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKit -lX11 #-lmlx -lX11 -framework OpenGL -framework AppKit
+LDFLAGS = -L$(MLX_DIR) -L /usr/X11/lib -lmlx -framework OpenGL -framework AppKit -lX11
 
 # Linux
 else
