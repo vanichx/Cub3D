@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/21 15:30:55 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:37:39 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 # define MINIMAPSCALE 5
 # define MAX_NUM_TEXT 6
 # define COLORS_COMPONENTS 3
+# define MMAP_VIEW_DIST 4
+# define MMAP_PIXEL_SIZE 128
 
 
 /* src/geometry/movement.c */
@@ -70,7 +72,25 @@ int		render_cube(t_cube *cube);
 int		render(t_cube *cube);
 
 /* src/geometry/render_minimap.c */
+void	debug_print_char_tab(char **tab);
+void	debug_display_minimap(t_minimap *minimap);
+void	free_tab(void **tab);
+void	init_img_clean(t_img *img);
+void	init_img(t_cube *cube, t_img *image, int width, int height);
+void	mm_set_image_pixel(t_img *image, int x, int y, int color);
+void	set_minimap_tile_pixels(t_minimap *minimap, int x, int y, int color);
+void	draw_minimap_tile(t_minimap *minimap, int x, int y);
+void	set_minimap_border_image_pixels(t_minimap *minimap, int color);
+void	draw_minimap(t_minimap *minimap);
+void	render_minimap_image(t_cube *cube, t_minimap *minimap);
+int		get_mmap_offset(t_minimap *minimap, int map_dimension, int player_pos);
+bool	is_valid_map_coord(int coord, int size);
+char	*add_minimap_line(t_cube *d, t_minimap *m, int y);
+char	**generate_minimap(t_cube *cube, t_minimap *minimap);
+void	print_minimap(char **mmap, int size);
 void	render_minimap(t_cube *cube);
+void	update_player_position(t_cube *cube);
+void	rotate_player_fov(t_cube *cube, float angle);
 
 /* src/geometry/render.c */
 void	allocate_text_pixels(t_cube *cube);
@@ -127,9 +147,7 @@ void	increase_player_speed(t_cube *cube);
 void	decrease_player_speed(t_cube *cube);
 
 /* src/mlx_functions/mouse_events.c */
-int		mouse_release(int button, int x, int y, void *param);
-int		mouse_press(int button, int x, int y, void *param);
-int		mouse_move(int x, int y, void *param);
+int		ft_mouse(t_cube *cube);
 
 /* src/mlx_functions/resize_window.c */
 void	resize_window(t_cube *cub, int flag);

@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/21 18:35:54 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:33:38 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,19 @@ typedef struct s_keys
 	int		key_o;
 }			t_keys;
 
+typedef struct s_minimap
+{
+	char	**map;
+	t_point	m_pos;
+	t_img	*img;
+	int		view_dist;
+	int		size;
+	int		offset_x;
+	int		offset_y;
+	int		tile_size;
+	
+}			t_minimap;
+
 typedef struct s_cube
 {
 	t_mlx		screen;
@@ -149,7 +162,10 @@ typedef struct s_cube
 	t_map		map;
 	t_textures	wall_text;
 	t_keys		key;
+	t_img		minimap;
+	t_minimap	minimap_data;
 	int			player_has_moved;
 }			t_cube;
+
 
 #endif

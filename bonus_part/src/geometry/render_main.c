@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:57:07 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/21 17:01:22 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:29:02 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	render_cube(t_cube *cube)
 
 int	render(t_cube *cube)
 {
-	keys_execute(cube);
+	if (keys_execute(cube))
+		cube->player_has_moved = true;
+	ft_mouse(cube);
 	render_cube(cube);
-	// render_minimap(cube);
 	return (0);
 }
