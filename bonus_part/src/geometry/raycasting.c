@@ -11,10 +11,10 @@ void update_left_right_rays(t_cube *c)
 void cast_floor(t_cube *c, int y)
 {
 	int p;
-	float pos_z;
-	float row_distance;
-	float floor_step[2];
-	float floor[2];
+	double pos_z;
+	double row_distance;
+	double floor_step[2];
+	double floor[2];
 	int x;
 	int cell[2];
 	int t[2];
@@ -37,7 +37,7 @@ void cast_floor(t_cube *c, int y)
 		floor[X] += floor_step[X];
 		floor[Y] += floor_step[Y];
 		c->wall_text.text_pixels[y][x] = (c->wall_text.textures[F][c->wall_text.tex_size * t[Y] + t[X]] >> 1) & 8355711;
-		c->wall_text.text_pixels[c->screen.height - y - 1][x] = c->wall_text.textures[C][c->wall_text.tex_size * t[Y] + t[X]];
+		c->wall_text.text_pixels[c->screen.height - y - 1][x] = (c->wall_text.textures[C][c->wall_text.tex_size * t[Y] + t[X]] >> 1) & 8355711;
 		x++;
 	}
 }
@@ -90,8 +90,7 @@ void	perform_dda(t_cube *cube, t_ray *ray)
 			ray->map_point[Y] += ray->step[Y];
 			ray->side = 1;
 		}
-		if (cube->map.map[(int)ray->map_point[Y]]
-			[(int)ray->map_point[X]] == '1')
+		if (cube->map.map[ray->map_point[Y]][ray->map_point[X]] == '1')
 			hit = 1;
 	}
 }

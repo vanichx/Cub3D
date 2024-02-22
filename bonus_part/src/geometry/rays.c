@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:34:12 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 14:36:16 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/22 00:23:20 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,14 @@ void	setup_ray_params(t_cube *cube, t_ray *ray, int x)
 	+ cube->player.cam.dir[Y] * ray->camera_x;
 	ray->map_point[X] = (int)cube->player.pos[X];
 	ray->map_point[Y] = (int)cube->player.pos[Y];
-	ray->delta_dist[X] = fabs(1 / ray->ray_dir.dir[X]);
-	ray->delta_dist[Y] = fabs(1 / ray->ray_dir.dir[Y]);
+	if (ray->ray_dir.dir[X] == 0)
+		ray->delta_dist[X] = 1e30;
+	else
+		ray->delta_dist[X] = fabs(1 / ray->ray_dir.dir[X]);
+	if (ray->ray_dir.dir[Y] == 0)
+		ray->delta_dist[Y] = 1e30;
+	else
+		ray->delta_dist[Y] = fabs(1 / ray->ray_dir.dir[Y]);
 }
 
 void	calculate_line_height(t_cube *cube, t_ray *ray)
