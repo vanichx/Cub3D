@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:56:30 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/23 13:21:00 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/23 14:25:15 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	set_frame_image_pixel(t_cube *cube, t_img *img, int i[2])
 	// printf("fps = %f\n", 1.0 / (cube->player.frame_time / CLOCKS_PER_SEC));
 	
 	// if (cube->wall_text.text_pixels[i[Y]][i[X]] > 0)
-		set_image_pixel(img, i, cube->wall_text.text_pixels[i[Y]][i[X]]);
+	set_image_pixel(img, i, cube->wall_text.text_pixels[i[Y]][i[X]]);
 	// else if (i[Y] < cube->screen.height / 2)
 	// 	set_image_pixel(img, i, cube->map.c_col);
 	// else if (i[Y] < cube->screen.height - 1 && i[Y] >= cube->screen.height / 2)
@@ -75,6 +75,5 @@ void	render_frame(t_cube *cube)
 			set_frame_image_pixel(cube, &img, i);
 	}
 	mlx_put_image_to_window(cube->screen.mlx, cube->screen.win, img.img, 0, 0);
-	// render_minimap(cube);
 	mlx_destroy_image(cube->screen.mlx, img.img);
 }

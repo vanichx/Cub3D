@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/22 15:37:39 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:40:59 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,13 @@ void	draw_minimap(t_minimap *minimap);
 void	render_minimap_image(t_cube *cube, t_minimap *minimap);
 int		get_mmap_offset(t_minimap *minimap, int map_dimension, int player_pos);
 bool	is_valid_map_coord(int coord, int size);
+
+
+
 char	*add_minimap_line(t_cube *d, t_minimap *m, int y);
 char	**generate_minimap(t_cube *cube, t_minimap *minimap);
-void	print_minimap(char **mmap, int size);
+
+
 void	render_minimap(t_cube *cube);
 void	update_player_position(t_cube *cube);
 void	rotate_player_fov(t_cube *cube, float angle);

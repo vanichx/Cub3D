@@ -1,10 +1,11 @@
-NO ./textures/wall_4.xpm    
-SO ./textures/wall_4.xpm
-WE ./textures/wall_4.xpm   
-EA ./textures/wall_4.xpm
-F 220,100,0
-C 0,10,150
-SC 50
+
+NO ./textures/painting.xpm
+SO ./textures/painting.xpm
+WE ./textures/painting.xpm
+EA ./textures/painting.xpm
+
+F ./textures/north.xpm
+C ./textures/east.xpm
 
         1111111111111111111111111
         1000000000110000000000001
@@ -62,7 +63,7 @@ SC 50
                 1                                                               1
 11111111111111111           11111111111111111111111111    11111111111111111111111
 1                                       1                               1
-1                                       1                              31 
+1                                       1                              11 
 1                                       1                               1
 1                1111111111             111111                          1
 1                1        1                  1                          1
