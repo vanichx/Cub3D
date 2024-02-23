@@ -24,8 +24,8 @@ void cast_floor(t_cube *c, int y)
 	p = y - c->screen.height / 2;  // current y position compared to the center of the screen
 	pos_z = 0.5 * c->screen.height; // vertical position of the camera
 	row_distance = pos_z / p;
-	floor_step[X] = row_distance * (c->player.ray.ray_dir_r.dir[X] - c->player.ray.ray_dir_l.dir[X]) / c->screen.width;
-	floor_step[Y] = row_distance * (c->player.ray.ray_dir_r.dir[Y] - c->player.ray.ray_dir_l.dir[Y]) / c->screen.width;
+	floor_step[X] = row_distance * (c->player.ray.ray_dir_l.dir[X] - c->player.ray.ray_dir_r.dir[X]) / c->screen.width;
+	floor_step[Y] = row_distance * (c->player.ray.ray_dir_l.dir[Y] - c->player.ray.ray_dir_r.dir[Y]) / c->screen.width;
 	floor[X] = c->player.pos[X] + row_distance * c->player.ray.ray_dir_r.dir[X];
 	floor[Y] = c->player.pos[Y] + row_distance * c->player.ray.ray_dir_r.dir[Y];
 	while (x < c->screen.width)

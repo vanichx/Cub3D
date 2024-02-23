@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:30:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/22 16:02:21 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:15:10 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void mm_set_image_pixel(t_img *image, int x, int y, int color)
 	int pixel;
 
 	pixel = y * image->line_length + x * (image->bpp / 8);
+	printf("pixel: %d\n", pixel);
 	image->addr[pixel + 0] = (color >>  0) & 0xFF;
 	image->addr[pixel + 1] = (color >>  8) & 0xFF;
 	image->addr[pixel + 2] = (color >> 16) & 0xFF;
@@ -193,6 +194,8 @@ char	*add_minimap_line(t_cube *d, t_minimap *m, int y)
 		else if (d->map.map[y + m->offset_y][x + m->offset_x] == '1')
 			line[x] = '1';
 		else if (d->map.map[y + m->offset_y][x + m->offset_x] == 'F')
+			line[x] = '0';
+		else if (d->map.map[y + m->offset_y][x + m->offset_x] == '0')
 			line[x] = '0';
 		else
 			line[x] = '\0';

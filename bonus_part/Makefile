@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+         #
+#    By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 10:13:35 by ipetruni          #+#    #+#              #
-#    Updated: 2024/02/22 15:53:51 by ipetruni         ###   ########.fr        #
+#    Updated: 2024/02/23 13:18:24 by eseferi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ re:					fclean all
 
 # Valgrind testing
 valgrind:			$(NAME)
-					$(VALGRIND) ./$(NAME) maps/testing.cub
+					$(VALGRIND) ./$(NAME) maps/basic2.cub
 
 # Leaks at exit testing
 leaks:				$(NAME)

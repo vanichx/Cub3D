@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/15 12:16:20 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:48:37 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void	check_walls(t_cube *cube)
 	replace_spaces(cube->map.map, cube->map.map_height);
 	f_fill(cube, (int)cube->player.m_pos.y,
 		(int)cube->player.m_pos.x);
+	print_map_info(cube);
 }
