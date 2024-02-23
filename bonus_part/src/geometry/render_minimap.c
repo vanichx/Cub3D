@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:30:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/23 16:42:28 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:12:45 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,6 @@ void	draw_minimap_tile(t_minimap *minimap, int x, int y)
 		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
 			y * minimap->tile_size, 0x000000);
 	}
-	// else if (minimap->map[y][x] == 'F')
-	// {
-	// 	set_minimap_tile_pixels(minimap, x * minimap->tile_size,
-	// 		y * minimap->tile_size, 0x0000FF);
-	// }
 	else
 	{
 		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
@@ -188,15 +183,15 @@ int	get_mmap_offset(t_minimap *minimap, int size, int p_pos)
 
 bool	is_valid_pos_wall_collision(t_cube *cube, double x, double y)
 {
-	if (cube->map.map[(int)y][(int)x] == '1')
+	if (cube->map.map[(int)y][(int)x] == '1' || cube->map.map[(int)(y + 0.1)][(int)(x + 0.1)] == '1')
 		return (false);
 	return (true);
 }
 
 void	update_player_position(t_cube *cube)
 {
-	float	new_x;
-	float	new_y;
+	double	new_x;
+	double	new_y;
 
 	new_x = cube->player.pos[X] + cube->player.front.dir[X]
 		* cube->player.player_speed * 2;
@@ -208,6 +203,8 @@ void	update_player_position(t_cube *cube)
 		cube->player.m_pos.x = new_x;
 		cube->player.m_pos.y = new_y;
 	}
+
+	printf("player pos: %f, %f\n", cube->player.pos[X], cube->player.pos[Y]);
 }
 
 void	calculate_minimap_offset(t_minimap *minimap, t_cube *cube)

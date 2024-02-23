@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:42:26 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/23 16:46:11 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:50:42 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*add_minimap_line(t_cube *d, t_minimap *m, int y)
 	x = 0;
 	while (x < m->size && x < d->map.map_width)
 	{
-		if ((y + m->offset_y) < d->map.map_height && (size_t)(x + m->offset_x) < strlen(d->map.map[y + m->offset_y]))
+		if ((y + m->offset_y) < d->map.map_height && (size_t)(x + m->offset_x) < ft_strlen(d->map.map[y + m->offset_y]))
 		{
 			if ((int)d->player.m_pos.x == (x + m->offset_x) 
 				&& (int)d->player.m_pos.y == (y + m->offset_y))
