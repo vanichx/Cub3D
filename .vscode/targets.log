@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Thu Feb 22 16:48:14 2024
+# Make data base, printed on Fri Feb 23 13:22:30 2024
 
 # Variables
 
@@ -39,19 +39,19 @@ VSCODE_CWD = /
 # environment
 PATH = /Users/eseferi/.brew/bin:/Users/eseferi/goinfre/.brew/bin:/Users/eseferi/goinfre/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/opt/X11/bin:/Library/Apple/usr/bin
 # environment
-LaunchInstanceID = 19CEEB4E-314A-4B87-9D41-7B5E981E909E
+LaunchInstanceID = D89387AD-7E65-4E85-AEB0-10533D420A61
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.QXmdhzXOxC/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.87MEq7wifJ/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 HOMEBREW_TEMP = /tmp/eseferi/Homebrew/Temp
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.UxL0tyDCCz/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.dEurkAw9LL/org.xquartz:0
 # environment
 PWD = /Users/eseferi/cub3d
 # environment
@@ -137,7 +137,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 882
+VSCODE_PID = 4588
 # variable set hash-table stats:
 # Load=63/1024=6%, Rehash=0, Collisions=1/84=1%
 
@@ -221,7 +221,7 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Thu Feb 22 16:48:14 2024
+# Finished Make data base on Fri Feb 23 13:22:30 2024
 
  
 make: *** No rule to make target `all'.  Stop.

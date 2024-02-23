@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:56:30 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/22 15:39:24 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:21:00 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	render_frame(t_cube *cube)
 			set_frame_image_pixel(cube, &img, i);
 	}
 	mlx_put_image_to_window(cube->screen.mlx, cube->screen.win, img.img, 0, 0);
-	render_minimap(cube);
+	// render_minimap(cube);
 	mlx_destroy_image(cube->screen.mlx, img.img);
 }
