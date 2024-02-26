@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:57:07 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/23 14:25:36 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:48:28 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	render(t_cube *cube)
 		cube->player_has_moved = true;
 	ft_mouse(cube);
 	render_cube(cube);
-	render_minimap(cube);
+	if (cube->minimap_data.show)
+		render_minimap(cube);
 	return (0);
 }

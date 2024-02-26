@@ -6,11 +6,13 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 14:32:41 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:41:14 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+
 
 void	handle_special_keys(int key, t_cube *cube)
 {
@@ -18,7 +20,9 @@ void	handle_special_keys(int key, t_cube *cube)
 		resize_window(cube, EXPAND);
 	if (key == KEY_U)
 		resize_window(cube, REDUCE);
-		
+	if (key == KEY_M)
+		show_hide_minimap(cube);
+	
 }
 
 int	key_press(int key, void *param)

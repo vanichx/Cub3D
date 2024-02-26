@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 14:31:13 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:47:18 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,56 +46,56 @@
 # define KNIFE 0
 # define GUN 1
 
-typedef enum	e_etext
-{
-	WOOD1 = 0,
-	WOOD2,
-	WOOD3,
-	WOOD4,
-	WOOD5,
-	WOOD6,
-	CAT,
-	STONE1,
-	STONE2,
-	STONE3,
-	STONE4,
-	STONE5,
-	WALL1,
-	WALL2,
-	WALL3,
-	CEIL,
-	TELEP,
-	WOOD7,
-	DOOR,
-	BARREL,
-	PILAR,
-	AMMO,
-	PNJ,
-	CAGE,
-	CAGE2,
-	CAGE3,
-	CAGE4,
-	CAGE5,
-	CAGE6,
-	DEAD,
-	KEY,
-	GUN_LOOT,
-	SINK,
-	SKULLS,
-	TABLE,
-	TABLE2,
-	TABLE3,
-	BLOOD,
-	KNIGHT,
-	KNIGHT2,
-	LIGHT,
-	PUIT,
-	CUBE,
-	CAKE,
-	CHEST,
-	SCREAM,
-	SKYBOX,
-}				t_etext;
+// typedef enum	e_etext
+// {
+// 	WOOD1 = 0,
+// 	WOOD2,
+// 	WOOD3,
+// 	WOOD4,
+// 	WOOD5,
+// 	WOOD6,
+// 	CAT,
+// 	STONE1,
+// 	STONE2,
+// 	STONE3,
+// 	STONE4,
+// 	STONE5,
+// 	WALL1,
+// 	WALL2,
+// 	WALL3,
+// 	CEIL,
+// 	TELEP,
+// 	WOOD7,
+// 	DOOR,
+// 	BARREL,
+// 	PILAR,
+// 	AMMO,
+// 	PNJ,
+// 	CAGE,
+// 	CAGE2,
+// 	CAGE3,
+// 	CAGE4,
+// 	CAGE5,
+// 	CAGE6,
+// 	DEAD,
+// 	KEY,
+// 	GUN_LOOT,
+// 	SINK,
+// 	SKULLS,
+// 	TABLE,
+// 	TABLE2,
+// 	TABLE3,
+// 	BLOOD,
+// 	KNIGHT,
+// 	KNIGHT2,
+// 	LIGHT,
+// 	PUIT,
+// 	CUBE,
+// 	CAKE,
+// 	CHEST,
+// 	SCREAM,
+// 	SKYBOX,
+// }				t_etext;
 
 typedef struct s_point
 {
@@ -203,6 +203,19 @@ typedef struct	s_hook
 
 typedef struct s_keys
 {
+	int		key_esc;
+	int		key_s;
+	int		key_w;
+	int		key_a;
+	int		key_d;
+	int		key_left;
+	int		key_right;
+	int		key_i;
+	int		key_o;
+}			t_keys;
+
+typedef struct s_keys
+{
 	int		vanilla;
 	int		skybox;
 	int		vdoor;
@@ -230,16 +243,16 @@ typedef struct s_minimap
 	int		offset_x;
 	int		offset_y;
 	int		tile_size;
-	
+	int		show;
 }			t_minimap;
 
-typedef struct sprite_text
-{
-	char *filename;
-	t_img img;
-	int  w;
-	int  h;
-}				t_sprite_text;
+// typedef struct sprite_text
+// {
+// 	char *filename;
+// 	t_img img;
+// 	int  w;
+// 	int  h;
+// }				t_sprite_text;
 
 typedef struct s_door
 {
@@ -260,13 +273,13 @@ typedef struct s_dsprite
 	int 	screen_x;
 }				t_dsprite;
 
-typedef struct s_sprite
-{
-	double	pos[2];
-	double	dist;
-	int		texture;
-	double	dir[2];
-}				t_sprite;
+// typedef struct s_sprite
+// {
+// 	double	pos[2];
+// 	double	dist;
+// 	int		texture;
+// 	double	dir[2];
+// }				t_sprite;
 
 typedef struct s_cube
 {
@@ -280,6 +293,7 @@ typedef struct s_cube
 	t_sprite_text	*hud;
 	t_keys			key;
 	t_door			door;
+	t_keys			key;
 	int				player_has_moved;
 	int				refresh;
 }			t_cube;
