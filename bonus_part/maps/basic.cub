@@ -1,11 +1,11 @@
 
-NO ./textures/painting.xpm
-SO ./textures/painting.xpm
-WE ./textures/painting.xpm
-EA ./textures/painting.xpm
+NO ./textures/stone4.xpm
+SO ./textures/stone4.xpm
+WE ./textures/stone4.xpm
+EA ./textures/stone4.xpm
 
-F ./textures/north.xpm
-C ./textures/east.xpm
+F ./textures/stone4.xpm
+C ./textures/stone4.xpm
 
 111111111111111111111
 100000000000000000001111111111111111

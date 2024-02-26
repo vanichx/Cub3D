@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/22 15:33:38 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 12:14:52 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define OLD 0
 # define NEW 1
 
-# define TEXT_SIZE 128
+# define TEXT_SIZE 64
 
 typedef struct s_point
 {
