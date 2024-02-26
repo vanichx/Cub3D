@@ -1,28 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/26 16:52:03 by ipetruni          #+#    #+#             */
+/*   Updated: 2024/02/26 16:53:29 by ipetruni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void update_left_right_rays(t_cube *c)
+void	update_left_right_rays(t_cube *c)
 {
-	c->player.ray.ray_dir_l.dir[X] = c->player.front.dir[X] - c->player.cam.dir[X];
-	c->player.ray.ray_dir_l.dir[Y] = c->player.front.dir[Y] - c->player.cam.dir[Y];
-	c->player.ray.ray_dir_r.dir[X] = c->player.front.dir[X] + c->player.cam.dir[X];
-	c->player.ray.ray_dir_r.dir[Y] = c->player.front.dir[Y] + c->player.cam.dir[Y];
+	c->player.ray.ray_dir_l.dir[X] = c->player.front.dir[X]
+		- c->player.cam.dir[X];
+	c->player.ray.ray_dir_l.dir[Y] = c->player.front.dir[Y]
+		- c->player.cam.dir[Y];
+	c->player.ray.ray_dir_r.dir[X] = c->player.front.dir[X]
+		+ c->player.cam.dir[X];
+	c->player.ray.ray_dir_r.dir[Y] = c->player.front.dir[Y]
+		+ c->player.cam.dir[Y];
 }
 
-void cast_floor(t_cube *c, int y)
+void	cast_floor(t_cube *c, int y)
 {
-	int p;
-	double pos_z;
-	double row_distance;
-	double floor_step[2];
-	double floor[2];
-	int x;
-	int cell[2];
-	int t[2];
+	int		p;
+	double	pos_z;
+	double	row_distance;
+	double	floor_step[2];
+	double	floor[2];
+	int		x;
+	int		cell[2];
+	int		t[2];
 
 	x = 0;
 	update_left_right_rays(c);
-	p = y - c->screen.height / 2;  // current y position compared to the center of the screen
-	pos_z = 0.5 * c->screen.height; // vertical position of the camera
+	p = y - c->screen.height / 2;
+	pos_z = 0.5 * c->screen.height;
 	row_distance = pos_z / p;
 	floor_step[X] = row_distance * (c->player.ray.ray_dir_r.dir[X] - c->player.ray.ray_dir_l.dir[X]) / c->screen.width;
 	floor_step[Y] = row_distance * (c->player.ray.ray_dir_r.dir[Y] - c->player.ray.ray_dir_l.dir[Y]) / c->screen.width;
@@ -130,7 +146,7 @@ void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
 void	raycast_bonus(t_cube *cube, t_ray *ray)
 {
 	int	x;
-	int y;
+	int	y;
 
 	x = -1;
 	y = -1;

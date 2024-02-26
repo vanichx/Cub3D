@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 14:47:18 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:28:27 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,19 +203,6 @@ typedef struct	s_hook
 
 typedef struct s_keys
 {
-	int		key_esc;
-	int		key_s;
-	int		key_w;
-	int		key_a;
-	int		key_d;
-	int		key_left;
-	int		key_right;
-	int		key_i;
-	int		key_o;
-}			t_keys;
-
-typedef struct s_keys
-{
 	int		vanilla;
 	int		skybox;
 	int		vdoor;
@@ -290,8 +277,7 @@ typedef struct s_cube
 	t_img			minimap;
 	t_minimap		minimap_data;
 	t_list			*sprite;
-	t_sprite_text	*hud;
-	t_keys			key;
+	// t_sprite_text	*hud;
 	t_door			door;
 	t_keys			key;
 	int				player_has_moved;

@@ -6,11 +6,26 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:42:26 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/23 17:50:42 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:25:43 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char	get_minimap_character(t_cube *d, t_minimap *m, int x, int y)
+{
+	if ((int)d->player.m_pos.x == (x + m->offset_x)
+		&& (int)d->player.m_pos.y == (y + m->offset_y))
+		return ('N');
+	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '1')
+		return ('1');
+	else if (d->map.map[y + m->offset_y][x + m->offset_x] == 'F')
+		return ('0');
+	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '0')
+		return ('0');
+	else
+		return ('\0');
+}
 
 char	*add_minimap_line(t_cube *d, t_minimap *m, int y)
 {
@@ -23,20 +38,9 @@ char	*add_minimap_line(t_cube *d, t_minimap *m, int y)
 	x = 0;
 	while (x < m->size && x < d->map.map_width)
 	{
-		if ((y + m->offset_y) < d->map.map_height && (size_t)(x + m->offset_x) < ft_strlen(d->map.map[y + m->offset_y]))
-		{
-			if ((int)d->player.m_pos.x == (x + m->offset_x) 
-				&& (int)d->player.m_pos.y == (y + m->offset_y))
-					line[x] = 'N';
-			else if (d->map.map[y + m->offset_y][x + m->offset_x] == '1')
-				line[x] = '1';
-			else if (d->map.map[y + m->offset_y][x + m->offset_x] == 'F')
-				line[x] = '0';
-			else if (d->map.map[y + m->offset_y][x + m->offset_x] == '0')
-				line[x] = '0';
-			else
-				line[x] = '\0';
-		}
+		if ((y + m->offset_y) < d->map.map_height && (size_t)
+			(x + m->offset_x) < ft_strlen(d->map.map[y + m->offset_y]))
+			line[x] = get_minimap_character(d, m, x, y);
 		x++;
 	}
 	return (line);
@@ -63,4 +67,3 @@ char	**generate_minimap(t_cube *cube, t_minimap *minimap)
 	}
 	return (mmap);
 }
-

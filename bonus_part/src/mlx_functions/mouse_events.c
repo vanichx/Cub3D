@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:11:07 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 15:12:33 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:30:03 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,6 @@ void	rotate_right_mouse(t_cube *cube)
 }
 
 int	mouse_release(int button, int x, int y, void *param)
-{
-	t_cube	*cub;
-
-	(void) cub;
-	(void) button;
-	(void) x;
-	(void) y;
-	cub = (t_cube *)param;
-	return (EXIT_SUCCESS);
-}
-
-int	mouse_press(int button, int x, int y, void *param)
 {
 	t_cube	*cub;
 

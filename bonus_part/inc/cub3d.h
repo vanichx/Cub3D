@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 14:45:20 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:30:19 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,14 +145,14 @@ void	handle_special_keys(int key, t_cube *cube);
 int		key_press(int key, void *param);
 int		key_release(int key, void *param);
 int		keys_execute(t_cube *cube);
-int 	mouse_press(int key, void *param);
 
 /* src/mlx_functions/keyhooks2.c */
 void	show_hide_minimap(t_cube *cube);
 
 /* src/mlx_functions/mouse_events.c */
 int		mouse_release(int button, int x, int y, void *param);
-int		mouse_press(int button, int x, int y, void *param);
+// int		mouse_press(int button, int x, int y, void *param);
+int 	mouse_press(int key, void *param);
 int		ft_mouse(t_cube *cube);
 
 /* src/mlx_functions/resize_window.c */
