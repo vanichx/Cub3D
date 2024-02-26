@@ -6,30 +6,48 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/26 13:18:13 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:38:08 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void init_keys(t_keys *key)
+{
+	key->vanilla = 0;
+	key->skybox = 0;
+	key->vdoor = 0;
+	key->bullet = 0;
+	key->action = 0;
+	key->shoot = 0;
+}
+
+void init_player(t_player *player)
+{
+	player->pos[X] = 0;
+	player->pos[Y] = 0;
+	player->time[0] = 0;
+	player->time[1] = 0;
+	player->info[LIFE_S] = 100;
+	player->info[AMMO_S] = 10;
+	player->info[KEY_STATUS] = 0;
+	player->info[WEAPON_S] = KNIFE;
+	player->info[GUN_LOOT_S] = 0;
+	player->player_speed = PLAYER_SPEED;
+	player->player_rot_speed = PLAYER_ROT_SPEED;
+
+}
+
 void	init_cube(t_cube *cube)
 {
+	init_keys(&cube->key);
+	init_player(&cube->player);
+	cube->refresh = 1;
 	cube->map.map_x = 0;
 	cube->map.map_y = 0;
 	cube->player_has_moved = 0;
 	cube->map.num_line = 0;
 	cube->map.num_textures = 0;
-	cube->player.pos[X] = 0;
-	cube->player.pos[Y] = 0;
-	cube->player.time[0] = 0;
-	cube->player.time[1] = 0;
-	cube->player.info[LIFE] = 100;
-	cube->player.info[AMMO] = 10;
-	cube->player.info[KEY] = 0;
-	cube->player.info[WEAPON] = 0;
-	cube->player.info[GUN_LOOT] = 0;
-	cube->player.player_speed = PLAYER_SPEED;
-	cube->player.player_rot_speed = PLAYER_ROT_SPEED;
 	cube->wall_text.tex_size = TEXT_SIZE;
 }
 

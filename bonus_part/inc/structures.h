@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 13:26:33 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:31:13 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCTURES_H
 
 # include <stdbool.h>
+# include "libft.h"
 
 # define X 0
 # define Y 1
@@ -36,17 +37,14 @@
 
 # define TEXT_SIZE 64
 
-# define LIFE 0
-# define AMMO 1
-# define KEY 2
-# define WEAPON 3
-# define GUN_LOOT 4
+# define LIFE_S 0
+# define AMMO_S 1
+# define KEY_STATUS 2
+# define WEAPON_S 3
+# define GUN_LOOT_S 4
 
-typedef enum	e_weapon
-{
-	KNIFE,
-	GUN,
-}				t_weapon;
+# define KNIFE 0
+# define GUN 1
 
 typedef enum	e_etext
 {
@@ -201,13 +199,26 @@ typedef struct	s_hook
 	int			bullet;
 	int			action;
 	int			shoot;
-	int			down;
-	int			up;
-	int			right;
-	int			left;
-	int			strafe_right;
-	int			strafe_left;
 }				t_hook;
+
+typedef struct s_keys
+{
+	int		vanilla;
+	int		skybox;
+	int		vdoor;
+	int		bullet;
+	int		action;
+	int		shoot;
+	int		key_esc;
+	int		key_s;
+	int		key_w;
+	int		key_a;
+	int		key_d;
+	int		key_left;
+	int		key_right;
+	int		key_i;
+	int		key_o;
+}      t_keys;
 
 typedef struct s_minimap
 {
@@ -236,7 +247,7 @@ typedef struct s_door
 	int    text_x;
 	int    x;
 	int    *actx;
-}
+}				t_door;
 
 typedef struct s_dsprite
 {
@@ -267,7 +278,8 @@ typedef struct s_cube
 	t_minimap		minimap_data;
 	t_list			*sprite;
 	t_sprite_text	*hud;
-	t_hook			hook;
+	t_keys			key;
+	t_door			door;
 	int				player_has_moved;
 	int				refresh;
 }			t_cube;

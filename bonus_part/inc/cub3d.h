@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/23 16:40:59 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:26:07 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	handle_special_keys(int key, t_cube *cube);
 int		key_press(int key, void *param);
 int		key_release(int key, void *param);
 int		keys_execute(t_cube *cube);
+int 	mouse_press(int key, void *param);
 
 /* src/mlx_functions/keyhooks2.c */
 void	increase_player_speed(t_cube *cube);
