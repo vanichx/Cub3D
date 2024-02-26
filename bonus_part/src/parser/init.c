@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/26 14:45:05 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:59:59 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_keys(t_keys *key)
+void	init_keys(t_keys *key)
 {
 	key->vanilla = 0;
 	key->skybox = 0;
@@ -22,7 +22,7 @@ void init_keys(t_keys *key)
 	key->shoot = 0;
 }
 
-void init_player(t_player *player)
+void	init_player(t_player *player)
 {
 	player->pos[X] = 0;
 	player->pos[Y] = 0;
@@ -35,7 +35,6 @@ void init_player(t_player *player)
 	player->info[GUN_LOOT_S] = 0;
 	player->player_speed = PLAYER_SPEED;
 	player->player_rot_speed = PLAYER_ROT_SPEED;
-
 }
 
 void	init_cube(t_cube *cube)

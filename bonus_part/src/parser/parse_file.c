@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/21 16:24:58 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:00:26 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	read_file_and_store_lines(char *map_path, char ***buffer, t_cube *cube)
+static int	read_file_and_store_lines(char *path, char ***buffer, t_cube *cube)
 {
 	int		fd;
 	char	*line;
@@ -22,7 +22,7 @@ static int	read_file_and_store_lines(char *map_path, char ***buffer, t_cube *cub
 	*buffer = ft_calloc(MAX_LINES, sizeof(char *));
 	if (!*buffer)
 		exit_program(cube, 1, MALLOC_ERROR);
-	read_file(map_path, &fd, cube);
+	read_file(path, &fd, cube);
 	line = get_next_line(fd);
 	while (line)
 	{
