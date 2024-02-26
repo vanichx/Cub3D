@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:11:07 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 14:37:37 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:12:33 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	rotate_left_mouse(t_cube *cube)
 {
 	double	old_dir_x;
 	double	old_plane_x;
-	double  speed;
+	double	speed;
 
 	old_dir_x = cube->player.front.dir[X];
 	old_plane_x = cube->player.cam.dir[X];
@@ -38,7 +38,7 @@ void	rotate_right_mouse(t_cube *cube)
 {
 	double	old_dir_x;
 	double	old_plane_x;
-	double  speed;
+	double	speed;
 
 	old_dir_x = cube->player.front.dir[X];
 	old_plane_x = cube->player.cam.dir[X];
@@ -94,6 +94,7 @@ int	ft_mouse(t_cube *cube)
 		rotate_right_mouse(cube);
 	else if (dx < -2)
 		rotate_left_mouse(cube);
-	mlx_mouse_move(cube->screen.win, cube->screen.width / 2, cube->screen.height / 2);
+	mlx_mouse_move(cube->screen.win,
+		cube->screen.width / 2, cube->screen.height / 2);
 	return (0);
 }

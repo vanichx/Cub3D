@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 14:41:14 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:11:55 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 void	handle_special_keys(int key, t_cube *cube)
 {
@@ -22,7 +20,14 @@ void	handle_special_keys(int key, t_cube *cube)
 		resize_window(cube, REDUCE);
 	if (key == KEY_M)
 		show_hide_minimap(cube);
-	
+	if (key == KEY_2 || key == KEY_1)
+	{
+		if (key == KEY_1)
+			cube->player.info[WEAPON_S] = KNIFE;
+		else if (key == KEY_2 && cube->player.info[GUN_LOOT_S])
+			cube->player.info[WEAPON_S] = GUN;
+		cube->refresh = 1;
+	}
 }
 
 int	key_press(int key, void *param)
@@ -67,20 +72,12 @@ int	key_release(int key, void *param)
 		cube->key.key_left = 0;
 	if (key == KEY_RIGHT && cube->key.key_right == 1)
 		cube->key.key_right = 0;
-	if (key == KEY_2 || key == KEY_1)
-	{
-		if (key == KEY_1)
-			cube->player.info[WEAPON_S] = KNIFE;
-		else if (key == KEY_2 && cube->player.info[GUN_LOOT_S])
-			cube->player.info[WEAPON_S] = GUN;
-		cube->refresh = 1;
-	}
 	return (0);
 }
 
-int mouse_press(int key, void *param)
+int	mouse_press(int key, void *param)
 {
-	t_cube *cube;
+	t_cube	*cube;
 
 	cube = (t_cube *)param;
 	if (key == 1)
