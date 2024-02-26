@@ -1,11 +1,11 @@
 
-NO ./textures/stone4.xpm
-SO ./textures/stone4.xpm
-WE ./textures/stone4.xpm
-EA ./textures/stone4.xpm
+NO ./textures/walls/telep.xpm
+SO ./textures/walls/telep.xpm
+WE ./textures/walls/telep.xpm
+EA ./textures/walls/telep.xpm
 
-F ./textures/stone4.xpm
-C ./textures/stone4.xpm
+F ./textures/walls/wood.xpm
+C ./textures/walls/ceil.xpm
 
 111111111111111111111
 100000000000000000001111111111111111

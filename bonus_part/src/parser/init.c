@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/21 16:22:24 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:18:13 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	init_cube(t_cube *cube)
 	cube->player.pos[Y] = 0;
 	cube->player.time[0] = 0;
 	cube->player.time[1] = 0;
+	cube->player.info[LIFE] = 100;
+	cube->player.info[AMMO] = 10;
+	cube->player.info[KEY] = 0;
+	cube->player.info[WEAPON] = 0;
+	cube->player.info[GUN_LOOT] = 0;
 	cube->player.player_speed = PLAYER_SPEED;
 	cube->player.player_rot_speed = PLAYER_ROT_SPEED;
 	cube->wall_text.tex_size = TEXT_SIZE;

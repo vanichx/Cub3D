@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/21 18:39:39 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 12:35:50 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 	while (map_file[++i])
 	{
 		trimmed_line = trim_whitespace(map_file[i]);
-		printf("trimmed_line: %s\n", trimmed_line);
 		if (!ft_strncmp(trimmed_line, "NO ", 3)
 			|| !ft_strncmp(trimmed_line, "SO ", 3)
 			|| !ft_strncmp(trimmed_line, "EA ", 3)
@@ -51,9 +50,9 @@ void	parse_textures_files(t_cube *cube)
 	i = NO;
 	while (i <= C)
 	{
-		if (ft_strlen(cube->map.texture[i]) < 16)
+		if (ft_strlen(cube->map.texture[i]) < 22)
 			exit_program(cube, 1, TEXT_ERR_FORMAT);
-		if (ft_strncmp(cube->map.texture[i], "./textures/", 11))
+		if (ft_strncmp(cube->map.texture[i], "./textures/walls/", 17))
 			exit_program(cube, 1, TEXT_LOC_ERR);
 		if (ft_strcmp(&cube->map.texture[i] \
 		[ft_strlen(cube->map.texture[i]) - 4], ".xpm"))

@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/21 18:41:56 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/26 12:33:14 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	parse_textures(char *trimmed_line, t_cube *cube)
 	load_texture(&cube->wall_text.img_text[cube->map.num_textures], \
 		cube->screen.mlx, texture_path, cube, \
 		&cube->wall_text.textures[cube->map.num_textures]);
-	printf("texture %d loaded  --> %s\n", cube->map.num_textures, texture_path);
 	cube->map.num_textures++;
 	i++;
 }
