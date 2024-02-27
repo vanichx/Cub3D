@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:28:27 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:29:49 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,64 +38,10 @@
 # define TEXT_SIZE 64
 
 # define LIFE_S 0
-# define AMMO_S 1
-# define KEY_STATUS 2
-# define WEAPON_S 3
-# define GUN_LOOT_S 4
+# define KEY_STATUS 1
 
 # define KNIFE 0
 # define GUN 1
-
-// typedef enum	e_etext
-// {
-// 	WOOD1 = 0,
-// 	WOOD2,
-// 	WOOD3,
-// 	WOOD4,
-// 	WOOD5,
-// 	WOOD6,
-// 	CAT,
-// 	STONE1,
-// 	STONE2,
-// 	STONE3,
-// 	STONE4,
-// 	STONE5,
-// 	WALL1,
-// 	WALL2,
-// 	WALL3,
-// 	CEIL,
-// 	TELEP,
-// 	WOOD7,
-// 	DOOR,
-// 	BARREL,
-// 	PILAR,
-// 	AMMO,
-// 	PNJ,
-// 	CAGE,
-// 	CAGE2,
-// 	CAGE3,
-// 	CAGE4,
-// 	CAGE5,
-// 	CAGE6,
-// 	DEAD,
-// 	KEY,
-// 	GUN_LOOT,
-// 	SINK,
-// 	SKULLS,
-// 	TABLE,
-// 	TABLE2,
-// 	TABLE3,
-// 	BLOOD,
-// 	KNIGHT,
-// 	KNIGHT2,
-// 	LIGHT,
-// 	PUIT,
-// 	CUBE,
-// 	CAKE,
-// 	CHEST,
-// 	SCREAM,
-// 	SKYBOX,
-// }				t_etext;
 
 typedef struct s_point
 {
@@ -176,14 +122,13 @@ typedef struct s_player
 	char	init_v;
 	double	sub_angles;
 	float	fov;
-	int		info[5];
+	int		info[2];
 	t_ray	ray;
 }			t_player;
 
 typedef struct s_textures
 {
 	t_img	img_text[6];
-	int		**text_pixels;
 	int		*textures[6];
 	int		text_point[2];
 	double	tex_step;
@@ -191,24 +136,8 @@ typedef struct s_textures
 	int		tex_size;
 }		t_textures;
 
-typedef struct	s_hook
-{
-	int			vanilla;
-	int			skybox;
-	int			vdoor;
-	int			bullet;
-	int			action;
-	int			shoot;
-}				t_hook;
-
 typedef struct s_keys
 {
-	int		vanilla;
-	int		skybox;
-	int		vdoor;
-	int		bullet;
-	int		action;
-	int		shoot;
 	int		key_esc;
 	int		key_s;
 	int		key_w;
@@ -233,14 +162,6 @@ typedef struct s_minimap
 	int		show;
 }			t_minimap;
 
-// typedef struct sprite_text
-// {
-// 	char *filename;
-// 	t_img img;
-// 	int  w;
-// 	int  h;
-// }				t_sprite_text;
-
 typedef struct s_door
 {
 	int    is;
@@ -260,28 +181,19 @@ typedef struct s_dsprite
 	int 	screen_x;
 }				t_dsprite;
 
-// typedef struct s_sprite
-// {
-// 	double	pos[2];
-// 	double	dist;
-// 	int		texture;
-// 	double	dir[2];
-// }				t_sprite;
-
 typedef struct s_cube
 {
 	t_mlx			screen;
 	t_player		player;
 	t_map			map;
 	t_textures		wall_text;
+	t_textures		sprite_text;
 	t_img			minimap;
 	t_minimap		minimap_data;
-	t_list			*sprite;
-	// t_sprite_text	*hud;
 	t_door			door;
 	t_keys			key;
+	int 			**text_pixels;
 	int				player_has_moved;
-	int				refresh;
 }			t_cube;
 
 

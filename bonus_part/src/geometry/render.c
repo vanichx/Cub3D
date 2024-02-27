@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:56:30 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 13:43:40 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:34:07 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	allocate_text_pixels(t_cube *cube)
 	int	i;
 
 	i = 0;
-	if (cube->wall_text.text_pixels)
-		free_2darray((void **)cube->wall_text.text_pixels);
-	cube->wall_text.text_pixels = ft_calloc(cube->screen.height \
-	+ 1, sizeof * cube->wall_text.text_pixels);
-	if (cube->wall_text.text_pixels == NULL)
+	if (cube->text_pixels)
+		free_2darray((void **)cube->text_pixels);
+	cube->text_pixels = ft_calloc(cube->screen.height \
+	+ 1, sizeof * cube->text_pixels);
+	if (cube->text_pixels == NULL)
 		exit_program(cube, 1, MALLOC_ERROR);
 	while (i < cube->screen.height)
 	{
-		cube->wall_text.text_pixels[i] = ft_calloc(cube->screen.width \
-		+ 1, sizeof * cube->wall_text.text_pixels);
-		if (cube->wall_text.text_pixels[i] == NULL)
+		cube->text_pixels[i] = ft_calloc(cube->screen.width \
+		+ 1, sizeof * cube->text_pixels);
+		if (cube->text_pixels[i] == NULL)
 			exit_program(cube, 1, MALLOC_ERROR);
 		i++;
 	}
@@ -57,7 +57,7 @@ void	render_frame(t_cube *cube)
 	{
 		i[X] = -1;
 		while (++i[X] < cube->screen.width)
-			set_image_pixel(&img, i, cube->wall_text.text_pixels[i[Y]][i[X]]);
+			set_image_pixel(&img, i, cube->text_pixels[i[Y]][i[X]]);
 	}
 	mlx_put_image_to_window(cube->screen.mlx, cube->screen.win, img.img, 0, 0);
 	mlx_destroy_image(cube->screen.mlx, img.img);

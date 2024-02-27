@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:52:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:53:29 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:31:43 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	cast_floor(t_cube *c, int y)
 		t[Y] = (int)(c->wall_text.tex_size * (floor[Y] - cell[Y])) & (c->wall_text.tex_size - 1);
 		floor[X] += floor_step[X];
 		floor[Y] += floor_step[Y];
-		c->wall_text.text_pixels[y][x] = (c->wall_text.textures[F][c->wall_text.tex_size * t[Y] + t[X]] >> 1) & 8355711;
-		c->wall_text.text_pixels[c->screen.height - y - 1][x] = (c->wall_text.textures[C][c->wall_text.tex_size * t[Y] + t[X]] >> 1) & 8355711;
+		c->text_pixels[y][x] = (c->wall_text.textures[F][c->wall_text.tex_size * t[Y] + t[X]] >> 1) & 8355711;
+		c->text_pixels[c->screen.height - y - 1][x] = (c->wall_text.textures[C][c->wall_text.tex_size * t[Y] + t[X]] >> 1) & 8355711;
 		x++;
 	}
 }
@@ -138,7 +138,7 @@ void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
 		+ cube->wall_text.text_point[X]];
 		if (ray->side == Y)
 			color = (color >> 1) & 8355711;
-		cube->wall_text.text_pixels[y][x] = color;
+		cube->text_pixels[y][x] = color;
 		y++;
 	}
 }

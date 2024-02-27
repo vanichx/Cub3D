@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:11:07 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:30:03 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:24:07 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,6 @@ void	rotate_right_mouse(t_cube *cube)
 	cube->player.cam.dir[Y] = old_plane_x \
 	* sin(speed) + cube->player.cam.dir[Y] \
 	* cos(speed);
-}
-
-int	mouse_release(int button, int x, int y, void *param)
-{
-	t_cube	*cub;
-
-	(void) cub;
-	(void) button;
-	(void) x;
-	(void) y;
-	cub = (t_cube *)param;
-	return (EXIT_SUCCESS);
 }
 
 int	ft_mouse(t_cube *cube)

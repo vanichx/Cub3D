@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:29:58 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:35:24 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ void	handle_special_keys(int key, t_cube *cube)
 		resize_window(cube, REDUCE);
 	if (key == KEY_M)
 		show_hide_minimap(cube);
-	if (key == KEY_2 || key == KEY_1)
-	{
-		if (key == KEY_1)
-			cube->player.info[WEAPON_S] = KNIFE;
-		else if (key == KEY_2 && cube->player.info[GUN_LOOT_S])
-			cube->player.info[WEAPON_S] = GUN;
-		cube->refresh = 1;
-	}
 }
 
 int	key_press(int key, void *param)
@@ -73,18 +65,6 @@ int	key_release(int key, void *param)
 	if (key == KEY_RIGHT && cube->key.key_right == 1)
 		cube->key.key_right = 0;
 	return (0);
-}
-
-int	mouse_press(int key, void *param)
-{
-	t_cube	*cube;
-
-	cube = (t_cube *)param;
-	if (key == 1)
-		cube->key.shoot = 1;
-	if (key == 2)
-		cube->key.action = 1;
-	return (EXIT_SUCCESS);
 }
 
 int	keys_execute(t_cube *cube)
