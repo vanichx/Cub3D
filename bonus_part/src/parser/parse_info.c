@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 12:33:14 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/27 18:18:57 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,38 @@ static int	check_text_dir(char *text, int i)
 		return (-1);
 }
 
-void	load_texture(t_img *img, void *mlx, char *path, t_cube *cube, int **tx)
+void	load_texture(t_text_info *text_info)
 {
-	int	i[2];
-	int	*buffer;
+    int	i[2];
+    int	*buffer;
 
-	img->img = mlx_xpm_file_to_image(mlx, path, \
-	&cube->wall_text.tex_size, &cube->wall_text.tex_size);
-	if (img->img == NULL)
-		exit_program(cube, 1, TEXT_LOAD_ERR);
-	img->casted_addr = (int *)mlx_get_data_addr(img->img, \
-	&img->bpp, &img->line_length, &img->endian);
-	i[Y] = -1;
-	buffer = ft_calloc(1, sizeof * buffer \
-	* cube->wall_text.tex_size * cube->wall_text.tex_size);
-	if (!buffer)
-		exit_program(cube, EXIT_FAILURE, MALLOC_ERROR);
-	(*tx) = buffer;
-	while (++i[Y] < cube->wall_text.tex_size)
-	{
-		i[X] = -1;
-		while (++i[X] < cube->wall_text.tex_size)
-			(*tx)[i[Y] * cube->wall_text.tex_size \
-		+ i[X]] = img->casted_addr[i[Y] * cube->wall_text.tex_size + i[X]];
-	}
-	mlx_destroy_image(mlx, img->img);
+    text_info->img->img = mlx_xpm_file_to_image(text_info->mlx, text_info->path, \
+    &text_info->cube->wall_text.tex_size, &text_info->cube->wall_text.tex_size);
+    if (text_info->img->img == NULL)
+        exit_program(text_info->cube, 1, TEXT_LOAD_ERR);
+    text_info->img->casted_addr = (int *)mlx_get_data_addr(text_info->img->img, \
+    &text_info->img->bpp, &text_info->img->line_length, &text_info->img->endian);
+    i[Y] = -1;
+    buffer = ft_calloc(1, sizeof * buffer \
+    * text_info->cube->wall_text.tex_size * text_info->cube->wall_text.tex_size);
+    if (!buffer)
+        exit_program(text_info->cube, EXIT_FAILURE, MALLOC_ERROR);
+    (*text_info->tx) = buffer;
+    while (++i[Y] < text_info->cube->wall_text.tex_size)
+    {
+        i[X] = -1;
+        while (++i[X] < text_info->cube->wall_text.tex_size)
+            (*text_info->tx)[i[Y] * text_info->cube->wall_text.tex_size \
+            + i[X]] = text_info->img->casted_addr[i[Y] * text_info->cube->wall_text.tex_size + i[X]];
+    }
+    mlx_destroy_image(text_info->mlx, text_info->img->img);
 }
 
 void	parse_textures(char *trimmed_line, t_cube *cube)
 {
 	char		*texture_path;
 	static int	i = 0;
+	t_text_info text_info;
 
 	if (cube->map.num_textures >= MAX_NUM_TEXT)
 		exit_program(cube, 1, TOO_MANY_TEXTURES);
@@ -68,9 +69,12 @@ void	parse_textures(char *trimmed_line, t_cube *cube)
 	if (texture_path == NULL)
 		exit_program(cube, 1, DUPLICATE_ERROR);
 	cube->map.texture[cube->map.num_textures] = texture_path;
-	load_texture(&cube->wall_text.img_text[cube->map.num_textures], \
-		cube->screen.mlx, texture_path, cube, \
-		&cube->wall_text.textures[cube->map.num_textures]);
+	text_info.img = &cube->wall_text.img_text[cube->map.num_textures];
+	text_info.mlx = cube->screen.mlx;
+	text_info.path = texture_path;
+	text_info.cube = cube;
+	text_info.tx = &cube->wall_text.textures[cube->map.num_textures];
+	load_texture(&text_info);
 	cube->map.num_textures++;
 	i++;
 }

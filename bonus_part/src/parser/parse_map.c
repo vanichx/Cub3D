@@ -6,19 +6,11 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/26 12:35:50 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/27 18:27:40 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// static void	convert_to_rgb(t_map *map)
-// {
-// 	map->c_col = (map->ceiling_col[0] << 16) \
-// 	+ (map->ceiling_col[1] << 8) + map->ceiling_col[2];
-// 	map->f_col = (map->floor_col[0] << 16) \
-// 	+ (map->floor_col[1] << 8) + map->floor_col[2];
-// }
 
 static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 {
@@ -43,20 +35,40 @@ static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 	}
 }
 
-void	parse_textures_files(t_cube *cube)
+void	parse_sprites(t_cube *cube)
 {
 	int	i;
-
-	i = NO;
-	while (i <= C)
+	t_text_info text_info;
+	
+	i = DOOR;
+	while (i <= ENEMY)
 	{
-		if (ft_strlen(cube->map.texture[i]) < 22)
-			exit_program(cube, 1, TEXT_ERR_FORMAT);
-		if (ft_strncmp(cube->map.texture[i], "./textures/walls/", 17))
-			exit_program(cube, 1, TEXT_LOC_ERR);
-		if (ft_strcmp(&cube->map.texture[i] \
-		[ft_strlen(cube->map.texture[i]) - 4], ".xpm"))
-			exit_program(cube, 1, TEXT_EXT_ERR);
+		if (i == DOOR)
+		{
+			text_info.path = "./textures/walls/door.xpm";
+			text_info.tx = &cube->sprite[DOOR].sprite_text.pixels;
+			text_info.cube = cube;
+			text_info.mlx = cube->screen.mlx;
+			text_info.img = &cube->sprite[DOOR].sprite_text.img;
+		}
+		else if (i == KEY)
+		{
+			text_info.path = "./textures/sprites/key.xpm";
+			text_info.tx = &cube->sprite[KEY].sprite_text.pixels;	
+			text_info.cube = cube;
+			text_info.mlx = cube->screen.mlx;
+			text_info.img = &cube->sprite[KEY].sprite_text.img;
+		}
+		else
+		{
+			text_info.path = "./textures/sprites/knight.xpm";
+			text_info.tx = &cube->sprite[ENEMY].sprite_text.pixels;
+			text_info.cube = cube;
+			text_info.mlx = cube->screen.mlx;
+			text_info.img = &cube->sprite[ENEMY].sprite_text.img;
+		}
+		load_texture(&text_info);
+		printf("sprite %d loaded\n", i);
 		i++;
 	}
 }
@@ -84,5 +96,5 @@ void	parse_map(char **map_file, t_cube *cube)
 	cube->map.map[cube->map.map_height] = NULL;
 	free_2darray((void **)buffer);
 	parse_player(cube);
-	parse_textures_files(cube);
+	parse_sprites(cube);
 }

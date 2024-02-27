@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 16:29:49 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/27 18:20:30 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@
 
 # define KNIFE 0
 # define GUN 1
+
+# define DOOR 0
+# define KEY 1
+# define ENEMY 2
 
 typedef struct s_point
 {
@@ -82,6 +86,9 @@ typedef struct s_map
 	int		num_textures;
 	int		map_x;
 	int		map_y;
+	int		key[2];
+	int 	enemy[2];
+	int		door[2];
 }				t_map;
 
 typedef struct s_vec
@@ -136,6 +143,7 @@ typedef struct s_textures
 	int		tex_size;
 }		t_textures;
 
+
 typedef struct s_keys
 {
 	int		key_esc;
@@ -162,24 +170,27 @@ typedef struct s_minimap
 	int		show;
 }			t_minimap;
 
-typedef struct s_door
+typedef struct s_sprite_tex
 {
-	int    is;
-	int    text_x;
-	int    x;
-	int    *actx;
-}				t_door;
+	t_img	img;
+	int		*pixels;
+	int		text_point[2];
+	double	tex_step;
+	double	tex_pos;
+	int		tex_size;
+}				t_sprite_tex;
 
-typedef struct s_dsprite
+typedef struct s_sprite
 {
-	double	transform[2];
-	int		start[2];
-	int		end[2];
-	int		h;
-	int		w;
-	int		tex_x;
-	int 	screen_x;
-}				t_dsprite;
+	t_sprite_tex	sprite_text;
+	double			transform[2];
+	int				start[2];
+	int				end[2];
+	int				h;
+	int				w;
+	int				tex_x;
+	int 			screen_x;
+}				t_sprite;
 
 typedef struct s_cube
 {
@@ -187,14 +198,22 @@ typedef struct s_cube
 	t_player		player;
 	t_map			map;
 	t_textures		wall_text;
-	t_textures		sprite_text;
 	t_img			minimap;
 	t_minimap		minimap_data;
-	t_door			door;
 	t_keys			key;
+	t_sprite		sprite[3];
 	int 			**text_pixels;
 	int				player_has_moved;
 }			t_cube;
+
+typedef struct s_text_info
+{
+	t_img	*img;
+	void	*mlx;
+	char	*path;
+	t_cube	*cube;
+	int		**tx;
+}		t_text_info;
 
 
 #endif

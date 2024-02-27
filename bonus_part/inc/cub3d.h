@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:30:19 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:25:09 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ int		parse_color_code(char *line, int *color);
 void	parse_file(char *map_path, char ***map_file, t_cube *cube);
 
 /* src/parcer/parse_info.c */
-void	load_texture(t_img *img, void *mlx, char *path, t_cube *cube, int **tx);
+void	load_texture(t_text_info *text_info);
 void	parse_textures(char *trimmed_line, t_cube *cube);
 
 /* src/parcer/parse_info2.c */
@@ -193,9 +193,12 @@ void	parse_map(char **map_file, t_cube *cube);
 /* src/parcer/parse_utils.c */
 bool	is_valid_char(char c);
 int		is_valid_line(char *line, t_cube *cube);
-void		read_file(char *map_path, int *fd, t_cube *cube);
+void	read_file(char *map_path, int *fd, t_cube *cube);
 bool	line_has_walls(char *line);
 int		is_player(char *line);
+int 	is_key(char *line);
+int 	is_enemy(char *line);
+int 	is_door(char *line);
 
 /* src/parcer/print_map_info.c */
 void	print_map_info(t_cube *cube);

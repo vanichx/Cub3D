@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:23:32 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/16 10:45:13 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:15:57 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,9 @@
 # define TEXT_LOAD_ERR "❌ Texture error: Failed to load texture\n"
 
 # define HOOKING_ERROR "❌ Hooking error: Failed to hook events\n"
+
+# define MULT_DOORS "❌ Map error: Multiple doors\n"
+# define MULT_KEYS "❌ Map error: Multiple keys\n"
+# define MULT_ENEMIES "❌ Map error: Multiple enemies\n"
 
 #endif
