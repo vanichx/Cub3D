@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:52:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 01:31:20 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 14:22:29 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ void draw_door(t_cube *cube, t_ray *ray, int x)
         & (TEXT_SIZE - 1);
         cube->sprite.sprite_text[DOOR].tex_pos += cube->sprite.sprite_text[DOOR].tex_step;
         color = cube->sprite.sprite_text[DOOR].pixels
-        [TEXT_SIZE * cube->sprite.sprite_text[DOOR].text_point[Y] \
-        + cube->sprite.sprite_text[DOOR].text_point[X]];
+        [TEXT_SIZE * (int)cube->sprite.sprite_text[DOOR].text_point[Y] \
+        + (int)cube->sprite.sprite_text[DOOR].text_point[X]];
         if (ray->side == Y)
             color = (color >> 1) & 8355711;
         cube->text_pixels[y][x] = color;
@@ -177,11 +177,11 @@ void sort_sprites(t_sprite *sprite, t_cube *cube)
 
 void set_sprite_text(t_sprite *sprite, t_cube *cube, int i)
 {
-	sprite->sprite_text[i].text_pos[X] = sprite->sprite_text[i].text_point[X] + 0.5 - cube->player.pos[X];
-	sprite->sprite_text[i].text_pos[Y] = sprite->sprite_text[i].text_point[Y] + 0.5 - cube->player.pos[Y];
-	sprite->sprite_text[i].inv_det = 1.0 / (cube->player.cam.dir[X] * cube->player.front.dir[Y] - cube->player.cam.dir[Y] * cube->player.front.dir[X]);
-	sprite->sprite_text[i].transform[X] = sprite->sprite_text[i].inv_det * (cube->player.front.dir[Y] * sprite->sprite_text[i].text_pos[X] - cube->player.cam.dir[Y] * sprite->sprite_text[i].text_pos[Y]);
-	sprite->sprite_text[i].transform[Y] = sprite->sprite_text[i].inv_det * (-cube->player.cam.dir[X] * sprite->sprite_text[i].text_pos[X] + cube->player.front.dir[X] * sprite->sprite_text[i].text_pos[Y]);
+	sprite->sprite_text[i].text_pos[X] = sprite->sprite_text[i].text_point[X] - cube->player.pos[X];
+	sprite->sprite_text[i].text_pos[Y] = sprite->sprite_text[i].text_point[Y] - cube->player.pos[Y];
+	sprite->sprite_text[i].inv_det = 1.0 / (cube->player.cam.dir[X] * cube->player.front.dir[Y] - cube->player.front.dir[X] * cube->player.cam.dir[Y]);
+	sprite->sprite_text[i].transform[X] = sprite->sprite_text[i].inv_det * (cube->player.front.dir[Y] * sprite->sprite_text[i].text_pos[X] - cube->player.front.dir[X] * sprite->sprite_text[i].text_pos[Y]);
+	sprite->sprite_text[i].transform[Y] = sprite->sprite_text[i].inv_det * (-cube->player.cam.dir[Y] * sprite->sprite_text[i].text_pos[X] + cube->player.cam.dir[X] * sprite->sprite_text[i].text_pos[Y]);
 	sprite->sprite_text[i].screen_x = (int)((cube->screen.width / 2) * (1 + sprite->sprite_text[i].transform[X] / sprite->sprite_text[i].transform[Y]));
 	sprite->sprite_text[i].h = abs((int)(cube->screen.height / (sprite->sprite_text[i].transform[Y])));
 	sprite->sprite_text[i].start[Y] = -sprite->sprite_text[i].h / 2 + cube->screen.height / 2;

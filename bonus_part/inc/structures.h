@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 01:23:06 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 13:49:51 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ typedef struct s_sprite_tex
 {
 	t_img	img;
 	int		*pixels;
-	int		text_point[2];
+	double	text_point[2];
 	double  text_pos[2];
 	double	tex_step;
 	double	tex_pos;
@@ -187,7 +187,7 @@ typedef struct s_sprite_tex
 	int		h;
 	int		w;
 	int 	d;
-	int 	color;
+	uint32_t color;
 	int		tex_x;
 	int 	screen_x;
 }				t_sprite_tex;

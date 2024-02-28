@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/27 23:44:14 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 12:05:08 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	parse_sprites(t_cube *cube)
 			text_info.img = &cube->sprite.sprite_text[ENEMY].img;
 		}
 		load_texture(&text_info);
-		printf("sprite %d loaded\n", i);
 		i++;
 	}
 }
@@ -89,7 +88,6 @@ void	parse_map(char **map_file, t_cube *cube)
 	while (i < cube->map.map_height)
 	{
 		cube->map.map[i] = ft_strdup(buffer[i]);
-		printf("%s\n", cube->map.map[i]);
 		if (cube->map.map[i++] == NULL)
 			exit_program(cube, 1, DUPLICATE_ERROR);
 	}
