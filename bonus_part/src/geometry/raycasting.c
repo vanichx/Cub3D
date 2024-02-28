@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:52:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 16:57:07 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 01:31:20 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,134 @@ void	perform_dda(t_cube *cube, t_ray *ray)
 			ray->map_point[Y] += ray->step[Y];
 			ray->side = 1;
 		}
-		if (cube->map.map[ray->map_point[Y]][ray->map_point[X]] == '1')
+		if (cube->map.map[ray->map_point[Y]][ray->map_point[X]] == '1'
+			|| cube->map.map[ray->map_point[Y]][ray->map_point[X]] == '2')
+		{
+			if (cube->map.map[ray->map_point[Y]][ray->map_point[X]] == '2')
+				ray->hit_door = 1;
 			hit = 1;
+		}
 	}
+}
+
+void draw_door(t_cube *cube, t_ray *ray, int x)
+{
+    int		y;
+    int		color;
+
+    cube->sprite.sprite_text[DOOR].text_point[X] = (int)(ray->wall_x \
+    * (double)TEXT_SIZE);
+    if (((ray->side == X) && (ray->ray_dir.dir[X] > 0))
+        || ((ray->side == Y) && (ray->ray_dir.dir[Y] < 0)))
+        cube->sprite.sprite_text[DOOR].text_point[X] = TEXT_SIZE \
+        - cube->sprite.sprite_text[DOOR].text_point[X] - 1;
+    cube->sprite.sprite_text[DOOR].tex_step = 1.0 * TEXT_SIZE \
+    / ray->line_height;
+    cube->sprite.sprite_text[DOOR].tex_pos = (ray->draw[START] - cube->screen.height \
+    / 2 + ray->line_height / 2) * cube->sprite.sprite_text[DOOR].tex_step;
+    y = ray->draw[START];
+    while (y < ray->draw[END])
+    {
+        cube->sprite.sprite_text[DOOR].text_point[Y] = (int)cube->sprite.sprite_text[DOOR].tex_pos \
+        & (TEXT_SIZE - 1);
+        cube->sprite.sprite_text[DOOR].tex_pos += cube->sprite.sprite_text[DOOR].tex_step;
+        color = cube->sprite.sprite_text[DOOR].pixels
+        [TEXT_SIZE * cube->sprite.sprite_text[DOOR].text_point[Y] \
+        + cube->sprite.sprite_text[DOOR].text_point[X]];
+        if (ray->side == Y)
+            color = (color >> 1) & 8355711;
+        cube->text_pixels[y][x] = color;
+        y++;
+    }
+}
+
+void sort_sprites(t_sprite *sprite, t_cube *cube)
+{
+	int i;
+	int temp_order;
+	double temp_distance;
+
+	i = ENEMY;
+	while (i < DOOR)
+	{
+		sprite->sprite_order[i] = i;
+        sprite->sprite_dist[i] = ((cube->player.pos[X] - cube->sprite.sprite_text[i].text_pos[X]) \
+		* (cube->player.pos[X] - cube->sprite.sprite_text[i].text_pos[X]) + (cube->player.pos[Y] \
+		- cube->sprite.sprite_text[i].text_pos[Y]) * (cube->player.pos[Y] - \
+		cube->sprite.sprite_text[i].text_pos[Y]));
+		i++;
+	}
+	if (sprite->sprite_dist[ENEMY] > sprite->sprite_dist[KEY])
+	    return ;
+	else
+	{
+		temp_order = sprite->sprite_order[ENEMY];
+		sprite->sprite_order[ENEMY] = sprite->sprite_order[KEY];
+		sprite->sprite_order[KEY] = temp_order;
+		temp_distance = sprite->sprite_dist[ENEMY];
+		sprite->sprite_dist[ENEMY] = sprite->sprite_dist[KEY];
+		sprite->sprite_dist[KEY] = temp_distance;
+	}
+}
+
+void set_sprite_text(t_sprite *sprite, t_cube *cube, int i)
+{
+	sprite->sprite_text[i].text_pos[X] = sprite->sprite_text[i].text_point[X] + 0.5 - cube->player.pos[X];
+	sprite->sprite_text[i].text_pos[Y] = sprite->sprite_text[i].text_point[Y] + 0.5 - cube->player.pos[Y];
+	sprite->sprite_text[i].inv_det = 1.0 / (cube->player.cam.dir[X] * cube->player.front.dir[Y] - cube->player.cam.dir[Y] * cube->player.front.dir[X]);
+	sprite->sprite_text[i].transform[X] = sprite->sprite_text[i].inv_det * (cube->player.front.dir[Y] * sprite->sprite_text[i].text_pos[X] - cube->player.cam.dir[Y] * sprite->sprite_text[i].text_pos[Y]);
+	sprite->sprite_text[i].transform[Y] = sprite->sprite_text[i].inv_det * (-cube->player.cam.dir[X] * sprite->sprite_text[i].text_pos[X] + cube->player.front.dir[X] * sprite->sprite_text[i].text_pos[Y]);
+	sprite->sprite_text[i].screen_x = (int)((cube->screen.width / 2) * (1 + sprite->sprite_text[i].transform[X] / sprite->sprite_text[i].transform[Y]));
+	sprite->sprite_text[i].h = abs((int)(cube->screen.height / (sprite->sprite_text[i].transform[Y])));
+	sprite->sprite_text[i].start[Y] = -sprite->sprite_text[i].h / 2 + cube->screen.height / 2;
+	if(sprite->sprite_text[i].start[Y] < 0)
+		sprite->sprite_text[i].start[Y] = 0;
+	sprite->sprite_text[i].end[Y] = sprite->sprite_text[i].h / 2 + cube->screen.height / 2;
+	if(sprite->sprite_text[i].end[Y] >= cube->screen.height)
+		sprite->sprite_text[i].end[Y] = cube->screen.height - 1;
+	sprite->sprite_text[i].w = abs((int)(cube->screen.height / (sprite->sprite_text[i].transform[Y])));
+	sprite->sprite_text[i].start[X] = -sprite->sprite_text[i].w / 2 + sprite->sprite_text[i].screen_x;
+	if(sprite->sprite_text[i].start[X] < 0)
+		sprite->sprite_text[i].start[X] = 0;
+	sprite->sprite_text[i].end[X] = sprite->sprite_text[i].w / 2 + sprite->sprite_text[i].screen_x;
+	if(sprite->sprite_text[i].end[X] >= cube->screen.width)
+		sprite->sprite_text[i].end[X] = cube->screen.width - 1;
+}
+
+void cast_sprites(t_cube *cube, double *z_buffer)
+{
+	int i[2];
+	int stripe;
+	int tex[2];
+	t_sprite_tex sprite_text;
+
+	i[X] = 0;
+	sort_sprites(&cube->sprite, cube);
+	while (i[X] < 2)
+    {
+		set_sprite_text(&cube->sprite, cube, cube->sprite.sprite_order[i[X]]);
+		sprite_text = cube->sprite.sprite_text[cube->sprite.sprite_order[i[X]]];
+		stripe = sprite_text.start[X];
+		while (stripe < sprite_text.end[X])
+        {
+			tex[X] = (int)(256 * (stripe - (-sprite_text.w / 2 + sprite_text.screen_x)) * TEXT_SIZE / sprite_text.w) / 256;
+			if (sprite_text.transform[Y] > 0 && stripe > 0 && stripe < cube->screen.width && sprite_text.transform[Y] < z_buffer[stripe])
+			{
+				i[Y] = sprite_text.start[Y];
+				while (i[Y] < sprite_text.end[Y])
+				{
+					sprite_text.d = (i[Y]) * 256 - cube->screen.height * 128 + sprite_text.h * 128;
+					tex[Y] = ((sprite_text.d * TEXT_SIZE) / sprite_text.h) / 256;
+					sprite_text.color = sprite_text.pixels[TEXT_SIZE * tex[Y] + tex[X]];
+					if ((sprite_text.color & 0x00FFFFFF) != 0)
+						cube->text_pixels[i[Y]][stripe] = sprite_text.color;
+					i[Y]++;
+				}
+			}
+			stripe++;
+        }
+		i[X]++;
+    }
 }
 
 void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
@@ -145,20 +270,26 @@ void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
 
 void	raycast_bonus(t_cube *cube, t_ray *ray)
 {
-	int	x;
-	int	y;
+    int	x;
+    int	y;
+	double z_buffer[cube->screen.width];
 
-	x = -1;
-	y = -1;
-	while (++y < cube->screen.height)
-		cast_floor(cube, y);
-	while (++x < cube->screen.width)
-	{
-		setup_ray_params(cube, ray, x);
-		setup_dda_params(cube, ray);
-		perform_dda(cube, ray);
-		calculate_line_height(cube, ray);
-		update_texts_pixels(cube, ray, x);
-	}
-	render_frame(cube);
+    x = -1;
+    y = -1;
+    while (++y < cube->screen.height)
+        cast_floor(cube, y);
+    while (++x < cube->screen.width)
+    {
+        setup_ray_params(cube, ray, x);
+        setup_dda_params(cube, ray);
+        perform_dda(cube, ray);
+        calculate_line_height(cube, ray);
+        if (ray->hit_door == 1)
+            draw_door(cube, ray, x);
+        else
+            update_texts_pixels(cube, ray, x);
+		z_buffer[x] = ray->wall_dist;
+    }
+	cast_sprites(cube, z_buffer);
+    render_frame(cube);
 }

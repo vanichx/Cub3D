@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:32:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 13:14:56 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 00:59:20 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,23 @@ void	check_args(int argc, char *argv[])
 		exit_program(NULL, EXIT_FAILURE, WRONG_FILE_NAMING);
 }
 
+void	set_sprites_coords(t_cube *c)
+{
+	c->sprite.sprite_text[DOOR].text_point[X] = c->map.door[X];
+	c->sprite.sprite_text[DOOR].text_point[Y] = c->map.door[Y];
+	c->sprite.sprite_text[KEY].text_point[X] = c->map.key[X];
+	c->sprite.sprite_text[KEY].text_point[Y] = c->map.key[Y];
+	c->sprite.sprite_text[ENEMY].text_point[X] = c->map.enemy[X];
+	c->sprite.sprite_text[ENEMY].text_point[Y] = c->map.enemy[Y];
+}
+
 void	parse(char *map_path, t_cube *cube)
 {
 	init_cube(cube);
 	parse_file(map_path, &cube->map.map_file, cube);
 	parse_map(cube->map.map_file, cube);
 	check_walls (cube);
+	set_sprites_coords(cube);
 }
 
 int	main(int argc, char *argv[])

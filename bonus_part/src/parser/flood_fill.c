@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/27 18:25:57 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/27 19:54:29 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static int	f_fill(t_cube *cube, int p_y, int p_x)
 		|| cube->map.map[c_y][c_x] == '\0')
 		exit_program (cube, 1, UNCLOSED_MAP);
 	if (c_y < 0 || c_x < 0 || cube->map.map[c_y][c_x] == '1'
-		|| cube->map.map[c_y][c_x] == 'F')
+		|| cube->map.map[c_y][c_x] == '2' || cube->map.map[c_y][c_x] == '3'
+		|| cube->map.map[c_y][c_x] == '4' || cube->map.map[c_y][c_x] == 'F')
 		return (0);
 	cube->map.map[c_y][c_x] = 'F';
 	if (f_fill(cube, c_y + 1, c_x)

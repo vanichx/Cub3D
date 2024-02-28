@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:34:12 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/22 00:23:20 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/27 20:13:29 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_ray(t_ray *ray)
 
 void	setup_ray_params(t_cube *cube, t_ray *ray, int x)
 {
+	ray->hit_door = 0;
 	ray->camera_x = 2 * x / (double)cube->screen.width - 1;
 	ray->ray_dir.dir[X] = cube->player.front.dir[X] \
 	+ cube->player.cam.dir[X] * ray->camera_x;

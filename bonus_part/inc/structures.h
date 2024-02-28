@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 18:20:30 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 01:23:06 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@
 # define KNIFE 0
 # define GUN 1
 
-# define DOOR 0
+# define ENEMY 0
 # define KEY 1
-# define ENEMY 2
+# define DOOR 2
 
 typedef struct s_point
 {
@@ -111,6 +111,7 @@ typedef struct s_ray
 	int		side;
 	int		line_height;
 	int		draw[2];
+	int		hit_door;
 }	t_ray;
 
 typedef struct s_player
@@ -175,21 +176,27 @@ typedef struct s_sprite_tex
 	t_img	img;
 	int		*pixels;
 	int		text_point[2];
+	double  text_pos[2];
 	double	tex_step;
 	double	tex_pos;
+	double  inv_det;
 	int		tex_size;
+	double	transform[2];
+	int		start[2];
+	int		end[2];
+	int		h;
+	int		w;
+	int 	d;
+	int 	color;
+	int		tex_x;
+	int 	screen_x;
 }				t_sprite_tex;
 
 typedef struct s_sprite
 {
-	t_sprite_tex	sprite_text;
-	double			transform[2];
-	int				start[2];
-	int				end[2];
-	int				h;
-	int				w;
-	int				tex_x;
-	int 			screen_x;
+	t_sprite_tex	sprite_text[3];
+	int				sprite_order[2];
+	double			sprite_dist[2];
 }				t_sprite;
 
 typedef struct s_cube
@@ -201,7 +208,7 @@ typedef struct s_cube
 	t_img			minimap;
 	t_minimap		minimap_data;
 	t_keys			key;
-	t_sprite		sprite[3];
+	t_sprite		sprite;
 	int 			**text_pixels;
 	int				player_has_moved;
 }			t_cube;
