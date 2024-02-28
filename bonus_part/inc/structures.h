@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 17:07:07 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 17:51:50 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,7 @@ typedef struct s_cube
 	int				key_status;
 	int				enemy;
 	int 			door;
+
 }			t_cube;
 
 typedef struct s_text_info

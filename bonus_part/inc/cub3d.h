@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 18:25:09 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 17:48:43 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,28 @@ bool	is_valid_map_coord(int coord, int size);
 
 
 
-char	*add_minimap_line(t_cube *d, t_minimap *m, int y);
-char	**generate_minimap(t_cube *cube, t_minimap *minimap);
+
+
+
+
+
+char	*add_minimap_line(t_cube *d, t_minimap *m, int y, char **map);
+char	**generate_minimap(t_cube *cube, t_minimap *minimap, char **map);
+char	get_minimap_character(t_cube *d, t_minimap *m, int x, int y, char **map);
+
+
+char **square_map(char **map);
+
+
+
+
 
 
 void	render_minimap(t_cube *cube);
 void	update_player_position(t_cube *cube);
 void	rotate_player_fov(t_cube *cube, float angle);
+
+
 
 /* src/geometry/render.c */
 void	allocate_text_pixels(t_cube *cube);

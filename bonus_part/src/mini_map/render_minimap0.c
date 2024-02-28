@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:45:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:45:44 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:22:29 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ void	draw_minimap_tile(t_minimap *minimap, int x, int y)
 	else if (minimap->map[y][x] == '1')
 		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
 			y * minimap->tile_size, 0x606060);
+	else if (minimap->map[y][x] == '2')
+		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
+			y * minimap->tile_size, 0xFF0000);
+	else if (minimap->map[y][x] == '3')
+		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
+			y * minimap->tile_size, 0xEEF600);
+	else if (minimap->map[y][x] == '4')
+		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
+			y * minimap->tile_size, 0x3399FF);
 	else if (minimap->map[y][x] == '0')
 		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
 			y * minimap->tile_size, 0x80E0E0E0);

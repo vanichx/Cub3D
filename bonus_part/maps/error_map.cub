@@ -1,13 +1,12 @@
+NO ./textures/walls/telep.xpm
+SO ./textures/walls/telep.xpm
+WE ./textures/walls/telep.xpm
+EA ./textures/walls/telep.xpm
 
-NO ./textures/painting.xpm
-SO ./textures/painting.xpm
-WE ./textures/painting.xpm
-EA ./textures/painting.xpm
+F ./textures/walls/wood.xpm
+C ./textures/walls/ceil.xpm
 
-F ./textures/north.xpm
-C ./textures/east.xpm
-
-        1111111111111111111111111
+        111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
         1001000000000000000000001
@@ -44,7 +43,7 @@ C ./textures/east.xpm
 1            11111111           1                       1
 1                               11111111111111111       11111111111111111                
 1                               1               1                       1
-1                               1               1                       1
+1                               1               1     N                  1
 1                               1               1                       1111111
 1                               1               1        111111               1
 111111111            111111111111               1        11   0          11111
@@ -72,7 +71,7 @@ C ./textures/east.xpm
 1           1111                                                        1
 1               1                                                       1
 1               1                              111111                   1
-1               1                                 11  E                  1
+1               1                                 11 11                  1
 1               1                                   11111                1
 1               111111111111111              111111111                   1
 1                             1                    111111        1       1

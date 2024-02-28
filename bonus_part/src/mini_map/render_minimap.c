@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:30:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:43:07 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:49:10 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_mmap_offset(t_minimap *minimap, int size, int p_pos)
 
 bool	is_valid_pos_wall_collision(t_cube *cube, double x, double y)
 {
-	if (cube->map.map[(int)y][(int)x] == '1'
+	if (cube->map.map[(int)y][(int)x] == '1' || cube->map.map[(int)y][(int)x] == '2'
 		|| cube->map.map[(int)(y + 0.1)][(int)(x + 0.1)] == '1')
 		return (false);
 	return (true);
@@ -62,6 +62,8 @@ void	calculate_minimap_offset(t_minimap *minimap, t_cube *cube)
 void	render_minimap(t_cube *cube)
 {
 	t_minimap	minimap;
+	char **new_map;
+
 
 	minimap.map = NULL;
 	cube->minimap_data = minimap;
@@ -71,7 +73,8 @@ void	render_minimap(t_cube *cube)
 	minimap.tile_size = MMAP_PIXEL_SIZE / (2 * minimap.view_dist);
 	calculate_minimap_offset(&minimap, cube);
 	update_player_position(cube);
-	minimap.map = generate_minimap(cube, &minimap);
+	new_map = square_map(cube->map.map);
+	minimap.map = generate_minimap(cube, &minimap, new_map);
 	if (!minimap.map)
 		exit_program(cube, 1, "Error: minimap generation failed");
 	render_minimap_image(cube, &minimap);

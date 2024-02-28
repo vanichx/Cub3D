@@ -6,28 +6,34 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:42:26 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:25:43 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:28:32 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	get_minimap_character(t_cube *d, t_minimap *m, int x, int y)
+char	get_minimap_character(t_cube *d, t_minimap *m, int x, int y, char **map)
 {
 	if ((int)d->player.m_pos.x == (x + m->offset_x)
-		&& (int)d->player.m_pos.y == (y + m->offset_y))
-		return ('N');
-	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '1')
-		return ('1');
-	else if (d->map.map[y + m->offset_y][x + m->offset_x] == 'F')
+        && (int)d->player.m_pos.y == (y + m->offset_y))
+        return ('N');
+    else if (map[y + m->offset_y][x + m->offset_x] == '1')
+        return ('1');
+	else if (map[y + m->offset_y][x + m->offset_x] == '2')
+		return ('2');
+	else if (map[y + m->offset_y][x + m->offset_x] == '3')
+		return ('3');
+	else if (map[y + m->offset_y][x + m->offset_x] == '4')
+		return ('4');
+	else if (map[y + m->offset_y][x + m->offset_x] == 'F')
 		return ('0');
-	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '0')
+	else if (map[y + m->offset_y][x + m->offset_x] == '0')
 		return ('0');
 	else
 		return ('\0');
 }
 
-char	*add_minimap_line(t_cube *d, t_minimap *m, int y)
+char	*add_minimap_line(t_cube *d, t_minimap *m, int y, char **map)
 {
 	char	*line;
 	int		x;
@@ -37,16 +43,16 @@ char	*add_minimap_line(t_cube *d, t_minimap *m, int y)
 		return (NULL);
 	x = 0;
 	while (x < m->size && x < d->map.map_width)
-	{
-		if ((y + m->offset_y) < d->map.map_height && (size_t)
-			(x + m->offset_x) < ft_strlen(d->map.map[y + m->offset_y]))
-			line[x] = get_minimap_character(d, m, x, y);
-		x++;
-	}
+    {
+        if ((y + m->offset_y) < d->map.map_height && (size_t)
+            (x + m->offset_x) < ft_strlen(map[y + m->offset_y]))
+            line[x] = get_minimap_character(d, m, x, y, map);
+        x++;
+    }
 	return (line);
 }
 
-char	**generate_minimap(t_cube *cube, t_minimap *minimap)
+char	**generate_minimap(t_cube *cube, t_minimap *minimap, char **map)
 {
 	char	**mmap;
 	int		y;
@@ -57,7 +63,7 @@ char	**generate_minimap(t_cube *cube, t_minimap *minimap)
 	y = 0;
 	while (y < minimap->size && y < cube->map.map_height)
 	{
-		mmap[y] = add_minimap_line(cube, minimap, y);
+		mmap[y] = add_minimap_line(cube, minimap, y, map);
 		if (!mmap[y])
 		{
 			free_tab((void **)mmap);
