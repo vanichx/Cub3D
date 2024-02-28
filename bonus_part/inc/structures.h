@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 13:49:51 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 17:18:19 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ typedef struct s_cube
 	t_sprite		sprite;
 	int 			**text_pixels;
 	int				player_has_moved;
+
 }			t_cube;
 
 typedef struct s_text_info
