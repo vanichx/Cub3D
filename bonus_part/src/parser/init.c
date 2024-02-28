@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/27 16:35:32 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 15:30:38 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	init_player(t_player *player)
 void	init_cube(t_cube *cube)
 {
 	init_player(&cube->player);
+	cube->enemy = 0;
+	cube->key_status = 0;
+	cube->door = 0;
+	cube->game_status = 0;
 	cube->map.map_x = 0;
 	cube->map.map_y = 0;
 	cube->player_has_moved = 0;

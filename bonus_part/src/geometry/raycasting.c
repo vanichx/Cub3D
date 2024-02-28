@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:52:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 14:22:29 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 17:48:19 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,46 @@ void set_sprite_text(t_sprite *sprite, t_cube *cube, int i)
 		sprite->sprite_text[i].end[X] = cube->screen.width - 1;
 }
 
+void move_enemy(int map_height, int map_width, char **map, double *enemy_x, double *enemy_y)
+{
+    const int movement_interval = 7;
+    static int iteration_count = 0;
+	enum Direction direction;
+	double new[2];
+
+	if (iteration_count < 100)
+    	iteration_count++;
+	else if (iteration_count == 100)
+		iteration_count = 0;
+    if (iteration_count % movement_interval != 0)
+        return;
+    direction = rand() % 4;
+    new[X] = (*enemy_x);
+    new[Y] = (*enemy_y);
+	if (direction == UP)
+		new[Y] -= 0.5;
+	else if (direction == DOWN)
+		new[Y] += 0.5;
+	else if (direction == LEFT)
+		new[X] -= 0.5;
+	else if (direction == RIGHT)
+		new[X] += 0.5;
+    if (new[X] >= 0 && new[X] < map_width && new[Y] >= 0 && new[Y] < map_height && map[(int)new[Y]][(int)new[X]] != '1' && map[(int)new[Y]][(int)new[X]] != '2')
+	{
+		if (map[(int)(new[Y] + 1)][(int)new[X]] == '1')
+			new[Y] -= 0.5;
+		if (map[(int)(new[Y] - 1)][(int)new[X]] == '1')
+			new[Y] += 0.5;
+		if (map[(int)new[Y]][(int)(new[X] + 1)] == '1')
+			new[X] -= 0.5;
+		if (map[(int)new[Y]][(int)(new[X] - 1)] == '1')
+			new[X] += 0.5;
+        *enemy_x = new[X];
+        *enemy_y = new[Y];	
+    }
+}
+
+
 void cast_sprites(t_cube *cube, double *z_buffer)
 {
 	int i[2];
@@ -207,6 +247,7 @@ void cast_sprites(t_cube *cube, double *z_buffer)
 	t_sprite_tex sprite_text;
 
 	i[X] = 0;
+	move_enemy(cube->map.map_height, cube->map.map_width, cube->map.map, &cube->sprite.sprite_text[ENEMY].text_point[X], &cube->sprite.sprite_text[ENEMY].text_point[Y]);
 	sort_sprites(&cube->sprite, cube);
 	while (i[X] < 2)
     {

@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 13:49:51 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 17:07:07 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,26 @@
 # define KEY 1
 # define DOOR 2
 
+enum Direction
+{ 
+	UP,
+	DOWN, 
+	LEFT,
+	RIGHT 
+};
+
 typedef struct s_point
 {
 	float	x;
 	float	y;
 	int		color;
 }		t_point;
+
+typedef struct point
+{
+	int x;
+	int y;
+}			point;
 
 typedef struct s_img
 {
@@ -211,6 +225,10 @@ typedef struct s_cube
 	t_sprite		sprite;
 	int 			**text_pixels;
 	int				player_has_moved;
+	int				game_status;
+	int				key_status;
+	int				enemy;
+	int 			door;
 }			t_cube;
 
 typedef struct s_text_info
