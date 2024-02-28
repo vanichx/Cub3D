@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keycodes_mac.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:24:25 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 16:52:35 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:31:55 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@
 # define KEY_UP		126
 # define KEY_CTRL	256
 # define KEY_CMD	259
+# define KEY_SPACE	49
 
 #endif

@@ -6,13 +6,13 @@
 #    By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 10:13:35 by ipetruni          #+#    #+#              #
-#    Updated: 2024/02/23 13:21:31 by eseferi          ###   ########.fr        #
+#    Updated: 2024/02/28 18:26:09 by eseferi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 CC					=	gcc -Wall -Wextra -Werror
-CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/X11/include -fsanitize=address -fno-omit-frame-pointer #-I/usr/include/X11/include/
+CFLAGS				=	-Iinc -Isrc -O3 -g -I/usr/X11/include #-fsanitize=address -fno-omit-frame-pointer #-I/usr/include/X11/include/
 
 RM					=	rm -rf
 CUB3D				=   cub3D_bonus

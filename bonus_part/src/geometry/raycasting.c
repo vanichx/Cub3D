@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:52:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 17:48:19 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/28 19:20:17 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void draw_door(t_cube *cube, t_ray *ray, int x)
         if (ray->side == Y)
             color = (color >> 1) & 8355711;
         cube->text_pixels[y][x] = color;
+		if (cube->door == 1)
+			cube->text_pixels[y][x] = 0x00FF0000;
         y++;
     }
 }
@@ -199,7 +201,7 @@ void set_sprite_text(t_sprite *sprite, t_cube *cube, int i)
 		sprite->sprite_text[i].end[X] = cube->screen.width - 1;
 }
 
-void move_enemy(int map_height, int map_width, char **map, double *enemy_x, double *enemy_y)
+void move_enemy(int map_height, int map_width, char **map, double *enemy_x, double *enemy_y, t_cube *cube)
 {
     const int movement_interval = 7;
     static int iteration_count = 0;
@@ -234,7 +236,9 @@ void move_enemy(int map_height, int map_width, char **map, double *enemy_x, doub
 		if (map[(int)new[Y]][(int)(new[X] - 1)] == '1')
 			new[X] += 0.5;
         *enemy_x = new[X];
-        *enemy_y = new[Y];	
+        *enemy_y = new[Y];
+		if ((int)*enemy_x == (int)cube->player.pos[X] && (int)*enemy_y == (int)cube->player.pos[Y])
+			cube->game_status = 1;
     }
 }
 
@@ -247,10 +251,15 @@ void cast_sprites(t_cube *cube, double *z_buffer)
 	t_sprite_tex sprite_text;
 
 	i[X] = 0;
-	move_enemy(cube->map.map_height, cube->map.map_width, cube->map.map, &cube->sprite.sprite_text[ENEMY].text_point[X], &cube->sprite.sprite_text[ENEMY].text_point[Y]);
+	move_enemy(cube->map.map_height, cube->map.map_width, cube->map.map, &cube->sprite.sprite_text[ENEMY].text_point[X], &cube->sprite.sprite_text[ENEMY].text_point[Y], cube);
 	sort_sprites(&cube->sprite, cube);
 	while (i[X] < 2)
     {
+		if (i[X] == KEY && cube->key_status == 1)
+		{
+			i[X]++;
+			continue ;
+		}
 		set_sprite_text(&cube->sprite, cube, cube->sprite.sprite_order[i[X]]);
 		sprite_text = cube->sprite.sprite_text[cube->sprite.sprite_order[i[X]]];
 		stripe = sprite_text.start[X];
@@ -309,6 +318,46 @@ void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
 	}
 }
 
+void	render_game_over(t_cube *cube)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < cube->screen.height)
+	{
+		j = 0;
+		while (j < cube->screen.width)
+		{
+			cube->text_pixels[i][j] = 0x00FF0000;
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(cube->screen.mlx, cube->screen.win, cube->screen.img.img, 0, 0);
+	mlx_string_put(cube->screen.mlx, cube->screen.win, cube->screen.width / 2 - 100, cube->screen.height / 2, 0x00FF0000, "GAME OVER!");
+}
+
+void	render_win_screen(t_cube *cube)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < cube->screen.height)
+	{
+		j = 0;
+		while (j < cube->screen.width)
+		{
+			cube->text_pixels[i][j] = 0x00FF0000;
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(cube->screen.mlx, cube->screen.win, cube->screen.img.img, 0, 0);
+	mlx_string_put(cube->screen.mlx, cube->screen.win, cube->screen.width / 2 - 100, cube->screen.height / 2, 0x00FF0000, "YOU WIN!");
+}
+
 void	raycast_bonus(t_cube *cube, t_ray *ray)
 {
     int	x;
@@ -317,20 +366,29 @@ void	raycast_bonus(t_cube *cube, t_ray *ray)
 
     x = -1;
     y = -1;
-    while (++y < cube->screen.height)
-        cast_floor(cube, y);
-    while (++x < cube->screen.width)
-    {
-        setup_ray_params(cube, ray, x);
-        setup_dda_params(cube, ray);
-        perform_dda(cube, ray);
-        calculate_line_height(cube, ray);
-        if (ray->hit_door == 1)
-            draw_door(cube, ray, x);
-        else
-            update_texts_pixels(cube, ray, x);
-		z_buffer[x] = ray->wall_dist;
-    }
-	cast_sprites(cube, z_buffer);
-    render_frame(cube);
+	if (cube->game_status == 1)
+		render_game_over(cube);
+	else if (cube->game_status == 2)
+		render_win_screen(cube);
+	else
+	{
+		while (++y < cube->screen.height)
+			cast_floor(cube, y);
+		while (++x < cube->screen.width)
+		{
+			setup_ray_params(cube, ray, x);
+			setup_dda_params(cube, ray);
+			perform_dda(cube, ray);
+			calculate_line_height(cube, ray);
+			if (ray->hit_door == 1)
+				draw_door(cube, ray, x);
+			else
+				update_texts_pixels(cube, ray, x);
+			z_buffer[x] = ray->wall_dist;
+		}
+		if ((int)cube->player.pos[X] == (int)cube->sprite.sprite_text[KEY].text_point[X] && (int)cube->player.pos[Y] == (int)cube->sprite.sprite_text[KEY].text_point[Y])
+			cube->key_status = 1;
+		cast_sprites(cube, z_buffer);
+		render_frame(cube);
+	}
 }

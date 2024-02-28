@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:30:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 17:49:10 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:05:53 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ void	calculate_minimap_offset(t_minimap *minimap, t_cube *cube)
 			(int)cube->player.pos[Y]);
 }
 
+
+void print_minimap(char **map)
+{
+	int i = 0;
+	
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+
+	printf("\n");
+}
+
 void	render_minimap(t_cube *cube)
 {
 	t_minimap	minimap;
@@ -75,6 +89,7 @@ void	render_minimap(t_cube *cube)
 	update_player_position(cube);
 	new_map = square_map(cube->map.map);
 	minimap.map = generate_minimap(cube, &minimap, new_map);
+	print_minimap(minimap.map);
 	if (!minimap.map)
 		exit_program(cube, 1, "Error: minimap generation failed");
 	render_minimap_image(cube, &minimap);
