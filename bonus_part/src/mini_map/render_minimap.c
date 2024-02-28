@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:30:03 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:43:07 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:07:44 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_mmap_offset(t_minimap *minimap, int size, int p_pos)
 
 bool	is_valid_pos_wall_collision(t_cube *cube, double x, double y)
 {
-	if (cube->map.map[(int)y][(int)x] == '1'
+	if (cube->map.map[(int)y][(int)x] == '1' || cube->map.map[(int)y][(int)x] == '2'
 		|| cube->map.map[(int)(y + 0.1)][(int)(x + 0.1)] == '1')
 		return (false);
 	return (true);

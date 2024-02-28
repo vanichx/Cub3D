@@ -6,7 +6,7 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:42:26 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/26 16:25:43 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:54:51 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ char	get_minimap_character(t_cube *d, t_minimap *m, int x, int y)
 		return ('N');
 	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '1')
 		return ('1');
+	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '2')
+		return ('2');
+	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '3')
+		return ('3');
+	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '4')
+		return ('4');
 	else if (d->map.map[y + m->offset_y][x + m->offset_x] == 'F')
 		return ('0');
 	else if (d->map.map[y + m->offset_y][x + m->offset_x] == '0')
