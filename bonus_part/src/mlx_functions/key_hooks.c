@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 19:47:37 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 14:36:18 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	handle_special_keys(int key, t_cube *cube)
 		resize_window(cube, REDUCE);
 	if (key == KEY_M)
 		show_hide_minimap(cube);
-	if (key == KEY_SPACE && cube->key_status == 1 && abs(cube->map.door[X] - (int)cube->player.pos[X]) - abs(cube->map.door[Y] - (int)cube->player.pos[Y]) == 1)
+	if (key == KEY_SPACE && cube->key_status == 1 \
+	&& abs(cube->map.door[X] - (int)cube->player.pos[X]) \
+	- abs(cube->map.door[Y] - (int)cube->player.pos[Y]) == 1)
 		cube->door = 1;
 }
 
