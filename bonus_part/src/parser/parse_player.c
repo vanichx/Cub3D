@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:57:10 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/29 12:11:46 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 17:46:10 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,10 @@ void	parse_player(t_cube *c)
 	}
 	if (player_start_positions == 0)
 		exit_program(c, 1, NO_PLAYER);
+	if (c->map.door[X] == 0 && c->map.door[Y] == 0)
+		exit_program(c, 1, NO_DOOR);
+	if (c->map.key[X] == 0 && c->map.key[Y] == 0)
+		exit_program(c, 1, NO_KEY);
+	if (c->map.enemy[X] == 0 && c->map.enemy[Y] == 0)
+		exit_program(c, 1, NO_ENEMY);
 }

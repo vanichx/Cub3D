@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:23:32 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 17:15:57 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 17:45:14 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@
 # define MULT_DOORS "❌ Map error: Multiple doors\n"
 # define MULT_KEYS "❌ Map error: Multiple keys\n"
 # define MULT_ENEMIES "❌ Map error: Multiple enemies\n"
+
+# define NO_DOOR "❌ Map error: No door\n"
+# define NO_KEY "❌ Map error: No key\n"
+# define NO_ENEMY "❌ Map error: No enemy\n"
 
 #endif
