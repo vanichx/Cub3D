@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:18:59 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/28 15:30:38 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:01:26 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	init_player(t_player *player)
 {
 	player->pos[X] = 0;
 	player->pos[Y] = 0;
-	player->time[0] = 0;
-	player->time[1] = 0;
 	player->info[LIFE_S] = 1;
 	player->info[KEY_STATUS] = 0;
 	player->player_speed = PLAYER_SPEED;
@@ -27,7 +25,6 @@ void	init_player(t_player *player)
 void	init_cube(t_cube *cube)
 {
 	init_player(&cube->player);
-	cube->enemy = 0;
 	cube->key_status = 0;
 	cube->door = 0;
 	cube->game_status = 0;

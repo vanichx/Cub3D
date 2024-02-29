@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 17:51:50 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:54:06 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@
 # define ENEMY 0
 # define KEY 1
 # define DOOR 2
+
+#define LVL_1 0
+#define LVL_2 1
+#define LVL_3 2
+
+#define GAME_OVER 0
+#define YOU_WON 1
 
 enum Direction
 { 
@@ -134,15 +141,11 @@ typedef struct s_player
 	t_point	m_pos;
 	t_vec	front;
 	t_vec	cam;
-	int		player_height;
 	int		move[2];
-	double 	time[2];
-	double	frame_time;
 	double	rotate;
 	double	player_speed;
 	double	player_rot_speed;
 	char	init_v;
-	double	sub_angles;
 	float	fov;
 	int		info[2];
 	t_ray	ray;
@@ -227,9 +230,7 @@ typedef struct s_cube
 	int				player_has_moved;
 	int				game_status;
 	int				key_status;
-	int				enemy;
 	int 			door;
-
 }			t_cube;
 
 typedef struct s_text_info
@@ -240,6 +241,18 @@ typedef struct s_text_info
 	t_cube	*cube;
 	int		**tx;
 }		t_text_info;
+
+typedef struct s_floor_info
+{
+	int		p;
+	double	pos_z;
+	double	row_distance;
+	double	floor_step[2];
+	double	floor[2];
+	int		x;
+	int		cell[2];
+	int		t[2];
+}				t_floor_info;
 
 
 #endif

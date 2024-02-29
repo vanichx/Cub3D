@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 06:16:31 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/28 12:05:08 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:40:55 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,38 +37,23 @@ static void	proceed_mapfile(char **map_file, char **buffer, t_cube *cube)
 
 void	parse_sprites(t_cube *cube)
 {
-	int	i;
-	t_text_info text_info;
-	
-	i = ENEMY;
-	while (i <= DOOR)
+	int			i;
+	t_text_info	text_info;
+
+	text_info.cube = cube;
+	text_info.mlx = cube->screen.mlx;
+	i = -1;
+	while (++i <= DOOR)
 	{
 		if (i == DOOR)
-		{
 			text_info.path = "./textures/walls/door.xpm";
-			text_info.tx = &cube->sprite.sprite_text[DOOR].pixels;
-			text_info.cube = cube;
-			text_info.mlx = cube->screen.mlx;
-			text_info.img = &cube->sprite.sprite_text[DOOR].img;
-		}
 		else if (i == KEY)
-		{
 			text_info.path = "./textures/sprites/key.xpm";
-			text_info.tx = &cube->sprite.sprite_text[KEY].pixels;	
-			text_info.cube = cube;
-			text_info.mlx = cube->screen.mlx;
-			text_info.img = &cube->sprite.sprite_text[KEY].img;
-		}
 		else
-		{
 			text_info.path = "./textures/sprites/knight.xpm";
-			text_info.tx = &cube->sprite.sprite_text[ENEMY].pixels;
-			text_info.cube = cube;
-			text_info.mlx = cube->screen.mlx;
-			text_info.img = &cube->sprite.sprite_text[ENEMY].img;
-		}
+		text_info.tx = &cube->sprite.sprite_text[i].pixels;
+		text_info.img = &cube->sprite.sprite_text[i].img;
 		load_texture(&text_info);
-		i++;
 	}
 }
 

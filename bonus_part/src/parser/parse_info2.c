@@ -6,11 +6,38 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:36:02 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 17:27:09 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:42:24 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	is_valid_line(char *line, t_cube *cube)
+{
+	static int	player_dir = 0;
+	static int	info[3] = {0, 0, 0};
+	int			i;
+
+	i = 0;
+	while (line && line[i] && line[i] != '\n')
+	{
+		if (!is_valid_char(line[i]))
+			exit_program(cube, 1, INV_CHARS);
+		if (line[i] == 'N' || line[i] == 'S'
+			|| line[i] == 'E' || line[i] == 'W')
+			player_dir++;
+		if (line[i] == '2')
+			info[DOOR]++;
+		if (line[i] == '3')
+			info[KEY]++;
+		if (line[i] == '4')
+			info[ENEMY]++;
+		i++;
+	}
+	if (player_dir > 1 || info[DOOR] > 1 || info[KEY] > 1 || info[ENEMY] > 1)
+		multiple_error(player_dir, info);
+	return (player_dir);
+}
 
 void	parse_map_lines(char *line, char **buffer, t_cube *cube)
 {

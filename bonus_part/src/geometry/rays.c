@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:34:12 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 20:13:29 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 13:31:00 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,16 @@ int	get_texture_index(t_ray *ray)
 		else
 			return (NO);
 	}
+}
+
+void	ray_calculations(t_cube *cube, t_ray *ray, int x)
+{
+	setup_ray_params(cube, ray, x);
+	setup_dda_params(cube, ray);
+	perform_dda(cube, ray);
+	calculate_line_height(cube, ray);
+	if (ray->hit_door == 1)
+		draw_door(cube, ray, x);
+	else
+		update_texts_pixels(cube, ray, x);
 }

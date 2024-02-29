@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:24:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/28 19:59:17 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:48:33 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void	move_forward(t_cube *cube)
 	* (cube->player.player_speed * 2));
 	delta_y = (int)(cube->player.pos[Y] + cube->player.front.dir[Y] \
 	* (cube->player.player_speed * 2));
-	if (cube->map.map[(int)cube->player.pos[Y]][delta_x] != '1' 
+	if (cube->map.map[(int)cube->player.pos[Y]][delta_x] != '1'
 		&& (cube->map.map[(int)cube->player.pos[Y]][delta_x] != '2'))
 		cube->player.pos[X] += cube->player.front.dir[X] \
 		* cube->player.player_speed;
-	if (abs(cube->map.door[X] - (int)cube->player.pos[X]) - abs(cube->map.door[Y] - (int)cube->player.pos[Y]) < 2 && cube->door == 1)
+	if (abs(cube->map.door[X] - (int)cube->player.pos[X]) - \
+	abs(cube->map.door[Y] - (int)cube->player.pos[Y]) < 2 && cube->door == 1)
 	{
 		cube->game_status = 2;
 		return ;

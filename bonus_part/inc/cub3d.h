@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 10:23:40 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 13:31:17 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,16 @@ void	move_backward(t_cube *cube);
 void	move_left(t_cube *cube);
 void	move_right(t_cube *cube);
 
+/* cast_floor.c */
+void	cast_floor(t_cube *cube, int y);
+void	render_game_over(t_cube *cube);
+void	render_win_screen(t_cube *cube);
+
 /* src/geometry/raycasting.c */
 void	setup_dda_params(t_cube *cube, t_ray *ray);
 void	perform_dda(t_cube *cube, t_ray *ray);
 void	update_texts_pixels(t_cube *cube, t_ray *ray, int x);
-void	raycast_bonus(t_cube *cube, t_ray *ray);
-void	render_game_over(t_cube *cube);
-void	render_win_screen(t_cube *cube);
+void	raycast_bonus(t_cube *cube, t_ray *ray, int width);
 
 /* src/sprites.c */
 void cast_sprites(t_cube *cube, double *z_buffer);
@@ -74,10 +77,14 @@ void	init_ray(t_ray *ray);
 void	setup_ray_params(t_cube *cube, t_ray *ray, int x);
 void	calculate_line_height(t_cube *cube, t_ray *ray);
 int		get_texture_index(t_ray *ray);
+void	ray_calculations(t_cube *cube, t_ray *ray, int x);
 
 /* src/geometry/render_main.c */
 int		render_cube(t_cube *cube);
 int		render(t_cube *cube);
+void	render_lvl1(t_cube *cube);
+void	render_lvl2(t_cube *cube);
+void	render_lvl3(t_cube *cube);
 
 /* src/geometry/render_minimap.c */
 void	debug_print_char_tab(char **tab);
@@ -214,10 +221,13 @@ void	parse_textures_files(t_cube *cube);
 void	parse_map(char **map_file, t_cube *cube);
 
 /* src/parcer/parse_utils.c */
+void	multiple_error(int player_dir, int info[3]);
 bool	is_valid_char(char c);
 int		is_valid_line(char *line, t_cube *cube);
 void	read_file(char *map_path, int *fd, t_cube *cube);
 bool	line_has_walls(char *line);
+
+/* src/parcer/positioning_elements.c */
 int		is_player(char *line);
 int 	is_key(char *line);
 int 	is_enemy(char *line);

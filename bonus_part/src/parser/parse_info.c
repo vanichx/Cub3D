@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:43:22 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 23:50:31 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:37:00 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,47 @@ static int	check_text_dir(char *text, int i)
 		return (-1);
 }
 
+static void	copy_texture_data(int *i, t_text_info *text_info)
+{
+	i[X] = -1;
+	while (++i[X] < text_info->cube->wall_text.tex_size)
+	{
+		(*text_info->tx)[i[Y] * text_info->cube->wall_text.tex_size \
+		+ i[X]] = text_info->img->casted_addr[i[Y] * \
+		text_info->cube->wall_text.tex_size + i[X]];
+	}
+}
+
 void	load_texture(t_text_info *text_info)
 {
-    int	i[2];
-    int	*buffer;
+	int	i[2];
+	int	*buffer;
 
-    text_info->img->img = mlx_xpm_file_to_image(text_info->mlx, text_info->path, \
-    &text_info->cube->wall_text.tex_size, &text_info->cube->wall_text.tex_size);
-    if (text_info->img->img == NULL)
-        exit_program(text_info->cube, 1, TEXT_LOAD_ERR);
-    text_info->img->casted_addr = (int *)mlx_get_data_addr(text_info->img->img, \
-    &text_info->img->bpp, &text_info->img->line_length, &text_info->img->endian);
-    i[Y] = -1;
-    buffer = ft_calloc(1, sizeof * buffer \
-    * text_info->cube->wall_text.tex_size * text_info->cube->wall_text.tex_size);
-    if (!buffer)
-        exit_program(text_info->cube, EXIT_FAILURE, MALLOC_ERROR);
-    (*text_info->tx) = buffer;
-    while (++i[Y] < text_info->cube->wall_text.tex_size)
-    {
-        i[X] = -1;
-        while (++i[X] < text_info->cube->wall_text.tex_size)
-            (*text_info->tx)[i[Y] * text_info->cube->wall_text.tex_size \
-            + i[X]] = text_info->img->casted_addr[i[Y] * text_info->cube->wall_text.tex_size + i[X]];
-    }
-    mlx_destroy_image(text_info->mlx, text_info->img->img);
+	text_info->img->img = mlx_xpm_file_to_image(text_info->mlx, \
+	text_info->path, &text_info->cube->wall_text.tex_size, \
+	&text_info->cube->wall_text.tex_size);
+	if (text_info->img->img == NULL)
+		exit_program(text_info->cube, 1, TEXT_LOAD_ERR);
+	text_info->img->casted_addr = (int *) \
+	mlx_get_data_addr(text_info->img->img, &text_info->img->bpp, \
+	&text_info->img->line_length, &text_info->img->endian);
+	i[Y] = -1;
+	buffer = ft_calloc(1, sizeof * buffer \
+	* text_info->cube->wall_text.tex_size * \
+	text_info->cube->wall_text.tex_size);
+	if (!buffer)
+		exit_program(text_info->cube, EXIT_FAILURE, MALLOC_ERROR);
+	(*text_info->tx) = buffer;
+	while (++i[Y] < text_info->cube->wall_text.tex_size)
+		copy_texture_data(i, text_info);
+	mlx_destroy_image(text_info->mlx, text_info->img->img);
 }
 
 void	parse_textures(char *trimmed_line, t_cube *cube)
 {
 	char		*texture_path;
 	static int	i = 0;
-	t_text_info text_info;
+	t_text_info	text_info;
 
 	if (cube->map.num_textures >= MAX_NUM_TEXT)
 		exit_program(cube, 1, TOO_MANY_TEXTURES);
