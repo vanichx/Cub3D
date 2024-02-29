@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 14:32:30 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 17:19:06 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ void	raycast_bonus(t_cube *cube, t_ray *ray, int width);
 
 /* src/sprites.c */
 void cast_sprites(t_cube *cube, double *z_buffer);
-void move_enemy(int map_height, int map_width, char **map, double *enemy_x, double *enemy_y, t_cube *cube);
+void move_enemy(t_sprite_info *s_i, double *enemy_x, double *enemy_y);
 void sort_sprites(t_sprite *sprite, t_cube *cube);
 void draw_door(t_cube *cube, t_ray *ray, int x);
+void set_sprite_text(t_sprite *s, t_cube *c, int i);
 
 /* src/geometry/rays.c */
 void	init_ray(t_ray *ray);
@@ -82,13 +83,8 @@ void	ray_calculations(t_cube *cube, t_ray *ray, int x);
 /* src/geometry/render_main.c */
 int		render_cube(t_cube *cube);
 int		render(t_cube *cube);
-void	render_lvl1(t_cube *cube);
-void	render_lvl2(t_cube *cube);
-void	render_lvl3(t_cube *cube);
 
 /* src/geometry/render_minimap.c */
-void	debug_print_char_tab(char **tab);
-void	debug_display_minimap(t_minimap *minimap);
 void	free_tab(void **tab);
 void	init_img_clean(t_img *img);
 void	init_img(t_cube *cube, t_img *image, int width, int height);
@@ -99,7 +95,6 @@ void	set_minimap_border_image_pixels(t_minimap *minimap, int color);
 void	draw_minimap(t_minimap *minimap);
 void	render_minimap_image(t_cube *cube, t_minimap *minimap);
 int		get_mmap_offset(t_minimap *minimap, int map_dimension, int player_pos);
-bool	is_valid_map_coord(int coord, int size);
 
 
 
@@ -116,14 +111,8 @@ char	**square_map(t_minimap *minimap, char **map);
 int		find_longest_line(char **map);
 int		calculate_map_lines(char **map);
 
-
-
-
 void	render_minimap(t_cube *cube);
 void	update_player_position(t_cube *cube);
-void	rotate_player_fov(t_cube *cube, float angle);
-
-
 
 /* src/geometry/render.c */
 void	allocate_text_pixels(t_cube *cube);
