@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 17:39:45 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 18:05:14 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ typedef struct s_sprite_tex
 	int			h;
 	int			w;
 	int			d;
-	uint32_t	color;
+	int			color;
 	int			tex_x;
 	int			screen_x;
 }				t_sprite_tex;

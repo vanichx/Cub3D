@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:11:07 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/27 16:24:07 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 18:09:30 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int	ft_mouse(t_cube *cube)
 	int	y;
 	int	dx;
 
-	mlx_mouse_hide();
+	if (__APPLE__)
+		mlx_mouse_hide();
+	else
+		mlx_mouse_hide(cube->screen.mlx, cube->screen.win);
 	mlx_mouse_get_pos(cube->screen.win, &x, &y);
 	dx = x - cube->screen.width / 2;
 	if (dx > 2)
