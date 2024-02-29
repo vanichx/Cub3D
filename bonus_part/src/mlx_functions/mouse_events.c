@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:11:07 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 18:09:30 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/27 16:24:07 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ int	ft_mouse(t_cube *cube)
 	int	y;
 	int	dx;
 
-	if (__APPLE__)
-		mlx_mouse_hide();
-	else
-		mlx_mouse_hide(cube->screen.mlx, cube->screen.win);
+	mlx_mouse_hide();
 	mlx_mouse_get_pos(cube->screen.win, &x, &y);
 	dx = x - cube->screen.width / 2;
 	if (dx > 2)
@@ -77,3 +74,31 @@ int	ft_mouse(t_cube *cube)
 		cube->screen.width / 2, cube->screen.height / 2);
 	return (0);
 }
+
+// int	ft_mouse(t_cube *cube)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	dx;
+
+// 	#ifdef __APPLE__
+//     	mlx_mouse_hide();
+// 		mlx_mouse_get_pos(cube->screen.win, &x, &y);
+// 	#else
+// 		mlx_mouse_hide(cube->screen.mlx, cube->screen.win);
+// 		mlx_mouse_get_pos(cube->screen.mlx, cube->screen.win, &x, &y);
+// 	#endif
+// 	dx = x - cube->screen.width / 2;
+// 	if (dx > 2)
+// 		rotate_right_mouse(cube);
+// 	else if (dx < -2)
+// 		rotate_left_mouse(cube);
+// 	#ifdef __APPLE__
+// 		mlx_mouse_move(cube->screen.win,
+// 			cube->screen.width / 2, cube->screen.height / 2);
+// 	#else
+// 		mlx_mouse_move(cube->screen.mlx, cube->screen.win,\
+// 			cube->screen.width / 2, cube->screen.height / 2);
+// 	#endif
+// 	return (0);
+// }
