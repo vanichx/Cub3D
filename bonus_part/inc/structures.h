@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 14:33:14 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 17:07:27 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,16 @@ typedef struct s_floor_info
 	int		cell[2];
 	int		t[2];
 }				t_floor_info;
+
+typedef struct s_sprite_info
+{
+	int				m_h;
+	int				m_w;
+	t_sprite_tex	sprite_text;
+	char			**m;
+	t_cube			*c;
+	double 			*z_b;
+}				t_sprite_info;
 
 
 #endif
