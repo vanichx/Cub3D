@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:55:39 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/16 10:33:25 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:27:26 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	read_file_and_store_lines(char *map_path, char ***buffer, t_cube *cube)
+static int	read_file_and_store_lines(char *map_path, char ***buf, t_cube *cube)
 {
 	int		fd;
 	char	*line;
 	int		count;
 
 	count = 0;
-	*buffer = ft_calloc(MAX_LINES, sizeof(char *));
-	if (!*buffer)
+	*buf = ft_calloc(MAX_LINES, sizeof(char *));
+	if (!*buf)
 		exit_program(cube, 1, MALLOC_ERROR);
 	read_file(map_path, &fd, cube);
 	line = get_next_line(fd);
 	while (line)
 	{
-		(*buffer)[count] = ft_strdup(line);
+		(*buf)[count] = ft_strdup(line);
 		count++;
 		free(line);
 		line = get_next_line(fd);
@@ -37,7 +37,7 @@ static int	read_file_and_store_lines(char *map_path, char ***buffer, t_cube *cub
 
 static int	copy_lines_to_map_file(char ***map_file, char **buffer, int count)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	*map_file = malloc((count + 1) * sizeof(char *));
@@ -49,7 +49,7 @@ static int	copy_lines_to_map_file(char ***map_file, char **buffer, int count)
 		{
 			(*map_file)[i] = ft_strdup(buffer[i]);
 			if ((*map_file)[i] == NULL)
-				return (1);		
+				return (1);
 		}
 		i++;
 	}

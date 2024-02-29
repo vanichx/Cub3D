@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 07:27:34 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/27 18:23:14 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 16:42:56 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	initialize_player(t_cube *c, int i)
 	c->player.init_v = c->map.map[(int)c->player.m_pos.y]
 	[(int)c->player.m_pos.x];
 	c->player.fov = 66;
-	set_fr_cam_v(c->player.init_v, &c->player.front, &c->player.cam, c->player.fov);
+	set_fr_cam_v(c->player.init_v, &c->player.front,
+		&c->player.cam, c->player.fov);
 	c->player.move[X] = 0;
 	c->player.move[Y] = 0;
 	c->player.rotate = 0;
@@ -98,5 +99,4 @@ void	check_walls(t_cube *cube)
 	replace_spaces(cube->map.map, cube->map.map_height);
 	f_fill(cube, (int)cube->player.m_pos.y,
 		(int)cube->player.m_pos.x);
-	print_map_info(cube);
 }

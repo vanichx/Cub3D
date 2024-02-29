@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_cam_dir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:29:57 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/15 12:15:07 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:28:23 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	north(t_vec *front, t_vec *cam, float fov)
 {

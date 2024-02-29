@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/16 10:32:03 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:13:36 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@
 # define MAX_NUM_TEXT 4
 # define COLORS_COMPONENTS 3
 
-
 /* src/geometry/movement.c */
 void	move_forward(t_cube *cube);
 void	move_backward(t_cube *cube);
@@ -53,10 +52,12 @@ void	move_left(t_cube *cube);
 void	move_right(t_cube *cube);
 
 /* src/geometry/raycasting.c */
-void	setup_dda_params(t_cube *cube, t_ray *ray);
-void	perform_dda(t_cube *cube, t_ray *ray);
 void	update_texts_pixels(t_cube *cube, t_ray *ray, int x);
 void	raycast(t_cube *cube, t_ray *ray);
+
+/* src/geometry/raycasting_dda.c */
+void	setup_dda_params(t_cube *cube, t_ray *ray);
+void	perform_dda(t_cube *cube, t_ray *ray);
 
 /* src/geometry/rays.c */
 void	init_ray(t_ray *ray);
@@ -96,10 +97,6 @@ double	get_front_length(t_cube *cube);
 t_vec	rotate_vec(t_vec vec, float ang);
 t_vec	find_casting_vec(t_cube *cube, int x);
 t_vec	normalize_vec(t_vec vec);
-
-/* src/geometry/vector_utils2.c */
-void zoom_in(t_cube *c);
-void zoom_out(t_cube *c);
 
 /* src/mlx_functions/cleanup.c */
 void	ft_strdel(char **s);
@@ -154,8 +151,11 @@ int		parse_color_code(char *line, int *color);
 void	parse_file(char *map_path, char ***map_file, t_cube *cube);
 
 /* src/parcer/parse_info.c */
-void	load_texture(t_img *img, void *mlx, char *path, t_cube *cube, int **tx);
+void	load_texture(t_cube *cube);
 void	parse_textures(char *trimmed_line, t_cube *cube);
+
+/* src/parcer/parse_info_utils.c */
+int		check_text_dir(char *text, int i);
 
 /* src/parcer/parse_info2.c */
 void	parse_floor_color(char *trimmed_line, t_cube *cube);
@@ -169,7 +169,7 @@ void	parse_map(char **map_file, t_cube *cube);
 /* src/parcer/parse_utils.c */
 bool	is_valid_char(char c);
 int		is_valid_line(char *line, t_cube *cube);
-void		read_file(char *map_path, int *fd, t_cube *cube);
+void	read_file(char *map_path, int *fd, t_cube *cube);
 bool	line_has_walls(char *line);
 int		is_player(char *line);
 
