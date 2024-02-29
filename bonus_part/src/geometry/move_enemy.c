@@ -6,13 +6,13 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:54:38 by eseferi           #+#    #+#             */
-/*   Updated: 2024/02/29 16:35:58 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 17:30:10 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	update_position_based_on_direction(enum Direction direction, \
+static void	update_position_based_on_direction(enum e_direction direction, \
 double *new_x, double *new_y)
 {
 	if (direction == UP)
@@ -40,10 +40,10 @@ double *new_x, double *new_y)
 
 void	move_enemy(t_sprite_info *s_i, double *enemy_x, double *enemy_y)
 {
-	const int		movement_interval = 7;
-	static int		iteration_count = 0;
-	enum Direction	direction;
-	double			new[2];
+	const int			movement_interval = 7;
+	static int			iteration_count = 0;
+	enum e_direction	direction;
+	double				new[2];
 
 	iteration_count = (iteration_count + 1) % 101;
 	if (iteration_count % movement_interval != 0)

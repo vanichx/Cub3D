@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 17:19:06 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 17:26:48 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@
 # define MMAP_VIEW_DIST 4
 # define MMAP_PIXEL_SIZE 128
 
-
 /* src/geometry/movement.c */
 void	move_forward(t_cube *cube);
 void	move_backward(t_cube *cube);
@@ -67,11 +66,11 @@ void	update_texts_pixels(t_cube *cube, t_ray *ray, int x);
 void	raycast_bonus(t_cube *cube, t_ray *ray, int width);
 
 /* src/sprites.c */
-void cast_sprites(t_cube *cube, double *z_buffer);
-void move_enemy(t_sprite_info *s_i, double *enemy_x, double *enemy_y);
-void sort_sprites(t_sprite *sprite, t_cube *cube);
-void draw_door(t_cube *cube, t_ray *ray, int x);
-void set_sprite_text(t_sprite *s, t_cube *c, int i);
+void	cast_sprites(t_cube *cube, double *z_buffer);
+void	move_enemy(t_sprite_info *s_i, double *enemy_x, double *enemy_y);
+void	sort_sprites(t_sprite *sprite, t_cube *cube);
+void	draw_door(t_cube *cube, t_ray *ray, int x);
+void	set_sprite_text(t_sprite *s, t_cube *c, int i);
 
 /* src/geometry/rays.c */
 void	init_ray(t_ray *ray);
@@ -95,14 +94,9 @@ void	set_minimap_border_image_pixels(t_minimap *minimap, int color);
 void	draw_minimap(t_minimap *minimap);
 void	render_minimap_image(t_cube *cube, t_minimap *minimap);
 int		get_mmap_offset(t_minimap *minimap, int map_dimension, int player_pos);
-
-
-
 char	*add_minimap_line(t_cube *d, t_minimap *m, int y, char **map);
 char	**generate_minimap(t_cube *cube, t_minimap *minimap, char **map);
 char	get_minimap_character(t_cube *d, t_minimap *m, char **map);
-
-
 
 /* /src/mini_map/square_minimap.c */
 char	**square_map(t_minimap *minimap, char **map);
@@ -170,7 +164,7 @@ void	show_hide_minimap(t_cube *cube);
 /* src/mlx_functions/mouse_events.c */
 int		mouse_release(int button, int x, int y, void *param);
 // int		mouse_press(int button, int x, int y, void *param);
-int 	mouse_press(int key, void *param);
+int		mouse_press(int key, void *param);
 int		ft_mouse(t_cube *cube);
 
 /* src/mlx_functions/resize_window.c */
@@ -217,9 +211,9 @@ bool	line_has_walls(char *line);
 
 /* src/parcer/positioning_elements.c */
 int		is_player(char *line);
-int 	is_key(char *line);
-int 	is_enemy(char *line);
-int 	is_door(char *line);
+int		is_key(char *line);
+int		is_enemy(char *line);
+int		is_door(char *line);
 
 /* src/parcer/print_map_info.c */
 void	print_map_info(t_cube *cube);

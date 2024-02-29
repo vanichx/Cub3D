@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 17:07:27 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 17:39:45 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,48 +18,31 @@
 
 # define X 0
 # define Y 1
-
 # define PLAYER_SPEED 0.05
 # define PLAYER_ROT_SPEED 0.05
-
 # define NO 0
 # define SO 1
 # define WE 2
 # define EA 3
 # define F 4
 # define C 5
-
 # define START 0
 # define END 1
-
 # define OLD 0
 # define NEW 1
-
 # define TEXT_SIZE 64
-
 # define LIFE_S 0
 # define KEY_STATUS 1
-
-# define KNIFE 0
-# define GUN 1
-
 # define ENEMY 0
 # define KEY 1
 # define DOOR 2
 
-#define LVL_1 0
-#define LVL_2 1
-#define LVL_3 2
-
-#define GAME_OVER 0
-#define YOU_WON 1
-
-enum Direction
-{ 
+enum	e_direction
+{
 	UP,
-	DOWN, 
+	DOWN,
 	LEFT,
-	RIGHT 
+	RIGHT
 };
 
 typedef struct s_point
@@ -69,12 +52,6 @@ typedef struct s_point
 	int		color;
 }		t_point;
 
-typedef struct point
-{
-	int x;
-	int y;
-}			point;
-
 typedef struct s_img
 {
 	void	*img;
@@ -83,7 +60,7 @@ typedef struct s_img
 	int		bpp;
 	int		line_length;
 	int		endian;
-}	t_img;
+}				t_img;
 
 typedef struct s_mlx
 {
@@ -108,7 +85,7 @@ typedef struct s_map
 	int		map_x;
 	int		map_y;
 	int		key[2];
-	int 	enemy[2];
+	int		enemy[2];
 	int		door[2];
 }				t_map;
 
@@ -161,7 +138,6 @@ typedef struct s_textures
 	int		tex_size;
 }		t_textures;
 
-
 typedef struct s_keys
 {
 	int		key_esc;
@@ -173,7 +149,7 @@ typedef struct s_keys
 	int		key_right;
 	int		key_i;
 	int		key_o;
-}      t_keys;
+}				t_keys;
 
 typedef struct s_minimap
 {
@@ -182,8 +158,8 @@ typedef struct s_minimap
 	t_img	*img;
 	int		view_dist;
 	int		size;
-	int 	map_lines;
-	int 	longest_line;
+	int		map_lines;
+	int		longest_line;
 	int		offset_x;
 	int		offset_y;
 	int		x;
@@ -195,23 +171,23 @@ typedef struct s_minimap
 
 typedef struct s_sprite_tex
 {
-	t_img	img;
-	int		*pixels;
-	double	text_point[2];
-	double  text_pos[2];
-	double	tex_step;
-	double	tex_pos;
-	double  inv_det;
-	int		tex_size;
-	double	transform[2];
-	int		start[2];
-	int		end[2];
-	int		h;
-	int		w;
-	int 	d;
-	uint32_t color;
-	int		tex_x;
-	int 	screen_x;
+	t_img		img;
+	int			*pixels;
+	double		text_point[2];
+	double		text_pos[2];
+	double		tex_step;
+	double		tex_pos;
+	double		inv_det;
+	int			tex_size;
+	double		transform[2];
+	int			start[2];
+	int			end[2];
+	int			h;
+	int			w;
+	int			d;
+	uint32_t	color;
+	int			tex_x;
+	int			screen_x;
 }				t_sprite_tex;
 
 typedef struct s_sprite
@@ -231,11 +207,11 @@ typedef struct s_cube
 	t_minimap		minimap_data;
 	t_keys			key;
 	t_sprite		sprite;
-	int 			**text_pixels;
+	int				**text_pixels;
 	int				player_has_moved;
 	int				game_status;
 	int				key_status;
-	int 			door;
+	int				door;
 }			t_cube;
 
 typedef struct s_text_info
@@ -266,8 +242,7 @@ typedef struct s_sprite_info
 	t_sprite_tex	sprite_text;
 	char			**m;
 	t_cube			*c;
-	double 			*z_b;
+	double			*z_b;
 }				t_sprite_info;
-
 
 #endif
