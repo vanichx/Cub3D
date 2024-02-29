@@ -3,99 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:37:00 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/16 10:02:59 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:12:36 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	setup_dda_params(t_cube *cube, t_ray *ray)
+void	update_texture_index(t_cube *cube, t_ray *ray)
 {
-	if (ray->ray_dir.dir[X] < 0)
-	{
-		ray->step[X] = -1;
-		ray->side_dist[X] = (cube->player.pos[X] - ray->map_point[X]) \
-		* ray->delta_dist[X];
-	}
-	else
-	{
-		ray->step[X] = 1;
-		ray->side_dist[X] = (ray->map_point[X] + 1.0 - cube->player.pos[X]) \
-		* ray->delta_dist[X];
-	}
-	if (ray->ray_dir.dir[Y] < 0)
-	{
-		ray->step[Y] = -1;
-		ray->side_dist[Y] = (cube->player.pos[Y] - ray->map_point[Y]) \
-		* ray->delta_dist[Y];
-	}
-	else
-	{
-		ray->step[Y] = 1;
-		ray->side_dist[Y] = (ray->map_point[Y] + 1.0 - cube->player.pos[Y]) \
-		* ray->delta_dist[Y];
-	}
-}
-
-void	perform_dda(t_cube *cube, t_ray *ray)
-{
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
-	{
-		if (ray->side_dist[X] < ray->side_dist[Y])
-		{
-			ray->side_dist[X] += ray->delta_dist[X];
-			ray->map_point[X] += ray->step[X];
-			ray->side = 0;
-		}
-		else
-		{
-			ray->side_dist[Y] += ray->delta_dist[Y];
-			ray->map_point[Y] += ray->step[Y];
-			ray->side = 1;
-		}
-		if (cube->map.map[(int)ray->map_point[Y]]
-			[(int)ray->map_point[X]] == '1')
-			hit = 1;
-	}
-}
-
-void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
-{
-	int		y;
-	int		color;
-	int		texture_index;
+	int	texture_index;
 
 	texture_index = get_texture_index(ray);
 	cube->wall_text.text_point[X] = (int)(ray->wall_x \
-	* (double)cube->wall_text.tex_size);
-	if (((ray->side == 0) && (ray->ray_dir.dir[X] > 0))
+		* (double)cube->wall_text.tex_size);
+	if (((ray->side == 0) && (ray->ray_dir.dir[X] > 0)) \
 		|| ((ray->side == 1) && (ray->ray_dir.dir[Y] < 0)))
 		cube->wall_text.text_point[X] = cube->wall_text.tex_size \
-		- cube->wall_text.text_point[X] - 1;
-	cube->wall_text.tex_step = 1.0 * cube->wall_text.tex_size \
-	/ ray->line_height;
+			- cube->wall_text.text_point[X] - 1;
+}
+
+void	update_texture_step_and_pos(t_cube *cube, t_ray *ray)
+{
+	cube->wall_text.tex_step = 1.0 \
+		* cube->wall_text.tex_size / ray->line_height;
 	cube->wall_text.tex_pos = (ray->draw[START] - cube->screen.height \
-	/ 2 + ray->line_height / 2) * cube->wall_text.tex_step;
+		/ 2 + ray->line_height / 2) * cube->wall_text.tex_step;
+}
+
+void	update_texture_pixels(t_cube *cube, t_ray *ray, int x, int text_i)
+{
+	int	y;
+	int	color;
+
 	y = ray->draw[START];
 	while (y < ray->draw[END])
 	{
 		cube->wall_text.text_point[Y] = (int)cube->wall_text.tex_pos \
-		& (cube->wall_text.tex_size - 1);
+			& (cube->wall_text.tex_size - 1);
 		cube->wall_text.tex_pos += cube->wall_text.tex_step;
-		color = cube->wall_text.textures[texture_index]
-		[cube->wall_text.tex_size * cube->wall_text.text_point[Y] \
-		+ cube->wall_text.text_point[X]];
+		color = cube->wall_text.textures[text_i][cube->wall_text.tex_size \
+			* cube->wall_text.text_point[Y] + cube->wall_text.text_point[X]];
 		if (ray->side == Y)
 			color = (color >> 1) & 8355711;
 		cube->wall_text.text_pixels[y][x] = color;
 		y++;
 	}
+}
+
+void	update_texts_pixels(t_cube *cube, t_ray *ray, int x)
+{
+	int	texture_index;
+
+	update_texture_index(cube, ray);
+	update_texture_step_and_pos(cube, ray);
+	texture_index = get_texture_index(ray);
+	update_texture_pixels(cube, ray, x, texture_index);
 }
 
 void	raycast(t_cube *cube, t_ray *ray)

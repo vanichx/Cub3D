@@ -6,11 +6,25 @@
 /*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:24:47 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/13 13:58:59 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:22:20 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	get_next_color_component(char **line, int *color, int *j)
+{
+	*color = ft_atoi(*line);
+	*j += 1;
+	return (1);
+}
+
+static int	validate_commas(int commas)
+{
+	if (commas > 2)
+		return (-1);
+	return (1);
+}
 
 static int	parse_color_values(char *line, int *color)
 {
@@ -28,18 +42,14 @@ static int	parse_color_values(char *line, int *color)
 		if (line[i] == ',')
 		{
 			commas++;
-			if (commas > 2)
+			if (validate_commas(commas) == -1)
 				return (-1);
 			line[i] = '\0';
-			color[j] = ft_atoi(num_start);
+			get_next_color_component(&num_start, &color[j], &j);
 			num_start = &line[i + 1];
-			j++;
 		}
 		else if (line[i + 1] == '\0')
-		{
-			color[j] = ft_atoi(num_start);
-			j++;
-		}
+			get_next_color_component(&num_start, &color[j], &j);
 		i++;
 	}
 	return (j);

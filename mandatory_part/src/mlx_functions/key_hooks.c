@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: segfault <segfault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:55:37 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/15 12:33:40 by segfault         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:27:05 by ipetruni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ void	handle_special_keys(int key, t_cube *cube)
 		increase_player_speed(cube);
 	if (key == KEY_RES)
 		decrease_player_speed(cube);
-	if (key == KEY_Z)
-		zoom_in(cube);
-	if (key == KEY_X)
-		zoom_out(cube);
-		
 }
 
 int	key_press(int key, void *param)
