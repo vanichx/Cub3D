@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 18:54:42 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 10:23:40 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ void	update_texts_pixels(t_cube *cube, t_ray *ray, int x);
 void	raycast_bonus(t_cube *cube, t_ray *ray);
 void	render_game_over(t_cube *cube);
 void	render_win_screen(t_cube *cube);
+
+/* src/sprites.c */
+void cast_sprites(t_cube *cube, double *z_buffer);
+void move_enemy(int map_height, int map_width, char **map, double *enemy_x, double *enemy_y, t_cube *cube);
+void sort_sprites(t_sprite *sprite, t_cube *cube);
+void draw_door(t_cube *cube, t_ray *ray, int x);
 
 /* src/geometry/rays.c */
 void	init_ray(t_ray *ray);

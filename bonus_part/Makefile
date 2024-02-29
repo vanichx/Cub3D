@@ -6,7 +6,7 @@
 #    By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 10:13:35 by ipetruni          #+#    #+#              #
-#    Updated: 2024/02/28 18:26:09 by eseferi          ###   ########.fr        #
+#    Updated: 2024/02/29 10:19:32 by eseferi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,14 +96,14 @@ re:					fclean all
 
 # Valgrind testing
 valgrind:			$(NAME)
-					$(VALGRIND) ./$(NAME) maps/basic2.cub
+					$(VALGRIND) ./$(NAME) maps/basic.cub
 
 # Leaks at exit testing
 leaks:				$(NAME)
-					$(LEAKS_AT_EXIT) ./$(NAME) maps/testing.cub
+					$(LEAKS_AT_EXIT) ./$(NAME) maps/basic.cub
 
 leaks_valgrind:		$(NAME)
-					$(VALGRIND_LEAKS) ./$(NAME) maps/testing.cub
+					$(VALGRIND_LEAKS) ./$(NAME) maps/basic.cub
 
 .SILENT:
 
