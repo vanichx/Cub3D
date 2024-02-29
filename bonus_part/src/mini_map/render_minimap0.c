@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipetruni <ipetruni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:45:38 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/28 17:22:29 by ipetruni         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:34:30 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	draw_minimap_tile(t_minimap *minimap, int x, int y)
 			y * minimap->tile_size, 0xFF0000);
 	else if (minimap->map[y][x] == '3')
 		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
-			y * minimap->tile_size, 0xEEF600);
+			y * minimap->tile_size, 0x80E0E0E0);
 	else if (minimap->map[y][x] == '4')
 		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
-			y * minimap->tile_size, 0x3399FF);
+			y * minimap->tile_size, 0x80E0E0E0);
 	else if (minimap->map[y][x] == '0')
 		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
 			y * minimap->tile_size, 0x80E0E0E0);

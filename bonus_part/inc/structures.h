@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:25:48 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 12:54:06 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 14:33:14 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,10 +182,15 @@ typedef struct s_minimap
 	t_img	*img;
 	int		view_dist;
 	int		size;
+	int 	map_lines;
+	int 	longest_line;
 	int		offset_x;
 	int		offset_y;
+	int		x;
+	int		y;
 	int		tile_size;
 	int		show;
+	int		key_status;
 }			t_minimap;
 
 typedef struct s_sprite_tex

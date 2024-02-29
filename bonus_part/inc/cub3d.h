@@ -6,7 +6,7 @@
 /*   By: eseferi <eseferi@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:40:35 by ipetruni          #+#    #+#             */
-/*   Updated: 2024/02/29 13:31:17 by eseferi          ###   ########.fr       */
+/*   Updated: 2024/02/29 14:32:30 by eseferi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,19 +103,18 @@ bool	is_valid_map_coord(int coord, int size);
 
 
 
-
-
-
-
-
 char	*add_minimap_line(t_cube *d, t_minimap *m, int y, char **map);
 char	**generate_minimap(t_cube *cube, t_minimap *minimap, char **map);
-char	get_minimap_character(t_cube *d, t_minimap *m, int x, int y, char **map);
+char	get_minimap_character(t_cube *d, t_minimap *m, char **map);
 
 
-char **square_map(char **map);
 
+/* /src/mini_map/square_minimap.c */
+char	**square_map(t_minimap *minimap, char **map);
 
+/* /src/mini_map/square_minimap_utils.c */
+int		find_longest_line(char **map);
+int		calculate_map_lines(char **map);
 
 
 
