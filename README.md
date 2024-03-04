@@ -153,9 +153,7 @@ Here is a summary of the various controls in the game:
 
 - The ``WASD`` keys move the player up, down, left and right relative to the player's viewing angle
 - The ``left`` and ``right`` arrow keys rotate the viewing angle of the player
-- Press the ``ESC`` key or the ``X`` button on the window to exit the game
-
-Note: these are the basic mandatory controls, but we added a few more keys to handle other things. See below for such controls
+- Press the ``ESC`` key button on the window to exit the game.
 
 ## Bonus
 
@@ -169,14 +167,6 @@ When walking to a wall, instead of stopping in front of it we split the movement
 
 Being entirely honest, we did this bonus out of necessity, because we had some issues with our raycasting algorithm in the beginning and the best way to solve those issues was to visualize what we were doing in 2D. We decided to center the player on the minimap and only draw a part of it to prevent UI inconsistencies. Sometimes very large maps would cover a large part of the screen
 
-* Doors
-
-This bonus was qucick to implement. We added two new characters to the map: ``c`` for **c**losed doors and ``o`` for **o**pen doors. We launch a ray that looks for doors and walls in the direction of the player and if a door is hit we open/close that particular door. Press the ``E`` key to trigger nearby doors
-
-* Animations
-
-A simple way to animate sprites was to animate the walls themselves. When we read multiple lines with ``NO`` (for example) we add it to a new node in a linked list. Then we just iterate over the linked list changing the sprite to the next one on the list
-
 * Rotation with mouse
 
 This one was very straightforward. There is an event on the ``minilibX`` library that tells the user the position of the mouse. When the position changes, we increment/decrement the player's view direction accordingly
@@ -185,112 +175,36 @@ This one was very straightforward. There is an event on the ``minilibX`` library
 
 We implemented a few things that we were not asked to implement, but we thought would give the project a cooler vibe:
 
-- Added a centered green scope on the window to help the user open/close doors. Also added green centered ray on the minimap
-- Ability to end the game with the ``Q`` key
-- Added darkening effect to the game. The farther a wall is hit, the darker it is drawn. This gives the game a cave-like feel
-- Flash screen green/red when opening/closing a wall respectively
-- Add some sample animations to test in maps (flaming torches in walls and various Pac-Man sprites)
-- Ability to invert colors of the game by pressing the ``R`` key
+## Mandatory part :
+- By pressing (}) or (/) buttons you can change the player speed.
+- By pressing (U) or (I) buttons you can increase or decrease the game window size (by default its maximum screen resolution) 
 - Game works both in Linux and MacOS
 
-## Gameplay
-
-Here are a few samples of how our maps look
-
-- ``2.cub``
-
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/156563400-46e259e7-b197-446b-8578-c80ff97fc709.gif">
-</div>
-
-- ``space.cub``
-
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/156563514-1697f731-3a15-4e56-a047-db3a9aa1c121.gif">
-</div>
-
-- ``frame.cub``
-
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/156563421-491b363c-21f2-4129-ad90-83e57ec2c4f6.gif">
-</div>
-
-- ``pac.cub``
-
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/156563445-617cb27a-8df7-451e-9ce4-e22409bffdab.gif">
-</div>
-
-
-- ``pac2.cub``
-
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/156563462-300565a2-9d6a-4a82-9c18-d16d3fb35ffb.gif">
-</div>
-
-To check some of our favorite layouts, see [MAPS.md](./maps/MAPS.md)
-
-
+## Bonus part :
+- By pressing (M) you are able to see the minimap on the screen.
+- By pressing (U) or (I) buttons you can increase or decrease the game window size (by default its maximum screen resolution)
+- You can add the door '2' , key '3', enemy '4' in the map file in the maps folder, notice that you can have only one door , one key , one enemy on the map.
+- Rotation of the player's view by mouse.
+  
 ## Installation
 
 ### Cloning the repositories
 ```shell
-git clone https://gitlab.com/madebypixel02/cub3d.git
+git clone https://github.com/vanichx/Cub3D.git
 cd cub3d
+cd mandatory_part /OR/ cd bonus_part
 make
-```
-
-### Installing the MLX library
-
-* ``Linux``
-
-If you're not using a MacOS computer from 42, you'll need to install the libraries manually. Please refer to the [official github](https://github.com/42Paris/minilibx-linux) for more details. To install it, do the following (requires root access):
-
-```shell
-git clone https://github.com/42Paris/minilibx-linux.git
-cd minilibx-linux/
-make
-sudo cp mlx.h /usr/include
-sudo cp libmlx.a /usr/lib
-```
-
-* ``MacOS``
-
-To install the library, you will need to first install a package manager like homebrew (check [here](https://brew.sh/)) to then install the X11 package with ``brew install Xquartz``. After that you must extract the minilibx file called ``minilibx_opengl.tgz``. Then install it to your system with the following commands (requires sudo as well):
-
-```shell
-cd minilibx_opengl
-make
-sudo cp mlx.h /usr/local/include
-sudo cp libmlx.a /usr/local/lib
-sudo reboot
-```
-Note: A reboot is necessary to ensure that the ``Xquartz`` is working properly. You can test if it is by running a test example with the command ``xeyes``.
-
-### Installing the manuals
-
-If you want quick access to the mlx manuals, it is recommended that you copy the files from the ``man`` folder in [minilibx-linux](https://github.com/42Paris/minilibx-linux) to your system manuals:
-
-* ``Linux``
-```shell
-sudo cp man/man3/* /usr/share/man/man3/
-```
-Note: Depending on your Linux configuration, to get the manuals working (e.g. ``man mlx``) you will need to individually gzip all the manual files you just copied, e.g. ``sudo gzip /usr/share/man/man3/mlx.3``.
-
-* ``MacOS``
-```shell
-sudo cp man/man3/* /usr/X11/share/man/man3
 ```
 
 ### Usage
 
-```
-make                        compiles cub3D executable
-make bonus                  compiles cub3D executable (again)
-make test MAP={path_to_map} compiles and executes cub3D with the specified map
-make git                    adds and commits everything, then pushes to upstream branch
-make norminette             runs norminette for all files in the project that need to pass it
-```
+After you comppile the mandatory or the bonus part , the MLX lib will be compiled automaticaly , Makefile is ready to work with two OS (Mac / Linux) it will recognize by him self automaticaly.
+
+After project is compiled 
+
+./cub3D maps/basic.cub 
+or
+./cub3D_bonus maps/basic.cub
 
 ## References
 
@@ -303,4 +217,4 @@ make norminette             runs norminette for all files in the project that ne
 
 ## Summary
 
-After learning the basics of the ``miniLibX`` graphics library in the [so_long](https://gitlab.com/madebypixel02/so_long) project, this project was quicker to do than expected. However, raycasting was a brand new concept with tons of mathematical concepts behind it, so it was a bit tricky to grasp at first. Having said that, it was still a lot of fun :)
+After learning the basics of the ``miniLibX`` graphics library in the [so_long](https://github.com/vanichx/so_long) project, but you will need time to understand the concept of raycasting, for our team to do this project took about 3 weeks (with bonus). 
